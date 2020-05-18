@@ -1,12 +1,11 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import Layout from "../components/layout"
-
+import Layout from "../components/gamelist/Layout"
 const gamelist = () => (
-  <div>
-    <h1>Hi people</h1>
-  </div>
+  <Layout>
+    
+  </Layout>
 )
 
 export default gamelist

@@ -1,0 +1,17 @@
+@import '../../../style.scss';
+
+.card-card{
+    background-color: $main-color;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 10px;
+    box-shadow:
+        -3px -3px 10px 0 rgba(0, 0, 0, 0.12),
+        3px 3px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card-text{
+    vertical-align: middle;
+    margin-left: 17px;
+    font-weight: 600;
+}
