@@ -1,11 +1,14 @@
 
-.lists{
+.layout-lists{
     margin-top: 100px;
-    margin-left: 50px;
+    white-space: nowrap;
+    margin-left: 20px;
 }
 
+
+
 @media only screen and (max-width: 600px) {
-    body {
+    .layout-lists {
         margin-left: 0px;
     }
   }

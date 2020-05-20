@@ -13,8 +13,10 @@ import "./layout.scss"
 
 const Layout = ({ children }) => {
   return (
-    <div className = "layout">
-      <div className = "lists">
+    <div className>
+      <div className="layout-lists">
+        <List></List>
+        <List></List>
         <List></List>
       </div>
     </div>
