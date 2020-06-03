@@ -12,4 +12,11 @@
 .list-card{
     margin-top: 20px;
 }
-
+.list-visibility-visible {
+    position: static;
+    margin-top: 20px;
+}
+.list-visibility-hidden {
+    position: absolute;
+    top: -999999px;
+}
