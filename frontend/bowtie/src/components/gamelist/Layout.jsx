@@ -6,7 +6,6 @@
  */
 
 import React from "react"
-import TitleCard from "./TitleCard/TitleCard"
 import List from "./List/List"
 import "../../style.scss"
 import "./layout.scss"
