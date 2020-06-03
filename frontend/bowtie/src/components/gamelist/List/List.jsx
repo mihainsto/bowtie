@@ -55,6 +55,7 @@ const List = props => {
       >
         <AddNewCard cardText="+ Add new game" />
       </div>
+
     </div>
   )
 }

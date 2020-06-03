@@ -2,8 +2,8 @@
 
 .searchgamecard-card{
     background-color: $card-color;
-    height: 50px;
-    line-height: 50px;
+    height: 60px;
+    line-height: 60px;
     border-radius: 10px;
     box-shadow:
         -3px -3px 10px 0 rgba(0, 0, 0, 0.12),
@@ -23,6 +23,10 @@
     color: $text-color;
     height: 40px;
     width: 100%;
+    font-size: 1em;
+    font-weight: 600;
+    font-family: "Nunito";
+
 
   }
 .searchgamecard-input:focus{
