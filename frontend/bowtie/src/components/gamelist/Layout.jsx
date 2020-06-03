@@ -11,14 +11,18 @@ import List from "./List/List"
 import "../../style.scss"
 import "./layout.scss"
 
+const listItems ={title: "Completed 2020", items: [
+  "Metro Exodus", "The Last of Us", "Doom Eternal", "Horizon Zero Dawn"]} 
+
 const Layout = ({ children }) => {
   return (
     <div className>
       <div className="layout-lists">
-        <List></List>
-        <List></List>
-        <List></List>
+        <List listItems = {listItems}></List>
+        <List listItems = {listItems}></List>
+        <List listItems = {listItems}></List>
       </div>
+      
     </div>
   )
 }

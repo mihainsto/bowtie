@@ -11,25 +11,22 @@ import TitleCard from "../TitleCard/TitleCard"
 import Card from "../Card/Card"
 import "./List.scss"
 
-const List = () => {
+const List = (props) => {
   return (
     <div className="list-list">
+
       <div className="list-title-card">
-        <TitleCard />
+        <TitleCard title = {props.listItems.title}/>
       </div>
-      <div className="list-card">
-        <Card cardText="Metro Exodus" />
-      </div>
-      <div className="list-card">
-        <Card cardText="The Last of Us" />
-      </div>
-      <div className="list-card">
-        <Card cardText="Doom Eternal" />
-      </div>
-      <div className="list-card">
-        <Card cardText="Horizon Zero Dawn" />
-      </div>
+ 
+      {props.listItems.items.map((item)=>(
+        <div className="list-card">
+          <Card cardText = {item} />
+        </div>
+
+      ))}
     </div>
+    
   )
 }
 
