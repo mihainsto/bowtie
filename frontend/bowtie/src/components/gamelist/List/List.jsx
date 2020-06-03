@@ -5,14 +5,23 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-//import TitleCard from "/../TitleCard/TitleCard"
-import TitleCard from "../TitleCard/TitleCard"
-import Card from "../Card/Card"
-import AddNewCard from "../AddNewCard/AddNewCard"
+import React from "react";
+import {useState} from "react";
 
-import "./List.scss"
+//import TitleCard from "/../TitleCard/TitleCard"
+import TitleCard from "../TitleCard/TitleCard";
+import Card from "../Card/Card";
+import AddNewCard from "../AddNewCard/AddNewCard";
+import SearchGameCard from "../SearchGameCard/SearchGameCard";
+import "./List.scss";
+
 const List = (props) => {
+
+  const [newEntry, setNewEntry] = useState("");
+  const searchOnChangeValueHandler = (val) => {
+    setNewEntry(val.target.value)
+  };
+  
   return (
     <div className="list-list">
 
@@ -26,6 +35,10 @@ const List = (props) => {
         </div>
 
       ))}
+        <div className="list-card">
+          <SearchGameCard onChangeValue = {searchOnChangeValueHandler}/>
+        </div>
+
         <div className="list-card">
           <AddNewCard cardText = "+ Add new game"/>
         </div>

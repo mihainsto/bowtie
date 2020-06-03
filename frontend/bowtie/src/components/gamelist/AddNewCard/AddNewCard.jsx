@@ -2,7 +2,7 @@ import React from "react"
 
 import "./AddNewCard.scss"
 
-const Card = (props) => {
+const AddNewCard = (props) => {
     return (
       <div className="addnewcard-card">
         <div className="addnewcard-text">
@@ -12,4 +12,4 @@ const Card = (props) => {
     )
   }
 
-export default Card
+export default AddNewCard

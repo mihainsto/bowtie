@@ -1,0 +1,33 @@
+@import '../../../style.scss';
+
+.searchgamecard-card{
+    background-color: $card-color;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 10px;
+    box-shadow:
+        -3px -3px 10px 0 rgba(0, 0, 0, 0.12),
+        3px 3px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.searchgamecard-text{
+    vertical-align: middle;
+    margin-left: 17px;
+    font-weight: 600;
+}
+.searchgamecard-input {
+    box-sizing: border-box;
+    border: none;
+    //background-color: $card-color;
+    background-color: rgba(0, 0, 0, 0);
+    color: $text-color;
+    height: 40px;
+    width: 100%;
+
+  }
+.searchgamecard-input:focus{
+    outline: none;
+}
+.searchgamecard-input::placeholder {
+    color: rgba(238, 247, 255, 0.3);
+  }
