@@ -1,0 +1,17 @@
+@import '../../../style.scss';
+
+.addnewcard-card{
+    background-color: $main-color;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 10px;
+    border-width:2px;  
+    border-style:dashed;
+    border-color: rgba(88, 94, 234, 0.5);
+}
+
+.addnewcard-text{
+    vertical-align: middle;
+    margin-left: 17px;
+    font-weight: 600;
+}

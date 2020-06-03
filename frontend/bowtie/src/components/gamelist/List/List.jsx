@@ -9,8 +9,9 @@ import React from "react"
 //import TitleCard from "/../TitleCard/TitleCard"
 import TitleCard from "../TitleCard/TitleCard"
 import Card from "../Card/Card"
-import "./List.scss"
+import AddNewCard from "../AddNewCard/AddNewCard"
 
+import "./List.scss"
 const List = (props) => {
   return (
     <div className="list-list">
@@ -25,6 +26,9 @@ const List = (props) => {
         </div>
 
       ))}
+        <div className="list-card">
+          <AddNewCard cardText = "+ Add new game"/>
+        </div>
     </div>
     
   )
