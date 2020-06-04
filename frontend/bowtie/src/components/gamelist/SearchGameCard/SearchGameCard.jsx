@@ -11,6 +11,9 @@ const SearchGameCard = React.forwardRef((props, ref) => {
           className="searchgamecard-input"
           onChange={props.onChangeValue}
           ref = {ref}
+          onFocus= {props.focused}
+          onBlur= {props.blured}
+          
           />
         </div>
       </div>

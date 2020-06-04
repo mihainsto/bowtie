@@ -26,10 +26,15 @@ const List = props => {
   }
 
   const addNewClicked = () => {
+    searchElement.current.focus()
+  }
+  const searchFocused = () =>{
     setAddButtonVisibile("list-visibility-hidden")
     setSearchVisible("list-visibility-visible")
-    searchElement.current.focus()
-    
+  }
+  const searchBlured = () =>{
+    setAddButtonVisibile("list-visibility-visible")
+    setSearchVisible("list-visibility-hidden")
   }
   return (
     <div className="list-list">
@@ -44,7 +49,7 @@ const List = props => {
       ))}
       <div className="list-card" className = {searchVisible}>
         <SearchGameCard onChangeValue={searchOnChangeValueHandler} 
-        ref = {searchElement}
+        ref = {searchElement} focused = {searchFocused} blured = {searchBlured}
         />
       </div>
 
