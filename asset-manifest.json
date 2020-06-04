@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/bowtie/static/css/main.a786e421.chunk.css",
+    "main.css": "/bowtie/static/css/main.2dcad9a7.chunk.css",
     "main.js": "/bowtie/static/js/main.5607f243.chunk.js",
     "main.js.map": "/bowtie/static/js/main.5607f243.chunk.js.map",
     "runtime-main.js": "/bowtie/static/js/runtime-main.9b1f78fd.js",
@@ -8,16 +8,16 @@
     "static/js/2.e024bd1f.chunk.js": "/bowtie/static/js/2.e024bd1f.chunk.js",
     "static/js/2.e024bd1f.chunk.js.map": "/bowtie/static/js/2.e024bd1f.chunk.js.map",
     "index.html": "/bowtie/index.html",
-    "precache-manifest.c0dff20ca9532d07b4aef086fd7893ea.js": "/bowtie/precache-manifest.c0dff20ca9532d07b4aef086fd7893ea.js",
+    "precache-manifest.991700eb9db12c6b707c6d578d560629.js": "/bowtie/precache-manifest.991700eb9db12c6b707c6d578d560629.js",
     "service-worker.js": "/bowtie/service-worker.js",
-    "static/css/main.a786e421.chunk.css.map": "/bowtie/static/css/main.a786e421.chunk.css.map",
+    "static/css/main.2dcad9a7.chunk.css.map": "/bowtie/static/css/main.2dcad9a7.chunk.css.map",
     "static/js/2.e024bd1f.chunk.js.LICENSE.txt": "/bowtie/static/js/2.e024bd1f.chunk.js.LICENSE.txt",
     "static/media/logo.svg": "/bowtie/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.9b1f78fd.js",
     "static/js/2.e024bd1f.chunk.js",
-    "static/css/main.a786e421.chunk.css",
+    "static/css/main.2dcad9a7.chunk.css",
     "static/js/main.5607f243.chunk.js"
   ]
 }
