@@ -1,16 +1,19 @@
+@import "../../style.scss";
 
-.layout-lists{
-    margin-top: 100px;
-    white-space: nowrap;
-    margin-left: 20px;
+.layout-lists {
+  margin-top: $header-size;
+  white-space: nowrap;
+  margin-left: 20px;
 }
-.layout-wrapper{
-overflow-y: hidden;
-}
+.layout-wrapper {
+  overflow-y: hidden;
+  overflow-x: auto;
 
+}
 
 @media only screen and (max-width: 600px) {
-    .layout-lists {
-        margin-left: 0px;
-    }
+  .layout-lists {
+    margin-left: 0px;
   }
+}
+

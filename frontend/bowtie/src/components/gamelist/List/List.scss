@@ -1,12 +1,13 @@
 .list-list{
     //background-color: white;
     width: 350px;
-    height: 75vh;;
+    height: 88vh;
     display: inline-block;
     margin-left: 20px;
     white-space: nowrap;
     vertical-align: top;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 .list-title-card{
     margin-bottom: 30px;
@@ -39,3 +40,17 @@
         height: 0px;
       }
 }
+.list-add-new-wrapper{
+    padding-bottom: 50px;
+}
+
+@media only screen and (max-height: 600px) {
+    .list-list {
+      height: 79vh;
+    }
+  }
+  @media only screen and (max-height: 700px) {
+    .list-list {
+      height: 82vh;
+    }
+  }

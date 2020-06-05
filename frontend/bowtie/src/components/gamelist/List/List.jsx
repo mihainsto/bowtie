@@ -57,13 +57,14 @@ const List = (props) => {
             blured={searchBlured}
           />
         </div>
-
-        <div
-          className="list-card"
-          className={addButtonVisibile}
-          onClick={addNewClicked}
-        >
-          <AddNewCard cardText="+ Add new game" />
+        <div className="list-add-new-wrapper">
+          <div
+            className="list-card"
+            className={addButtonVisibile}
+            onClick={addNewClicked}
+          >
+            <AddNewCard cardText="+ Add new game" />
+          </div>
         </div>
       </div>
     </div>
