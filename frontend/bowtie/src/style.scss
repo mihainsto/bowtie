@@ -2,11 +2,46 @@ $main-color: #282D32;
 $blue-color: #585EEA;
 $text-color: #EEF7FF;
 $card-color: #2D333A;
+$header-size: 0px;
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap');
 body {
     background-color: $main-color;
     color: $text-color;
     font-family: "Nunito";
     font-weight: 800;
+    overflow-y: hidden;
 
 }
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(88, 94, 234, 0.2);
+    border: 0px none #ffffff;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(88, 94, 234, 0.6);
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background: rgba(88, 94, 234, 0.6);
+  }
+  ::-webkit-scrollbar-track {
+    background: #282d32;
+    border: 0px none #ffffff;
+    border-radius: 0px;
+  }
+  ::-webkit-scrollbar-track:hover {
+    background: #282d32;
+  }
+  ::-webkit-scrollbar-track:active {
+    background: #282d32;
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
