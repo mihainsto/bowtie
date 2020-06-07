@@ -14,6 +14,7 @@ import Card from "../Card/Card";
 import AddNewCard from "../AddNewCard/AddNewCard";
 import SearchGameCard from "../SearchGameCard/SearchGameCard";
 import "./List.scss";
+import { Droppable } from "react-beautiful-dnd";
 
 const List = (props) => {
   const [newEntry, setNewEntry] = useState("");
@@ -43,12 +44,23 @@ const List = (props) => {
       <div className="list-title-card">
         <TitleCard title={props.title} />
       </div>
-     <div className="list-list">
-        {props.listCards.map((item) => (
-          <div className="list-card">
-            <Card cardText={item.cardTitle} />
-          </div>
-        ))}
+      <div className="list-list">
+        <Droppable droppableId={props.listId}>
+          {(provided) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+            >
+              {props.listCards.map((item, index) => (
+                <div className="list-card">
+                  <Card cardText={item.cardTitle} cardId={item.cardId} index={index}/>
+                </div>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+
         <div className="list-card" className={searchVisible}>
           <SearchGameCard
             onChangeValue={searchOnChangeValueHandler}

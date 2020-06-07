@@ -9,34 +9,8 @@ import React from "react";
 import List from "./List/List";
 import "../../style.scss";
 import "./layout.scss";
+import {DragDropContext} from 'react-beautiful-dnd'
 
-const listItems = {
-  title: "Completed 2020",
-  items: [
-    "Metro Exodus",
-    "The Last of Us",
-    "Doom Eternal",
-    "Horizon Zero Dawn",
-  ],
-};
-const listItems2 = {
-  title: "Completed 2020",
-  items: [
-    "Metro Exodus",
-    "The Last of Us",
-    "Doom Eternal",
-    "Horizon Zero Dawn",
-    "Nier Automata",
-    "The Witcher3: Blood and Wine",
-    "Until Dawn",
-    "Gears 5",
-    "Metro Last Light",
-    "Life is Strange 2",
-    "Control",
-    "Star Wars Jedi: Fallen Order",
-    "Just Cause 4",
-  ],
-};
 // array with cards 'id' - 'card title'
 const cards = {
   "1": "Metro Exodus",
@@ -60,14 +34,20 @@ const lists = {
     title: "Completed 2019",
   },
 };
-const listorder = ["1", "2", "3"];
-
+//const listorder = ["1", "2", "3"];
+const listorder = ["1"]
 const Layout = ({ children }) => {
+  const onDragEnd = result =>{
+    // TODO: reorder
+  }
+
   return (
     <div className="layout-wrapper">
       <div className="layout-lists">
-
-
+      
+      <DragDropContext
+        onDragEnd={onDragEnd}
+      >
         {listorder.map((item) => {
           const listCards = [];
           const curentList = lists[item]
@@ -75,14 +55,14 @@ const Layout = ({ children }) => {
           const cardsOrder = curentList.cards
           
           cardsOrder.forEach(i => {
-            listCards.push({cardTitle: cards[i], index: i})
+            listCards.push({cardTitle: cards[i], cardId: i})
           });
 
           return (
-            <List listItems={listItems} listCards={listCards} title={title} />
+            <List listCards={listCards} title={title} listId={item}/>
           )
         })}
-
+      </DragDropContext>
       </div>
     </div>
   );
