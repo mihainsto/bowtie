@@ -43,7 +43,7 @@ const List = (props) => {
       <div className="list-title-card">
         <TitleCard title={props.listItems.title} />
       </div>
-      <div className="list-list">
+      <div className="list-list list-overflow">
         {props.listItems.items.map((item) => (
           <div className="list-card">
             <Card cardText={item} />
