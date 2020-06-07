@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/bowtie/precache-manifest.9b415ffb04e069fcd70529cc62bcd2aa.js"
+  "/bowtie/precache-manifest.4c5cd4e688b911b584cd6f9ecea191b8.js"
 );
 
 self.addEventListener('message', (event) => {
