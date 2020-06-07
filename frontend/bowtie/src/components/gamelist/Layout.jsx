@@ -53,11 +53,11 @@ const cards = {
   "12": "Just Cause 4"
 };
 const lists = {
-  "1": { cards: ["1", "2", "3"], title: "completed 2020" },
+  "1": { cards: ["1", "2", "3"], title: "Completed 2020" },
   "2": { cards: ["4", "5", "6", "7"], title: "To play" },
   "3": {
     cards: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-    title: "completed 2019",
+    title: "Completed 2019",
   },
 };
 const listorder = ["1", "2", "3"];
