@@ -44,7 +44,7 @@ const List = (props) => {
       <div className="list-title-card">
         <TitleCard title={props.title} />
       </div>
-      <div className="list-list">
+      <div className="list-list list-overflow">
         <Droppable droppableId={props.listId}>
           {(provided) => (
             <div

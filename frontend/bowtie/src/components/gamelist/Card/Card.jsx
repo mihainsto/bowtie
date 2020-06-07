@@ -4,7 +4,7 @@ import "./Card.scss";
 
 const Card = (props) => {
   return (
-    <Draggable draggableId={props.cardId} index={props.index}>
+    <Draggable draggableId={props.cardId} index={props.index} key={props.cardId}>
       {(provided) => (
         <div
           {...provided.draggableProps}
