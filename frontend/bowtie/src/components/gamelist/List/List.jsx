@@ -41,12 +41,12 @@ const List = (props) => {
   return (
     <div className="list-list-wrapper">
       <div className="list-title-card">
-        <TitleCard title={props.listItems.title} />
+        <TitleCard title={props.title} />
       </div>
-      <div className="list-list">
-        {props.listItems.items.map((item) => (
+     <div className="list-list">
+        {props.listCards.map((item) => (
           <div className="list-card">
-            <Card cardText={item} />
+            <Card cardText={item.cardTitle} />
           </div>
         ))}
         <div className="list-card" className={searchVisible}>
