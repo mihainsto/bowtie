@@ -9,7 +9,7 @@ import React from "react";
 import List from "./List/List";
 import "../../style.scss";
 import "./layout.scss";
-import {DragDropContext} from 'react-beautiful-dnd'
+import { DragDropContext } from "react-beautiful-dnd";
 import { useState, useRef } from "react";
 
 // array with cards 'id' - 'card title'
@@ -50,10 +50,10 @@ const Layout = ({ children }) => {
     "9": "Life is Strange 2",
     "10": "Control",
     "11": "Star Wars Jedi: Fallen Order",
-    "12": "Just Cause 4"
+    "12": "Just Cause 4",
   });
   const [lists, setLists] = useState({
-    "1": { cards: ["1", "2", "3", "4"], title: "Completed 2020" },
+    "1": { cards: ["1", "2", "3"], title: "Completed 2020" },
     "2": { cards: ["4", "5", "6", "7"], title: "To play" },
     "3": {
       cards: ["8", "9", "10", "11", "12"],
@@ -61,61 +61,86 @@ const Layout = ({ children }) => {
     },
   });
 
-  
-  const onDragEnd = result =>{
-    const {destination, source, draggableId} = result;
+  const onDragEnd = (result) => {
+    const { destination, source, draggableId } = result;
 
-    if (!destination){
+    if (!destination) {
       return;
     }
 
-    if(
+    if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
-    ){
+    ) {
       return;
     }
-    const curentListIndex = source.droppableId
-    const list = lists[curentListIndex]
-    const newCardsList = Array.from(list.cards)
-    
-    newCardsList.splice(source.index, 1)
-    newCardsList.splice(destination.index, 0, draggableId)
+    const startListId = source.droppableId
+    const finishListId = destination.droppableId
 
-    const newList = {
-      ...list,
-      cards: newCardsList
+    const startList = lists[startListId]
+    const finishList = lists[finishListId]
+
+    if (startList === finishList) {
+      const curentListIndex = source.droppableId
+      const list = lists[curentListIndex]
+      const newCardsList = Array.from(list.cards)
+
+      newCardsList.splice(source.index, 1)
+      newCardsList.splice(destination.index, 0, draggableId)
+
+      const newList = {
+        ...list,
+        cards: newCardsList,
+      }
+
+      setLists({
+        ...lists,
+        [curentListIndex]: newList,
+      })
+      return;
     }
 
-    setLists({
-      ...lists,
-      [curentListIndex]: newList
-    })
+    const startListCards = Array.from(startList.cards)
+    startListCards.splice(source.index, 1)
+    const newStart = {
+      ...startList,
+      cards: startListCards
+    }
 
-  }
+    const finishListCards = Array.from(finishList.cards)
+    finishListCards.splice(destination.index, 0, draggableId)
+    const newFinish = {
+      ...finishList,
+      cards: finishListCards
+    }
+
+    setLists(
+      {
+        ...lists,
+        [startListId]: newStart,
+        [finishListId]: newFinish
+      }
+    )
+    return;
+  };
 
   return (
     <div className="layout-wrapper">
       <div className="layout-lists">
-      
-      <DragDropContext
-        onDragEnd={onDragEnd}
-      >
-        {listorder.map((item) => {
-          const listCards = [];
-          const curentList = lists[item]
-          const title = curentList.title
-          const cardsOrder = curentList.cards
-          
-          cardsOrder.forEach(i => {
-            listCards.push({cardTitle: cards[i], cardId: i})
-          });
+        <DragDropContext onDragEnd={onDragEnd}>
+          {listorder.map((item) => {
+            const listCards = [];
+            const curentList = lists[item];
+            const title = curentList.title;
+            const cardsOrder = curentList.cards;
 
-          return (
-            <List listCards={listCards} title={title} listId={item}/>
-          )
-        })}
-      </DragDropContext>
+            cardsOrder.forEach((i) => {
+              listCards.push({ cardTitle: cards[i], cardId: i });
+            });
+
+            return <List listCards={listCards} title={title} listId={item} />;
+          })}
+        </DragDropContext>
       </div>
     </div>
   );
