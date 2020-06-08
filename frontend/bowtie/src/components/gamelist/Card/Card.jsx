@@ -12,7 +12,6 @@ const Card = (props) => {
           ref={provided.innerRef}
           //isDragging={snapshot.isDragging}
         >
-
           <div className="card-card">
             <div className="card-text">{props.cardText}</div>
           </div>
