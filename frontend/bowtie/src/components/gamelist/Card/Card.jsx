@@ -10,6 +10,7 @@ const Card = (props) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
+          // TODO: Style when dragging
           //isDragging={snapshot.isDragging}
         >
           <div className="card-card">
