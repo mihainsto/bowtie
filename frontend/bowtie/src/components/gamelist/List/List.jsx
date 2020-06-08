@@ -14,6 +14,7 @@ import Card from "../Card/Card";
 import AddNewCard from "../AddNewCard/AddNewCard";
 import SearchGameCard from "../SearchGameCard/SearchGameCard";
 import "./List.scss";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 
 const List = (props) => {
   const [newEntry, setNewEntry] = useState("");
@@ -39,35 +40,60 @@ const List = (props) => {
     setSearchVisible("list-visibility-hidden");
   };
   return (
-    <div className="list-list-wrapper">
-      <div className="list-title-card">
-        <TitleCard title={props.listItems.title} />
-      </div>
-      <div className="list-list list-overflow">
-        {props.listItems.items.map((item) => (
-          <div className="list-card">
-            <Card cardText={item} />
-          </div>
-        ))}
-        <div className="list-card" className={searchVisible}>
-          <SearchGameCard
-            onChangeValue={searchOnChangeValueHandler}
-            ref={searchElement}
-            focused={searchFocused}
-            blured={searchBlured}
-          />
-        </div>
-        <div className="list-add-new-wrapper">
-          <div
-            className="list-card"
-            className={addButtonVisibile}
-            onClick={addNewClicked}
+    <Draggable
+    draggableId={props.listId}
+    index={props.index}
+    key={props.listId}
+    >
+      {provided => (
+        <div className="list-list-wrapper"
+          {...provided.draggableProps}
+          ref={provided.innerRef}
+        >
+          <div className="list-title-card"
+          {...provided.dragHandleProps}
           >
-            <AddNewCard cardText="+ Add new game" />
+            <TitleCard title={props.title} />
+          </div>
+          <div className="list-list list-overflow">
+            <Droppable droppableId={props.listId} type="card">
+              {(provided) => (
+                <div ref={provided.innerRef} {...provided.droppableProps}>
+                  {props.listCards.map((item, index) => (
+                    <div className="list-card">
+                      <Card
+                        cardText={item.cardTitle}
+                        cardId={item.cardId}
+                        index={index}
+                      />
+                    </div>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+
+            <div className="list-card" className={searchVisible}>
+              <SearchGameCard
+                onChangeValue={searchOnChangeValueHandler}
+                ref={searchElement}
+                focused={searchFocused}
+                blured={searchBlured}
+              />
+            </div>
+            <div className="list-add-new-wrapper">
+              <div
+                className="list-card"
+                className={addButtonVisibile}
+                onClick={addNewClicked}
+              >
+                <AddNewCard cardText="+ Add new game" />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </Draggable>
   );
 };
 

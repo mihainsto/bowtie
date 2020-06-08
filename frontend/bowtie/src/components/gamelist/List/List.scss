@@ -1,15 +1,14 @@
 .list-list{
-    //background-color: white;
     width: 350px;
     height: 88vh;
     display: inline-block;
     margin-left: 20px;
     white-space: nowrap;
-    vertical-align: top;
 
 }
 .list-overflow{
     overflow-y: auto;
+    scrollbar-width: none;
     margin-left: -34px;
     padding-left: 54px;
     padding-right: 54px;
@@ -23,7 +22,6 @@
 }
 .list-card{
     margin-top: 20px;
-
 }
 .list-card:first-child{
     margin-top: 0px;
