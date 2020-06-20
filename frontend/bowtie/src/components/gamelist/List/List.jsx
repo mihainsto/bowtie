@@ -41,18 +41,17 @@ const List = (props) => {
   };
   return (
     <Draggable
-    draggableId={props.listId}
-    index={props.index}
-    key={props.listId}
+      draggableId={props.listId}
+      index={props.index}
+      key={props.listId}
     >
-      {provided => (
-        <div className="list-list-wrapper"
+      {(provided) => (
+        <div
+          className="list-list-wrapper"
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
-          <div className="list-title-card"
-          {...provided.dragHandleProps}
-          >
+          <div className="list-title-card" {...provided.dragHandleProps}>
             <TitleCard title={props.title} />
           </div>
           <div className="list-list list-overflow">
