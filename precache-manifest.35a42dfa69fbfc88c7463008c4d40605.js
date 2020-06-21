@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d6777649b9ddfa9e742c560b5aac4f49",
+    "revision": "bcbf45ce4e06a255260533d13c355aa2",
     "url": "/bowtie/index.html"
   },
   {
