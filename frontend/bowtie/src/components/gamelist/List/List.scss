@@ -50,7 +50,9 @@
 .list-add-new-wrapper{
     padding-bottom: 50px;
 }
-
+.list-padding-emptyadd{
+  padding-top: 1px;
+}
 @media only screen and (max-height: 600px) {
     .list-list {
       height: 79vh;

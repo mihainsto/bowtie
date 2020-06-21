@@ -67,6 +67,7 @@ const List = (props) => {
                       />
                     </div>
                   ))}
+                  <div className="list-padding-emptyadd"></div>
                   {provided.placeholder}
                 </div>
               )}
