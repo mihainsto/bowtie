@@ -1,13 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
-import Layout from "../src/components/gamelist/Layout"
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-
+import Layout from "../src/components/gamelist/Layout"
+import LandingPage from "../src/components/LandingPage/LandingPage"
 function App() {
   return (
   <Router>
     <Switch>
-    <Route path="/" exact component={Layout}/>
+    <Route path="/" exact component={LandingPage}/>
     <Route path="/board" component={Layout}/>
     </Switch>
   </Router>
