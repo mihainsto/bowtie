@@ -1,12 +1,16 @@
 import React from 'react';
 import logo from './logo.svg';
 import Layout from "../src/components/gamelist/Layout"
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
   return (
-
-  <Layout>
-  </Layout>
+  <Router>
+    <Switch>
+    <Route path="/" exact component={Layout}/>
+    <Route path="/board" component={Layout}/>
+    </Switch>
+  </Router>
   
   );
 }
