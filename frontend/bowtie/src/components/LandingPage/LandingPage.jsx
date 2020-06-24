@@ -1,21 +1,10 @@
 import React from "react";
 import "./LandingPage.scss";
+import LogoButtonsNav from "../Navs/LogoButtonsNav/LogoButtonsNav"
 const LandingPage = () => {
   return (
     <div className="LandingPage">
-      <nav>
-        <span className="logo ">Bowtie</span>
-
-        <div className="registerbtn">
-          <div type="button" className="registerbtn-text">
-            Register
-          </div>
-        </div>
-
-        <div className="loginbtn">
-          <div className="loginbtn-text">Log In</div>
-        </div>
-      </nav>
+      <LogoButtonsNav />
       {/* <div className="content-container">
         <div className="bigtext grid-right">
           Bowtie makes <br /> organizing your gaming life <br />a piece of cake.
