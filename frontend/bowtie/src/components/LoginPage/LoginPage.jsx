@@ -1,12 +1,10 @@
 import React from "react";
 import "./LoginPage.scss";
-
+import LogoNav from "../Navs/LogoNav/LogoNav"
 const LoginPage = () => {
   return (
     <div className="loginpage">
-      <nav>
-        <span className="logo">Bowtie</span>
-      </nav>
+      <LogoNav />
       <div>Login Page</div>
     </div>
   );
