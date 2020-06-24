@@ -1,0 +1,37 @@
+@import "../../../style.scss";
+
+.bluebutton {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  background-color: $blue-color;
+  cursor: pointer;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 13px;
+  box-shadow: -5px -5px 10px 0 rgba(0, 0, 0, 0.16),
+    5px 5px 10px 0 rgba(0, 0, 0, 0.16);
+  bordeR: none;
+  .bluebutton-text {
+    font-size: 30px;
+    color: $text-color;
+    vertical-align: middle;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-weight: 800;
+  }
+ 
+}
+
+.bluebutton:active{
+  background-color: rgba(88, 94, 234, 0.8);
+}
+.bluebutton:hover{
+  background-color: rgba(88, 94, 234, 0.8);
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
