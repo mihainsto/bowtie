@@ -4,6 +4,7 @@ import LogoNav from "../Navs/LogoNav/LogoNav";
 import BlueButton from "../Buttons/BlueButton/BlueButton";
 import Checkboxs1 from "../Checkboxes/Checkboxs1/Checkboxs1";
 import { useState } from "react";
+import {Link} from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -24,9 +25,6 @@ const LoginPage = () => {
   const resetpassClicked = () => {
     console.log("reset pass clicked")
   }
-  const RegisterClicked = () => {
-    console.log("Register clicked")
-  }
   return (
     <div className="loginpage">
       <LogoNav />
@@ -34,7 +32,9 @@ const LoginPage = () => {
         <div className="form-wrapper">
           <div className="buttons">
             <span className="login-btn">Log In</span>
-            <span className="register-btn" onClick={RegisterClicked}>Register</span>
+            <Link to="/register" style={{ textDecoration: 'none' }}>
+              <span className="register-btn">Register</span>
+            </Link>
           </div>
 
           <div>
