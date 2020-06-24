@@ -13,7 +13,7 @@ const LoginPage = () => {
     setState(value.target.value);
   };
   const loginClicked = (value) => {
-    console.log({ email: email, password: password });
+    console.log("login clicked")
   };
   const checkboxClicked = (value, setState) => {
     if (rememberCheck === true)
@@ -21,6 +21,12 @@ const LoginPage = () => {
     else
       setState(true)
   };
+  const resetpassClicked = () => {
+    console.log("reset pass clicked")
+  }
+  const RegisterClicked = () => {
+    console.log("Register clicked")
+  }
   return (
     <div className="loginpage">
       <LogoNav />
@@ -28,7 +34,7 @@ const LoginPage = () => {
         <div className="form-wrapper">
           <div className="buttons">
             <span className="login-btn">Log In</span>
-            <span className="register-btn">Register</span>
+            <span className="register-btn" onClick={RegisterClicked}>Register</span>
           </div>
 
           <div>
@@ -59,7 +65,7 @@ const LoginPage = () => {
             <BlueButton text="Log In" onClick={loginClicked} />
           </div>
           <div className="forgot-pass-text">
-            Forgot password? <span className="reset-pass-btn"> Reset </span>
+            Forgot password? <span className="reset-pass-btn" onClick={resetpassClicked}> Reset </span>
           </div>
         </div>
       </div>
