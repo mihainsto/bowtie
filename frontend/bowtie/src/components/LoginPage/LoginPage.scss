@@ -1,4 +1,64 @@
+@import "../../style.scss";
+
 .loginpage {
+  .login-btn {
+    font-weight: bold;
+    font-style: normal;
+    font-size: 36px;
+    line-height: 49px;
+    color: #f0f8ff;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  .register-btn {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 49px;
+    margin-left: 20px;
+
+    color: rgba(240, 248, 255, 0.3);
+
+    cursor: pointer;
+  }
+  .form-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  .buttons{
+    padding-bottom: 30px;
+  }
+  input {
+    color: $text-color;
+    font-size: 24px;
+    position: relative;
+    margin-top: 70px;
+    width: 600px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid rgba(240, 248, 255, 0.8);
+    text-indent: 20px;
 
   }
-  
+  input:invalid {
+    color: $text-color;
+    font-size: 24px;
+    position: relative;
+    margin-top: 70px;
+    width: 600px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    box-shadow:none;
+    border-bottom: 3px solid  rgba(240, 248, 255, 0.8);
+    text-indent: 20px;
+  }
+  input::placeholder {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 33px;
+    color: rgba(240, 248, 255, 0.5);
+  }
+}
