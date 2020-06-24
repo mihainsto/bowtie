@@ -8,12 +8,19 @@ import { useState } from "react";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberCheck, setRememberCheck] = useState(false);
   const inputFieldChanged = (value, setState) => {
     setState(value.target.value);
   };
   const loginClicked = (value) => {
-    console.log({email:email, password:password})
-  }
+    console.log({ email: email, password: password });
+  };
+  const checkboxClicked = (value, setState) => {
+    if (rememberCheck === true)
+      setState(false)
+    else
+      setState(true)
+  };
   return (
     <div className="loginpage">
       <LogoNav />
@@ -29,7 +36,7 @@ const LoginPage = () => {
               type="email"
               placeholder="Email"
               value={email}
-              onChange={value => inputFieldChanged(value, setEmail)}
+              onChange={(value) => inputFieldChanged(value, setEmail)}
             ></input>
           </div>
           <div>
@@ -37,16 +44,19 @@ const LoginPage = () => {
               type="password"
               placeholder="Password"
               value={password}
-              onChange={value => inputFieldChanged(value, setPassword)}
+              onChange={(value) => inputFieldChanged(value, setPassword)}
             ></input>
           </div>
 
           <div className="remember-checkbox">
-            <Checkboxs1 />
+            <Checkboxs1
+              checked={rememberCheck}
+              onClick={(value) => checkboxClicked(value, setRememberCheck)}
+            />
             <span>Remember me</span>
           </div>
           <div className="login-submit-btn">
-            <BlueButton text="Log In" onClick={loginClicked}/>
+            <BlueButton text="Log In" onClick={loginClicked} />
           </div>
           <div className="forgot-pass-text">
             Forgot password? <span className="reset-pass-btn"> Reset </span>
