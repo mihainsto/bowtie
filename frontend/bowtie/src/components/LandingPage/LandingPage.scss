@@ -1,0 +1,80 @@
+@import "../../style.scss";
+
+.LandingPage {
+  nav {
+    margin-top: 30px;
+  }
+  .logo {
+    font-size: 48px;
+    margin-left: 45px;
+  }
+  .loginbtn {
+    margin-right: 50px;
+    float: right;
+    cursor: pointer;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 13px;
+  }
+  .loginbtn-text {
+    font-size: 30px;
+    color: $text-color;
+    vertical-align: middle;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-weight: 800;
+  }
+  .registerbtn {
+    margin-right: 45px;
+    float: right;
+    background-color: $blue-color;
+    cursor: pointer;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 13px;
+    box-shadow: -5px -5px 10px 0 rgba(0, 0, 0, 0.16),
+      5px 5px 10px 0 rgba(0, 0, 0, 0.16);
+  }
+  .registerbtn-text {
+    font-size: 30px;
+    color: $text-color;
+    vertical-align: middle;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-weight: 800;
+  }
+  .content-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr;
+    gap: 1px 1px;
+    grid-template-areas: "left right";
+
+
+    .grid-left { grid-area: left; }
+  
+    .grid-right { grid-area: right; }
+
+  }
+  .bigtext {
+    margin-top: 50px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 65px;
+    line-height: 98px;
+  }
+
+  .smalltext1{
+    margin-top: 500px;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: normal;
+
+  }
+  .smalltext2{
+    margin-top: 590px;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: normal;
+  }
+}
