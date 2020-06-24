@@ -25,33 +25,40 @@
     text-align: center;
     margin-top: 50px;
   }
-  .buttons{
-    padding-bottom: 30px;
+  .form-wrapper {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
-  input[type=email], [type=password] {
+  .buttons {
+    margin-top: 15px;
+    padding-bottom: 15px;
+  }
+  input[type="email"],
+  [type="password"] {
     color: $text-color;
     font-size: 24px;
     position: relative;
     margin-top: 70px;
-    width: 600px;
+    width: 100%;
     height: 40px;
     background: transparent;
     border: none;
     border-bottom: 3px solid rgba(240, 248, 255, 0.8);
     text-indent: 20px;
-
   }
-  input[type=email], [type=password]:invalid {
+  input[type="email"],
+  [type="password"]:invalid {
     color: $text-color;
     font-size: 24px;
     position: relative;
     margin-top: 70px;
-    width: 600px;
+    width: 100%;
     height: 40px;
     background: transparent;
     border: none;
-    box-shadow:none;
-    border-bottom: 3px solid  rgba(240, 248, 255, 0.8);
+    box-shadow: none;
+    border-bottom: 3px solid rgba(240, 248, 255, 0.8);
     text-indent: 20px;
   }
   input::placeholder {
@@ -61,11 +68,54 @@
     line-height: 33px;
     color: rgba(240, 248, 255, 0.5);
   }
-
-  .login-submit-btn{
-    margin-top: 100px;
-    width: 600px;
+  :focus{
+    outline: none;
+  }
+  .login-submit-btn {
+    margin-top: 20px;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
+  }
+  .remember-checkbox {
+    margin-top: 70px;
+    //margin-left: -460px;
+    //float:left;
+    text-align: left;
+  }
+  .forgot-pass-text {
+    margin-top: 30px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 25px;
+
+    color: rgba(240, 248, 255, 0.5);
+  }
+  .reset-pass-btn {
+    color: rgba(240, 248, 255, 1);
+    cursor: pointer;
+  }
+  @media only screen and (max-width: 650px) {
+    .form-wrapper {
+      width: 90vw;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  @media only screen and (max-width: 340px) {
+    .buttons {
+      //display: flex;
+      //flex-wrap: wrap;
+      
+      text-align: center;
+      .register-btn{
+         margin-top: 10px;
+         text-align: center;
+       }
+       span{
+         display: inline-block;
+       }
+    }
   }
 }

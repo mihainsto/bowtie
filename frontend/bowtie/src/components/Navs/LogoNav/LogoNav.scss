@@ -7,4 +7,14 @@
     font-size: 48px;
     margin-left: 45px;
   }
+
+
+}
+@media only screen and (max-width: 650px) {
+  .logonav{
+    text-align: center;
+    .logo{
+      margin-left: auto
+    }
+  }
 }
