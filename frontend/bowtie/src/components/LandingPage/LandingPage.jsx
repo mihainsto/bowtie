@@ -16,7 +16,7 @@ const LandingPage = () => {
           <div className="loginbtn-text">Log In</div>
         </div>
       </nav>
-      <div className="content-container">
+      {/* <div className="content-container">
         <div className="bigtext grid-right">
           Bowtie makes <br /> organizing your gaming life <br />a piece of cake.
         </div>
@@ -29,7 +29,7 @@ const LandingPage = () => {
           Bowtie allows you to keep track of the upcoming games, <br/> get all the
           news about them and much more.{" "}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
