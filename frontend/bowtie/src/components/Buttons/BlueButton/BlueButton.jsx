@@ -4,11 +4,11 @@ import "./BlueButton.scss";
 
 const BlueButton = (props) => {
     return (
-        <div className="registerbtn">
-        <div type="button" className="registerbtn-text">
+        <button className="bluebutton">
+        <div type="button" className="bluebutton-text">
           {props.text}
         </div>
-      </div>
+      </button>
     )
 }
 
