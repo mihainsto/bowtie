@@ -23,23 +23,9 @@
     margin-right: 25px;
     font-weight: 800;
   }
-  .registerbtn {
+  .register-btn {
     margin-right: 45px;
     float: right;
-    background-color: $blue-color;
-    cursor: pointer;
-    height: 60px;
-    line-height: 60px;
-    border-radius: 13px;
-    box-shadow: -5px -5px 10px 0 rgba(0, 0, 0, 0.16),
-      5px 5px 10px 0 rgba(0, 0, 0, 0.16);
   }
-  .registerbtn-text {
-    font-size: 30px;
-    color: $text-color;
-    vertical-align: middle;
-    margin-left: 25px;
-    margin-right: 25px;
-    font-weight: 800;
-  }
+
 }
