@@ -27,3 +27,7 @@ const test = async () => {
   const body = await make_igdb_request("/games", 'fields id; search "Metro";')
   console.log(body)
 }
+
+module.exports = {
+  make_igdb_request
+}
