@@ -135,9 +135,9 @@ const Layout = ({ children }) => {
                   const cardsOrder = curentList.cards;
 
                   cardsOrder.forEach((i) => {
-                    listCards.push({ cardTitle: cards[i], cardId: i });
+                    listCards.push({ cardTitle: cards[i], cardId: i, cardImage: cardImages[i]});
                   });
-
+                  
                   return (
                     <List
                       listCards={listCards}

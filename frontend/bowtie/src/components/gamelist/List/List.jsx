@@ -62,6 +62,7 @@ const List = (props) => {
                     <div className="list-card">
                       <Card
                         cardText={item.cardTitle}
+                        cardImage={item.cardImage}
                         cardId={item.cardId}
                         index={index}
                       />
