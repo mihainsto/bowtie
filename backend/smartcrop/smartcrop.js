@@ -17,6 +17,6 @@ function applySmartCrop(src, dest, width, height) {
     });
   }
 
-
-var src = 'https://images.igdb.com/igdb/image/upload/t_original/ebus9dxflazafgwc6xq0.jpg';
-applySmartCrop(src, 'flower-square.jpg', 600, 300);
+// Test
+//var src = 'https://images.igdb.com/igdb/image/upload/t_original/ebus9dxflazafgwc6xq0.jpg';
+//applySmartCrop(src, 'croppedimg.jpg', 600, 300);
