@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  mongodb:
+    image: 'docker.io/bitnami/mongodb:4.2-debian-10'
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./database:/bitnami/mongodb
+    environment: 
+      - MONGODB_ROOT_PASSWORD=bowtiedevroot
+      - MONGODB_USERNAME=dev_bowtie_user
+      - MONGODB_PASSWORD=dev_bowtie_pass
+      - MONGODB_DATABASE=bowtieDB
+
+volumes:
+  mongodb_data:
+    driver: local
