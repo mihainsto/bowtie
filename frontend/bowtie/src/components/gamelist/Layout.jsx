@@ -28,6 +28,13 @@ const Layout = ({ children }) => {
     "11": "Star Wars Jedi: Fallen Order",
     "12": "Just Cause 4",
   });
+  const [cardImages, setCardsImages] = useState({
+    "1": "https://i.imgur.com/SvPjEBF.jpg",
+    "2": "https://i.imgur.com/SvPjEBF.jpg",
+    "3": "https://i.imgur.com/SvPjEBF.jpg",
+    "4": "https://i.imgur.com/SvPjEBF.jpg",
+    "5": "https://i.imgur.com/SvPjEBF.jpg"
+  })
   const [lists, setLists] = useState({
     "list-1": { cards: ["1", "2", "3"], title: "Completed 2020" },
     "list-2": { cards: ["4", "5", "6", "7"], title: "To play" },
@@ -122,9 +129,9 @@ const Layout = ({ children }) => {
                   const cardsOrder = curentList.cards;
 
                   cardsOrder.forEach((i) => {
-                    listCards.push({ cardTitle: cards[i], cardId: i });
+                    listCards.push({ cardTitle: cards[i], cardId: i, cardImage: cardImages[i]});
                   });
-
+                  
                   return (
                     <List
                       listCards={listCards}
