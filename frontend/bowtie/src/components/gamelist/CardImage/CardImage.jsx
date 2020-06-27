@@ -8,7 +8,7 @@ const CardImage = (props) => {
 
   return (
     <div>
-
+      <img src={withHttp(props.image)} style={{width: 300, height: 150}}></img>
     </div>
   );
 };
