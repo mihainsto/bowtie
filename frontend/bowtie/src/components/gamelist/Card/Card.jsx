@@ -1,7 +1,7 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import "./Card.scss";
-import CardImage from "../CardImage/CardImage"
+import CardImage from "../CardImage/CardImage";
 const Card = (props) => {
   return (
     <Draggable
@@ -18,9 +18,9 @@ const Card = (props) => {
           //isDragging={snapshot.isDragging}
         >
           <div className="card-card">
-            <div className="card-text">
-              <CardImage image={props.cardImage} />
-              {props.cardText}
+            <div className="card-content">
+              {props.cardImage ? <CardImage image={props.cardImage} /> : null}
+              <div className="card-text">{props.cardText}</div>
             </div>
           </div>
         </div>

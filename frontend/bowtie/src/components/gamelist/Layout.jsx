@@ -29,17 +29,11 @@ const Layout = ({ children }) => {
     "12": "Just Cause 4",
   });
   const [cardImages, setCardsImages] = useState({
-    "1": "images.igdb.com/igdb/image/upload/t_original/co1iuj.jpg",
-    "2": "images.igdb.com/igdb/image/upload/t_original/ebus9dxflazafgwc6xq0.jpg",
-    "3": "images.igdb.com/igdb/image/upload/t_original/co1lvj.jpg",
-    "4": "images.igdb.com/igdb/image/upload/t_original/co1izx.jpg",
-    "5": "images.igdb.com/igdb/image/upload/t_original/qhok1pi6egmfizjjii7r.jpg",
-    "7": "images.igdb.com/igdb/image/upload/t_original/co1r6v.jpg",
-    "8": "images.igdb.com/igdb/image/upload/t_original/mnxai3ur3pzzkhdc36on.jpg",
-    "9": "images.igdb.com/igdb/image/upload/t_original/co1l2z.jpg",
-    "10": "images.igdb.com/igdb/image/upload/t_original/co1qef.jpg",
-    "11": "images.igdb.com/igdb/image/upload/t_original/co1rbi.jpg",
-    "12": "images.igdb.com/igdb/image/upload/t_original/co1hz4.jpg"
+    "1": "https://i.imgur.com/SvPjEBF.jpg",
+    "2": "https://i.imgur.com/SvPjEBF.jpg",
+    "3": "https://i.imgur.com/SvPjEBF.jpg",
+    "4": "https://i.imgur.com/SvPjEBF.jpg",
+    "5": "https://i.imgur.com/SvPjEBF.jpg"
   })
   const [lists, setLists] = useState({
     "list-1": { cards: ["1", "2", "3"], title: "Completed 2020" },

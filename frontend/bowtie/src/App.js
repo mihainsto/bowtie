@@ -9,8 +9,7 @@ function App() {
   return (
   <Router>
     <Switch>
-    <Route path="/bowtie" exact component={LoginPage}/> {/* debug */}
-    
+    <Route path="/bowtie" exact component={Layout}/> {/* debug */}
     <Route path="/" exact component={LandingPage}/>
     <Route path="/board" component={Layout}/>
     <Route path="/login" component={LoginPage}/>
