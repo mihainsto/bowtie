@@ -1,15 +1,19 @@
-const validators = require("../validation/validators");
-const express = require("express");
-const User = require("../models/User");
-const bcrypt = require("bcrypt");
-const mongoose = require("mongoose");
-const keys = require("../config/keys");
-const utils = require("../lib/utils");
-
+const passport = require("passport")
+const validators = require("../validation/validators")
+const express = require("express")
+const User = require("../models/User")
+const bcrypt = require("bcrypt")
+const mongoose = require("mongoose")
+const keys = require("../config/keys")
+const utils = require("../lib/utils")
 const loginValidator = validators.loginValidator;
 const registerValidator = validators.registerValidator;
 
 const router = express.Router();
+router.get('/protected', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    res.status(200).json({success: true, msg: 'jwt valid', })
+    console.log(req.user)
+})
 
 router.post("/register", (req, res) => {
   const { errors, isValid } = validators.registerValidator(req.body);

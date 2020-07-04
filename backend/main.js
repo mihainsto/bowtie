@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const DB = require('./database/database') 
 const keys = require('./config/keys')
 const User = require('./routes/User')
+const passport = require('passport')
 
 const app = express()
 const port = 3000
@@ -20,6 +21,8 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true})
     .then(()=>console.log("Connected to database"))
     .catch((err)=>console.log(err))
 
+require('./config/passport')(passport);
+app.use(passport.initialize());
 app.get('/', (req, res) => res.send('Hello World!'))
 app.use("/user/", User)
 
