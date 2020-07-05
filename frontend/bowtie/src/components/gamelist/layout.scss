@@ -12,3 +12,23 @@
   }
 }
 
+.addnew-list-card{
+  display: inline-block;
+  white-space: nowrap;
+  min-width: 350px;
+  margin-left: 20px;
+
+}
+.lists-wrapper{
+  display: flex;
+}
+
+.layout-wrapper{
+  .visibility-visible{
+    position: static;
+  }
+  .visibility-hidden{
+    position: absolute;
+    top: -999999px;
+  }
+}

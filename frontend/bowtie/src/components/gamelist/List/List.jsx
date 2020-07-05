@@ -88,7 +88,7 @@ const List = (props) => {
                 className={addButtonVisibile}
                 onClick={addNewClicked}
               >
-                <AddNewCard cardText="+ Add new game" />
+                <AddNewCard cardText="+ Add new game" height={60}/>
               </div>
             </div>
           </div>
