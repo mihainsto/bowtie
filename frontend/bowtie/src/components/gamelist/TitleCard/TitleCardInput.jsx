@@ -13,7 +13,8 @@ const TitleCard = React.forwardRef((props, ref) => {
           ref = {ref}
           onFocus= {props.focused}
           onBlur= {props.blured}
-          
+          onKeyPress= {props.onKeyPress}
+          value= {props.value}
           />
         </div>
       </div>

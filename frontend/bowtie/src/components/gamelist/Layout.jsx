@@ -134,14 +134,20 @@ const Layout = ({ children }) => {
     setTitleEntry(val.target.value);
   };
 
-  const searchFocused = () => {
+  // allow to pres enter only when input is on focus
+  const [enterKeyAllow, setEnterKeyAllow] = useState(false);
+
+  const addnewFocused = () => {
     setAddButtonVisibile("visibility-hidden");
     settitleTextBoxVisible("visibility-visible");
+    setEnterKeyAllow(true)
   };
 
-  const searchBlured = () => {
+  const addnewBlured = () => {
     setAddButtonVisibile("visibility-visible");
     settitleTextBoxVisible("visibility-hidden");
+    // if no input do not add new list
+    if (titleEntry == "") return;
     // After the users clicked out of the search we want to add a new list
     const lists_ids = Object.keys(lists).sort();
     const last_id = lists_ids[lists_ids.length - 1];
@@ -149,10 +155,16 @@ const Layout = ({ children }) => {
       "list-" + (parseInt(last_id.replace("list-", "")) + 1).toString();
 
     setLists({ ...lists, [new_id]: { cards: [], title: titleEntry } });
-    const new_order = listorder
-    new_order.push(new_id)
-    setListorder(new_order)
-    console.log(lists)
+    const new_order = listorder;
+    new_order.push(new_id);
+    setListorder(new_order);
+    console.log(titleInputElement.value)
+    setTitleEntry("")
+  };
+  const addnewKeyPressed = (event) => {
+    if (event.key === "Enter" && enterKeyAllow === true) 
+      {addnewBlured(); setEnterKeyAllow(false)}
+  
   };
   return (
     <div className="layout-wrapper">
@@ -193,8 +205,10 @@ const Layout = ({ children }) => {
                   <TitleCardInput
                     onChangeValue={titleInputOnChangeValueHandler}
                     ref={titleInputElement}
-                    focused={searchFocused}
-                    blured={searchBlured}
+                    focused={addnewFocused}
+                    blured={addnewBlured}
+                    onKeyPress={addnewKeyPressed}
+                    value={titleEntry}
                   />
                 </div>
                 <div className={"addnew-list-card " + addButtonVisibile}>
