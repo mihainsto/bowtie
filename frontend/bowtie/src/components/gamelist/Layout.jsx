@@ -123,16 +123,16 @@ const Layout = ({ children }) => {
   const [titleTextBoxVisible, settitleTextBoxVisible] = useState(
     "visibility-hidden"
   );
-  const [titleEntry, setTitleEntry] = useState("")
-  const titleInputElement = useRef(null)
+  const [titleEntry, setTitleEntry] = useState("");
+  const titleInputElement = useRef(null);
 
   const addnewButtonClicked = () => {
-    titleInputElement.current.focus()
+    titleInputElement.current.focus();
     window.scrollTo(9999999, 0);
   };
   const titleInputOnChangeValueHandler = (val) => {
-    setTitleEntry(val.target.value)
-  }
+    setTitleEntry(val.target.value);
+  };
 
   const searchFocused = () => {
     setAddButtonVisibile("visibility-hidden");
@@ -142,6 +142,17 @@ const Layout = ({ children }) => {
   const searchBlured = () => {
     setAddButtonVisibile("visibility-visible");
     settitleTextBoxVisible("visibility-hidden");
+    // After the users clicked out of the search we want to add a new list
+    const lists_ids = Object.keys(lists).sort();
+    const last_id = lists_ids[lists_ids.length - 1];
+    const new_id =
+      "list-" + (parseInt(last_id.replace("list-", "")) + 1).toString();
+
+    setLists({ ...lists, [new_id]: { cards: [], title: titleEntry } });
+    const new_order = listorder
+    new_order.push(new_id)
+    setListorder(new_order)
+    console.log(lists)
   };
   return (
     <div className="layout-wrapper">
@@ -186,11 +197,12 @@ const Layout = ({ children }) => {
                     blured={searchBlured}
                   />
                 </div>
-                <div
-                  className={"addnew-list-card " + addButtonVisibile}
-                  
-                >
-                  <AddNewCard cardText="+ Add new list" height={60} onClick={addnewButtonClicked}/>
+                <div className={"addnew-list-card " + addButtonVisibile}>
+                  <AddNewCard
+                    cardText="+ Add new list"
+                    height={60}
+                    onClick={addnewButtonClicked}
+                  />
                 </div>
               </div>
             )}

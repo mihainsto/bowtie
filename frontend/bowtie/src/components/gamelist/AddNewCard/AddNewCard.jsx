@@ -9,7 +9,6 @@ const AddNewCard = (props) => {
     lineHeight: props.height.toString() + 'px'
   };
 
-  console.log(divStyle)
     return (
       <div className="addnewcard-card" style={divStyle} onClick={props.onClick}>
         <div className="addnewcard-text">
