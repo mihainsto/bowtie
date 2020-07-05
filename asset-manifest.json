@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/bowtie/static/css/main.ad85e31a.chunk.css",
-    "main.js": "/bowtie/static/js/main.5a91e14e.chunk.js",
-    "main.js.map": "/bowtie/static/js/main.5a91e14e.chunk.js.map",
+    "main.css": "/bowtie/static/css/main.d7b0bb4c.chunk.css",
+    "main.js": "/bowtie/static/js/main.aa47824b.chunk.js",
+    "main.js.map": "/bowtie/static/js/main.aa47824b.chunk.js.map",
     "runtime-main.js": "/bowtie/static/js/runtime-main.9b1f78fd.js",
     "runtime-main.js.map": "/bowtie/static/js/runtime-main.9b1f78fd.js.map",
-    "static/js/2.842f6df8.chunk.js": "/bowtie/static/js/2.842f6df8.chunk.js",
-    "static/js/2.842f6df8.chunk.js.map": "/bowtie/static/js/2.842f6df8.chunk.js.map",
+    "static/js/2.87e92d15.chunk.js": "/bowtie/static/js/2.87e92d15.chunk.js",
+    "static/js/2.87e92d15.chunk.js.map": "/bowtie/static/js/2.87e92d15.chunk.js.map",
     "index.html": "/bowtie/index.html",
-    "precache-manifest.1bc1ae4c9078bf60017aab1f903919ea.js": "/bowtie/precache-manifest.1bc1ae4c9078bf60017aab1f903919ea.js",
+    "precache-manifest.fd207b2cd9ad7c522635aabcc23b1485.js": "/bowtie/precache-manifest.fd207b2cd9ad7c522635aabcc23b1485.js",
     "service-worker.js": "/bowtie/service-worker.js",
-    "static/css/main.ad85e31a.chunk.css.map": "/bowtie/static/css/main.ad85e31a.chunk.css.map",
-    "static/js/2.842f6df8.chunk.js.LICENSE.txt": "/bowtie/static/js/2.842f6df8.chunk.js.LICENSE.txt",
+    "static/css/main.d7b0bb4c.chunk.css.map": "/bowtie/static/css/main.d7b0bb4c.chunk.css.map",
+    "static/js/2.87e92d15.chunk.js.LICENSE.txt": "/bowtie/static/js/2.87e92d15.chunk.js.LICENSE.txt",
     "static/media/logo.svg": "/bowtie/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.9b1f78fd.js",
-    "static/js/2.842f6df8.chunk.js",
-    "static/css/main.ad85e31a.chunk.css",
-    "static/js/main.5a91e14e.chunk.js"
+    "static/js/2.87e92d15.chunk.js",
+    "static/css/main.d7b0bb4c.chunk.css",
+    "static/js/main.aa47824b.chunk.js"
   ]
 }
