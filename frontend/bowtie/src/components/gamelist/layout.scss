@@ -22,3 +22,13 @@
 .lists-wrapper{
   display: flex;
 }
+
+.layout-wrapper{
+  .visibility-visible{
+    position: static;
+  }
+  .visibility-hidden{
+    position: absolute;
+    top: -999999px;
+  }
+}

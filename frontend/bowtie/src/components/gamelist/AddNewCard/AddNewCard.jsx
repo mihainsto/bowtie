@@ -11,7 +11,7 @@ const AddNewCard = (props) => {
 
   console.log(divStyle)
     return (
-      <div className="addnewcard-card" style={divStyle}>
+      <div className="addnewcard-card" style={divStyle} onClick={props.onClick}>
         <div className="addnewcard-text">
           {props.cardText}
         </div>
