@@ -7,6 +7,7 @@
 
 import React from "react";
 import List from "./List/List";
+import AddNewCard from "./AddNewCard/AddNewCard";
 import "../../style.scss";
 import "./layout.scss";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
@@ -121,7 +122,7 @@ const Layout = ({ children }) => {
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="lists" direction="horizontal" type="list">
             {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
+              <div {...provided.droppableProps} ref={provided.innerRef} className="lists-wrapper">
                 {listorder.map((item, index) => {
                   const listCards = [];
                   const curentList = lists[item];
@@ -140,8 +141,12 @@ const Layout = ({ children }) => {
                       index={index}
                     />
                   );
+                  
                 })}
                 {provided.placeholder}
+                <div className="addnew-list-card">
+                  <AddNewCard cardText="+ Add new list" height={60} />
+                 </div>
               </div>
             )}
           </Droppable>
