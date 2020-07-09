@@ -24,21 +24,7 @@ const List = (props) => {
   const [searchVisible, setSearchVisible] = useState("list-visibility-hidden");
   const searchElement = useRef(null);
 
-  const searchOnChangeValueHandler = (val) => {
-    setNewEntry(val.target.value);
-  };
 
-  const addNewClicked = () => {
-    searchElement.current.focus();
-  };
-  const searchFocused = () => {
-    setAddButtonVisibile("list-visibility-hidden");
-    setSearchVisible("list-visibility-visible");
-  };
-  const searchBlured = () => {
-    setAddButtonVisibile("list-visibility-visible");
-    setSearchVisible("list-visibility-hidden");
-  };
   return (
     <Draggable
       draggableId={props.listId}
@@ -70,27 +56,11 @@ const List = (props) => {
                   ))}
                   <div className="list-padding-emptyadd"></div>
                   {provided.placeholder}
+                  <div className="list-bottom-padding"></div> 
                 </div>
               )}
             </Droppable>
-
-            <div className="list-card" className={searchVisible}>
-              <SearchGameCard
-                onChangeValue={searchOnChangeValueHandler}
-                ref={searchElement}
-                focused={searchFocused}
-                blured={searchBlured}
-              />
-            </div>
-            <div className="list-add-new-wrapper">
-              <div
-                className="list-card"
-                className={addButtonVisibile}
-                onClick={addNewClicked}
-              >
-                <AddNewCard cardText="+ Add new game" height={60}/>
-              </div>
-            </div>
+                  
           </div>
         </div>
       )}
