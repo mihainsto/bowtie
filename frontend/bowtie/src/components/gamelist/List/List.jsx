@@ -38,7 +38,7 @@ const List = (props) => {
           ref={provided.innerRef}
         >
           <div className="list-title-card" {...provided.dragHandleProps}>
-            <TitleCard title={props.title} />
+            <TitleCard title={props.title} onAddNewCardClick={props.onAddNewCardClick}/>
           </div>
           <div className="list-list list-overflow">
             <Droppable droppableId={props.listId} type="card">

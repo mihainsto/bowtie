@@ -166,6 +166,10 @@ const Layout = ({ children }) => {
       {addnewBlured(); setEnterKeyAllow(false)}
   
   };
+
+  const onAddNewCardClick = (list) =>{
+    console.log(list)
+  }
   return (
     <div className="layout-wrapper">
       <div className="layout-lists">
@@ -197,6 +201,7 @@ const Layout = ({ children }) => {
                       title={title}
                       listId={item}
                       index={index}
+                      onAddNewCardClick= {() => onAddNewCardClick(item)}
                     />
                   );
                 })}

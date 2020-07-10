@@ -1,6 +1,11 @@
 @import '../../../style.scss';
 
 .titleCard-card{
+    display: grid;
+    grid-template-columns: 77% 23%;
+    gap: 1px 1px;
+    grid-template-areas: "first second";
+    
     background-color: $blue-color;
     height: 60px;
     line-height: 60px;
@@ -11,6 +16,7 @@
 }
 
 .titleCard-title-text{
+    grid-area: first;
     vertical-align: middle;
     margin-left: 17px;
     font-weight: 800;
@@ -36,3 +42,10 @@
 .titleCard-card-input::placeholder {
     color: rgba(238, 247, 255, 1);
   }
+
+.plusIcon{
+    grid-area: second;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
