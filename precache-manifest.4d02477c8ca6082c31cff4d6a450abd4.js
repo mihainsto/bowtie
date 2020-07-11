@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2b1eed92a6f9a1cfb77dfd7706835be1",
+    "revision": "bb02c394dd38df72b81c79c4dc502a3d",
     "url": "/bowtie/index.html"
   },
   {
-    "revision": "767da303287811b5f4e0",
-    "url": "/bowtie/static/css/main.a368c2b7.chunk.css"
+    "revision": "893f61c32fc24d33a95f",
+    "url": "/bowtie/static/css/main.730e19ef.chunk.css"
   },
   {
     "revision": "2828303d88c75e05c441",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bowtie/static/js/2.79dfa8eb.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "767da303287811b5f4e0",
+    "revision": "893f61c32fc24d33a95f",
     "url": "/bowtie/static/js/main.99225522.chunk.js"
   },
   {
