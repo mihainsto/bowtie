@@ -168,7 +168,7 @@ const Layout = ({ children }) => {
       setEnterKeyAllow(false);
     }
   };
-  const [modalStatus, setModalStatus] = useState(true);
+  const [modalStatus, setModalStatus] = useState(false);
   const onAddNewCardClick = (list) => {
     //console.log(list);
     setModalStatus(true);
