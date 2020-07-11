@@ -16,7 +16,10 @@ const GameSearchModal = (props) => {
   return (
     <div
       className="modal-wrapper"
-      onClick={(event)=>{props.modalOutsideClicked(event);setSearchQuery("")}}
+      onClick={(event) => {
+        props.modalOutsideClicked(event);
+        setSearchQuery("");
+      }}
       style={{ display: props.status ? "block" : "none" }}
     >
       <div
