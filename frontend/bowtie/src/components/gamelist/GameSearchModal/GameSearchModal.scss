@@ -1,0 +1,87 @@
+@import "../../../style.scss";
+
+.game-search-modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  overflow: auto;
+  background-color: $main-color;
+  width: 500px;
+  height: 80px;
+  left: 50%;
+  margin-left: -250px;
+  top: 20%;
+  border-radius: 10px;
+  box-shadow: -5px -5px 10px 0 rgba(0, 0, 0, 0.16),
+    5px 5px 10px 0 rgba(0, 0, 0, 0.16);
+  display: grid;
+  grid-template-columns: 20% 70%;
+  gap: 1px 1px;
+  grid-template-areas: "first second";
+
+  .icon {
+    grid-area: first;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .search-box {
+    grid-area: second;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  input {
+    width: 100%;
+    height: 55px;
+    background-color: transparent;
+    border: none;
+    font-size: 2.5em;
+    font-weight: 400;
+    color: rgba(238, 247, 255, 1);
+
+  }
+  input::placeholder {
+    color: rgba(238, 247, 255, 0.5);
+
+  }
+
+  input::focus{
+    outline: none;
+  }
+
+  *:focus {
+    outline: none;
+  }
+}
+
+
+.modal-wrapper {
+  z-index: 1;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  margin-left: -10px;
+  margin-top: -10px;
+}
+
+@media only screen and (max-width: 500px) {
+  .game-search-modal{
+    width: 90vw;
+    max-width: 100%;
+    margin-left: -45vw;
+    input {
+      font-size: 1.5em;
+    }
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .game-search-modal{
+    input {
+      font-size: 1.4em;
+    }
+  }
+}
