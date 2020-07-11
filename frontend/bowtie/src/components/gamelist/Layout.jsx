@@ -9,6 +9,7 @@ import React from "react";
 import List from "./List/List";
 import AddNewCard from "./AddNewCard/AddNewCard";
 import TitleCardInput from "./TitleCard/TitleCardInput";
+import GameSearchModal from "./GameSearchModal/GameSearchModal";
 import "../../style.scss";
 import "./layout.scss";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
@@ -140,7 +141,7 @@ const Layout = ({ children }) => {
   const addnewFocused = () => {
     setAddButtonVisibile("visibility-hidden");
     settitleTextBoxVisible("visibility-visible");
-    setEnterKeyAllow(true)
+    setEnterKeyAllow(true);
   };
 
   const addnewBlured = () => {
@@ -158,16 +159,32 @@ const Layout = ({ children }) => {
     const new_order = listorder;
     new_order.push(new_id);
     setListorder(new_order);
-    console.log(titleInputElement.value)
-    setTitleEntry("")
+    console.log(titleInputElement.value);
+    setTitleEntry("");
   };
   const addnewKeyPressed = (event) => {
-    if (event.key === "Enter" && enterKeyAllow === true) 
-      {addnewBlured(); setEnterKeyAllow(false)}
-  
+    if (event.key === "Enter" && enterKeyAllow === true) {
+      addnewBlured();
+      setEnterKeyAllow(false);
+    }
+  };
+  const [modalStatus, setModalStatus] = useState(false);
+  const onAddNewCardClick = (list) => {
+    //console.log(list);
+    setModalStatus(true);
+    //searchInputElement.current.focus();
+    //console.log(searchInputElement.curent.value)
+  };
+  const modalOutsideClicked = (event) => {
+    setModalStatus(false);
+    event.stopPropagation();
   };
   return (
     <div className="layout-wrapper">
+      <GameSearchModal
+        modalOutsideClicked={modalOutsideClicked}
+        status={modalStatus}
+      />
       <div className="layout-lists">
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="lists" direction="horizontal" type="list">
@@ -197,6 +214,7 @@ const Layout = ({ children }) => {
                       title={title}
                       listId={item}
                       index={index}
+                      onAddNewCardClick={() => onAddNewCardClick(item)}
                     />
                   );
                 })}
