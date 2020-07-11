@@ -1,17 +1,22 @@
 import React from "react";
 import "./GameSearchModal.scss";
 import { FaSearch } from "react-icons/fa";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 const GameSearchModal = (props) => {
   const searchInputElement = useRef(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const searchInputChanged = (event) => {
+    setSearchQuery(event.target.value);
+  };
   useEffect(() => {
-    if (props.status)
-        searchInputElement.current.focus();
+    if (props.status) {
+      searchInputElement.current.focus();
+    }
   }, [props.status]);
   return (
     <div
       className="modal-wrapper"
-      onClick={props.modalOutsideClicked}
+      onClick={(event)=>{props.modalOutsideClicked(event);setSearchQuery("")}}
       style={{ display: props.status ? "block" : "none" }}
     >
       <div
@@ -27,6 +32,8 @@ const GameSearchModal = (props) => {
             type="text"
             placeholder="Search for a game"
             ref={searchInputElement}
+            value={searchQuery}
+            onChange={searchInputChanged}
           ></input>
         </span>
       </div>
