@@ -2,43 +2,54 @@ import React from "react";
 import "./GameSearchModal.scss";
 import { FaSearch } from "react-icons/fa";
 import { useRef, useEffect, useState } from "react";
-const dumySearchResults =["Mini Metro", "Metro Exodus", "Metro Last Light", "Metro 2033"]
+const dumySearchResults = [
+  "Mini Metro",
+  "Metro Exodus",
+  "Metro Last Light",
+  "Metro 2033",
+];
 
 const SearchResultsComponent = (props) => {
-  if (props.searchResults){
-  return (
-    <div className="search-results-container">
-    {props.searchResults.map((item) => (  
-      <div className="search-result-element">
-        {item}
+  if (props.searchResults) {
+    return (
+      <div className="search-results-container">
+        {props.searchResults.map((item) => (
+          <div className="search-result-element">{item}</div>
+        ))}
+        <div className="see-more-btn" onClick={props.showMoreClicked}>
+          Show More
+        </div>
       </div>
-    ))}
-    </div>
-  )
-  } else{
-    return(<div></div>)
+    );
+  } else {
+    return <div></div>;
   }
-
-}
+};
 const GameSearchModal = (props) => {
   const searchInputElement = useRef(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState(null)
+  const [searchResults, setSearchResults] = useState(null);
   const searchInputChanged = (event) => {
     setSearchQuery(event.target.value);
-    setSearchResults(dumySearchResults)
+    setSearchResults(dumySearchResults);
   };
   useEffect(() => {
     if (props.status) {
       searchInputElement.current.focus();
     }
   }, [props.status]);
+
+  const showMoreClicked = () => {
+    const newData = ["Life Is Strange 2", "Metro Last Light", "Just Cause 4"]
+    setSearchResults(searchResults.concat(newData));
+  };
   return (
     <div
       className="modal-wrapper"
       onClick={(event) => {
         props.modalOutsideClicked(event);
         setSearchQuery("");
+        setSearchResults(null);
       }}
       style={{ display: props.status ? "block" : "none" }}
     >
@@ -61,8 +72,10 @@ const GameSearchModal = (props) => {
           ></input>
         </span>
 
-        <SearchResultsComponent searchResults={searchResults} />
-
+        <SearchResultsComponent
+          searchResults={searchResults}
+          showMoreClicked={showMoreClicked}
+        />
       </div>
     </div>
   );
