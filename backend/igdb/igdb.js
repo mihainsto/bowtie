@@ -64,21 +64,24 @@ const search_for_a_game = async (gameName, limit) => {
   return response;
 };
 
-const make_game_search_query = async (game, limit) => {
-  const games = await search_for_a_game(game, limit)
-  // const images = []
-  // for (let i = 0; i < games.length; i++) {
-  //   let image = await get_thumb_coverimg(games[i]['id'])
-  //   images.push(image)
-  // }
-  console.log(games)
-  // console.log(images)
-}
-const test = async () => {
-  //let response = await search_for_a_game("metro", 10);
-  //console.log(response);
-  response = await get_thumb_coverimg("19586");
-  console.log(response)
-};
+// Game Search with images
+// const make_game_search_query = async (game, limit) => {
+//   const games = await search_for_a_game(game, limit)
+//   // const images = []
+//   // for (let i = 0; i < games.length; i++) {
+//   //   let image = await get_thumb_acoverimg(games[i]['id'])
+//   //   images.push(image)
+//   // }
+//   console.log(games)
+//   // console.log(images)
+// }
+// const test = async () => {
+//   //let response = await search_for_a_game("metro", 10);
+//   //console.log(response);
+//   response = await get_thumb_coverimg("19586");
+//   console.log(response)
+// };
 //test();
-make_game_search_query("metro", 10)
+// make_game_search_query("metro", 10)
+
+module.exports={search_for_a_game}
