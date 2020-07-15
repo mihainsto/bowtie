@@ -38,7 +38,7 @@ const get_thumb_coverimg = async (gameId) => {
   const path = "/covers";
   const response = await igdbRequest.make_igdb_request(path, querry);
   if (typeof response[0] === "undefined") {
-    return null
+    return null;
   }
   let image_url = response[0].url;
   image_url = image_url.replace("//", "");
@@ -50,7 +50,7 @@ const get_game_coverimg_for_game = async (game) => {
   return imageUrl;
 };
 
-const search_for_a_game = async (gameName, limit) => {
+const search_for_a_game = async (gameName, offset, limit) => {
   const query =
     `fields id, name;
     search "` +
@@ -58,6 +58,9 @@ const search_for_a_game = async (gameName, limit) => {
     `";
     limit ` +
     limit +
+    `;` +
+    `offset ` +
+    offset +
     `;`;
   const path = "/games";
   const response = await igdbRequest.make_igdb_request(path, query);
@@ -84,4 +87,4 @@ const search_for_a_game = async (gameName, limit) => {
 //test();
 // make_game_search_query("metro", 10)
 
-module.exports={search_for_a_game}
+module.exports = { search_for_a_game };
