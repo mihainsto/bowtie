@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
+const cors = require('cors');
 // const DB = require('./database/database') 
 const keys = require('./config/keys')
 const User = require('./routes/User')
@@ -10,12 +11,12 @@ const Games = require('./routes/Games');
 
 const app = express()
 const port = 8000
-mongoose
+
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-
+app.use(cors())
 
 const db = keys.mongoUrl
 mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true})

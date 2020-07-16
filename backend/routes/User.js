@@ -58,9 +58,7 @@ router.post("/login", (req, res) => {
         const jwt = utils.issueJWT(user);
         res.status(200).json({
           success: true,
-          user: user,
           token: jwt.token,
-          expresIn: jwt.expires,
         });
       }
     });

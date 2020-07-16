@@ -5,6 +5,8 @@ import BlueButton from "../Buttons/BlueButton/BlueButton";
 import Checkboxs1 from "../Checkboxes/Checkboxs1/Checkboxs1";
 import { useState } from "react";
 import {Link} from "react-router-dom";
+import {api_login} from "../../Api/user"
+import { writeStorage } from '@rehooks/local-storage';
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -13,8 +15,13 @@ const LoginPage = () => {
   const inputFieldChanged = (value, setState) => {
     setState(value.target.value);
   };
-  const loginClicked = (value) => {
-    console.log("login clicked")
+  const loginClicked = async (value) => {
+    const response = await api_login(email, password)
+    if (response["success"] === true){
+      console.log("Login Succes")
+      //TODO: Insecure, to change in the future
+      writeStorage('jwt', response["token"])
+    }
   };
   const checkboxClicked = (value, setState) => {
     if (rememberCheck === true)
