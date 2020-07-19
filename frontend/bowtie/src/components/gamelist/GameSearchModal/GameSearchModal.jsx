@@ -5,12 +5,6 @@ import { useRef, useEffect, useState } from "react";
 import { games_search } from "../../../Api/games";
 import { useLocalStorage } from "@rehooks/local-storage";
 import { queryByRole } from "@testing-library/react";
-const dumySearchResults = [
-  "Mini Metro",
-  "Metro Exodus",
-  "Metro Last Light",
-  "Metro 2033",
-];
 
 const SearchResultsComponent = (props) => {
   if (props.searchResults) {
@@ -19,7 +13,6 @@ const SearchResultsComponent = (props) => {
         {props.searchResults.map((item) => (
           <div className="search-result-element">
             <div className="image" style={{backgroundImage:"url(https://"+item["image"]+")"}}></div>
-            {/* <img src={"https://"+item["image"]} /> */}
             <div className="search-result-text">
             {item["name"]}
             </div>
@@ -82,11 +75,13 @@ const GameSearchModal = (props) => {
 
   const searchInputChanged = (event) => {
     setSearchingStatus(true);
+    setSearchResults(null);
     setSearchQuery(event.target.value);
   };
   useEffect(() => {
     if (props.status) {
       searchInputElement.current.focus();
+
     }
   }, [props.status]);
 
@@ -102,6 +97,8 @@ const GameSearchModal = (props) => {
         props.modalOutsideClicked(event);
         setSearchQuery("");
         setSearchResults(null);
+        setShowMoreStatus(false)
+        setSearchingStatus(false)
       }}
       style={{ display: props.status ? "block" : "none" }}
     >
