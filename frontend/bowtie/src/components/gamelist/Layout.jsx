@@ -179,11 +179,15 @@ const Layout = ({ children }) => {
     setModalStatus(false);
     event.stopPropagation();
   };
+  const gameItemClicked = (game) => {
+    console.log(game)
+  }
   return (
     <div className="layout-wrapper">
       <GameSearchModal
         modalOutsideClicked={modalOutsideClicked}
         status={modalStatus}
+        gameItemClicked={gameItemClicked}
       />
       <div className="layout-lists">
         <DragDropContext onDragEnd={onDragEnd}>

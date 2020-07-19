@@ -15,7 +15,7 @@ const SearchResultsComponent = (props) => {
     return (
       <div className="search-results-container">
         {props.searchResults.map((item) => (
-          <div className="search-result-element">
+          <div className="search-result-element" onClick = {()=>props.gameItemClicked(item)}>
             <div
               className="image"
               style={{ backgroundImage: "url(https://" + item["image"] + ")" }}
@@ -134,6 +134,7 @@ const GameSearchModal = (props) => {
           showMoreClicked={showMoreClicked}
           showMoreStatus={showMoreStatus}
           searchingStatus={searchingStatus}
+          gameItemClicked={props.gameItemClicked}
         />
       </div>
     </div>
