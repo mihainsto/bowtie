@@ -12,27 +12,49 @@ const transformDateIntoYear = (timestamp) => {
 };
 const SearchResultsComponent = (props) => {
   if (props.searchResults) {
+    console.log(props.searchResults);
     return (
       <div className="search-results-container">
-        {props.searchResults.map((item) => (
-          <div className="search-result-element" onClick = {()=>props.gameItemClicked(item)}>
-            <div
-              className="image"
-              style={{ backgroundImage: "url(https://" + item["image"] + ")" }}
-            ></div>
-            <div className="search-result-text">
-              {item["name"]}
-              {typeof item["first_release_date"] !== "undefined" &&
-                " (" + transformDateIntoYear(item["first_release_date"]) + ")"}
-            </div>
-          </div>
-        ))}
+        {props.searchResults.map((item) => {
+          if (item !== null)
+            return (
+              <div
+                className="search-result-element"
+                onClick={() => props.gameItemClicked(item)}
+              >
+                <div
+                  className="image"
+                  style={{
+                    backgroundImage: "url(https://" + item["image"] + ")",
+                  }}
+                ></div>
+                <div className="search-result-text">
+                  {item["name"]}
+                  {typeof item["first_release_date"] !== "undefined" &&
+                    " (" +
+                      transformDateIntoYear(item["first_release_date"]) +
+                      ")"}
+                </div>
+              </div>
+            );
+        })}
         <div
           className="see-more-btn"
           onClick={props.showMoreClicked}
-          style={{ visibility: props.showMoreStatus ? "visible" : "hidden" }}
+          style={{
+            visibility: props.showMoreStatus ? "visible" : "hidden",
+            display: props.emptyResponseMessage ? "none" : "block",
+          }}
         >
           Show More
+        </div>
+        <div
+          className="empty-response-message"
+          style={{
+            display: props.emptyResponseMessage ? "block" : "none",
+          }}
+        >
+          Nothing more to show
         </div>
       </div>
     );
@@ -40,6 +62,19 @@ const SearchResultsComponent = (props) => {
     return (
       <div className="search-results-container">
         <div className="searching-status-label">Searching</div>
+      </div>
+    );
+  } else if (props.emptyResponseMessage === true) {
+    return (
+      <div className="search-results-container">
+      <div
+        className="empty-response-message"
+        style={{
+          display: props.emptyResponseMessage ? "block" : "none",
+        }}
+      >
+        Nothing to show
+      </div>
       </div>
     );
   } else {
@@ -53,21 +88,30 @@ const GameSearchModal = (props) => {
   const [searchResults, setSearchResults] = useState(null);
   const [showMoreStatus, setShowMoreStatus] = useState(false);
   const [searchingStatus, setSearchingStatus] = useState(false);
+  const [emptyResponseMessage, setEmptyResponseMessage] = useState(false);
   const [page, setPage] = useState(1);
 
   const updateSearchData = async (query, page) => {
     console.log({ query: query, page: page });
-    if (query.length > 3 && page === 1) {
+    if (query.length > 2 && page === 1) {
       const response = await games_search(jwt, query, page);
-      console.log(searchQuery);
-      console.log(query);
-      setSearchResults(response);
+      console.log(searchInputElement.current.value.length)
+      if (searchInputElement.current.value.length <= 2)
+        setSearchResults(null)
+      else
+        setSearchResults(response);
       setShowMoreStatus(true);
       setSearchingStatus(false);
-    } else if (query.length > 3 && page > 1) {
+      if (response === null) 
+        setEmptyResponseMessage(true);
+
+    } else if (query.length > 2 && page > 1) {
       const response = await games_search(jwt, query, page);
       setSearchResults(searchResults.concat(response));
-      if (response.length !== 0) {
+      if (response === null) {
+        setShowMoreStatus(false);
+        setEmptyResponseMessage(true);
+      } else if (response.length !== 0) {
         setShowMoreStatus(true);
       }
     }
@@ -83,8 +127,13 @@ const GameSearchModal = (props) => {
   }, [searchQuery]);
 
   const searchInputChanged = (event) => {
-    setSearchingStatus(true);
+    if (event.target.value.length <= 2)
+      setSearchingStatus(false);
+    else
+      setSearchingStatus(true);
+    setEmptyResponseMessage(false);
     setSearchResults(null);
+    setPage(1);
     setSearchQuery(event.target.value);
   };
   useEffect(() => {
@@ -107,6 +156,7 @@ const GameSearchModal = (props) => {
         setSearchResults(null);
         setShowMoreStatus(false);
         setSearchingStatus(false);
+        setEmptyResponseMessage(false);
       }}
       style={{ display: props.status ? "block" : "none" }}
     >
@@ -135,6 +185,7 @@ const GameSearchModal = (props) => {
           showMoreStatus={showMoreStatus}
           searchingStatus={searchingStatus}
           gameItemClicked={props.gameItemClicked}
+          emptyResponseMessage={emptyResponseMessage}
         />
       </div>
     </div>

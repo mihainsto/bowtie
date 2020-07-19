@@ -83,6 +83,10 @@ const search_for_a_game_names = async (gameName, offset, limit) => {
 //Game Search with images
 const search_for_a_game = async (gameName, offset, limit) => {
   const games = await search_for_a_game_names(gameName, offset, limit)
+  if (typeof games === "undefined" || games === null || games.length === null
+  || games.length <= 0){
+    return {status: "null"}
+  }
   const  newGames = []
   const gameIds = []
   games.forEach(element => {

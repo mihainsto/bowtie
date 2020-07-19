@@ -27,12 +27,15 @@ const make_games_search = () => {
         },
         { cancelToken: cancel.token }
       );
+      let responseData = response.data
+      if (responseData["status"] === "null"){
+        responseData=null
+      }
       if (!gameResultsCache[query])
-        gameResultsCache[query] = {[page]:response.data};
+        gameResultsCache[query] = {[page]:responseData};
       else
-        gameResultsCache[query][page] = response.data
-      const result = response.data;
-      console.log({results:gameResultsCache})
+        gameResultsCache[query][page] = responseData
+      const result = responseData;
       return result;
     } catch (error) {
       if (axios.isCancel(error)) {
