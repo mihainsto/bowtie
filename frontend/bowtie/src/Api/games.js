@@ -1,19 +1,19 @@
 import axios from "axios";
 import { api_url } from "./config";
 
-let  results = {}
+let  gameResultsCache = {}
+
 const make_games_search = () => {
   let cancel;
-
   return async (jwt, query, page) => {
     if (cancel) {
-      console.log("cancel")
       cancel.cancel();
     }
     cancel = axios.CancelToken.source();
     try {
-      if (results[query]){
-        return results[query]
+      if (gameResultsCache[query]){
+        if (gameResultsCache[query][page])
+          return gameResultsCache[query][page]
       }
       const response = await axios(
         {
@@ -27,8 +27,12 @@ const make_games_search = () => {
         },
         { cancelToken: cancel.token }
       );
-      results = response.data
+      if (!gameResultsCache[query])
+        gameResultsCache[query] = {[page]:response.data};
+      else
+        gameResultsCache[query][page] = response.data
       const result = response.data;
+      console.log({results:gameResultsCache})
       return result;
     } catch (error) {
       if (axios.isCancel(error)) {
