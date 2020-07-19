@@ -17,10 +17,14 @@ const LoginPage = () => {
   };
   const loginClicked = async (value) => {
     const response = await api_login(email, password)
+    console.log(response["success"])
     if (response["success"] === true){
       console.log("Login Succes")
       //TODO: Insecure, to change in the future
       writeStorage('jwt', response["token"])
+    }
+    else{
+      console.log("Login failed")
     }
   };
   const checkboxClicked = (value, setState) => {

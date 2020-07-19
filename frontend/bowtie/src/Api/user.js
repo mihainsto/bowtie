@@ -1,16 +1,16 @@
 import { api_url } from "./config";
+import axios from 'axios';
 
 const api_login = async (email, password) => {
-  const response = await fetch(api_url + "/user/login", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email: email, password: password }),
-  });
-  const json = await response.json();
-  return json
+  const response = await axios({
+    method: 'post',
+    url: api_url + "/user/login",
+    data: {
+      email: email,
+      password: password
+    }
+  })
+  return response.data
 };
 
 export { api_login };
