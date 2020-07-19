@@ -65,7 +65,7 @@ const get_gameid_list_coverimg = async (gameIdList) =>{
 
 const search_for_a_game_names = async (gameName, offset, limit) => {
   const query =
-    `fields id, name;
+    `fields id, name, first_release_date;
     search "` +
     gameName +
     `";

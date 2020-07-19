@@ -6,15 +6,24 @@ import { games_search } from "../../../Api/games";
 import { useLocalStorage } from "@rehooks/local-storage";
 import { queryByRole } from "@testing-library/react";
 
+const transformDateIntoYear = (timestamp) => {
+  const date = new Date(timestamp * 1000);
+  return date.getFullYear();
+};
 const SearchResultsComponent = (props) => {
   if (props.searchResults) {
     return (
       <div className="search-results-container">
         {props.searchResults.map((item) => (
           <div className="search-result-element">
-            <div className="image" style={{backgroundImage:"url(https://"+item["image"]+")"}}></div>
+            <div
+              className="image"
+              style={{ backgroundImage: "url(https://" + item["image"] + ")" }}
+            ></div>
             <div className="search-result-text">
-            {item["name"]}
+              {item["name"]}
+              {typeof item["first_release_date"] !== "undefined" &&
+                " (" + transformDateIntoYear(item["first_release_date"]) + ")"}
             </div>
           </div>
         ))}
@@ -81,7 +90,6 @@ const GameSearchModal = (props) => {
   useEffect(() => {
     if (props.status) {
       searchInputElement.current.focus();
-
     }
   }, [props.status]);
 
@@ -97,8 +105,8 @@ const GameSearchModal = (props) => {
         props.modalOutsideClicked(event);
         setSearchQuery("");
         setSearchResults(null);
-        setShowMoreStatus(false)
-        setSearchingStatus(false)
+        setShowMoreStatus(false);
+        setSearchingStatus(false);
       }}
       style={{ display: props.status ? "block" : "none" }}
     >
