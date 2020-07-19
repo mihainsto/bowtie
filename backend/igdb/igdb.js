@@ -44,13 +44,26 @@ const get_thumb_coverimg = async (gameId) => {
   image_url = image_url.replace("//", "");
   return image_url;
 };
+
 const get_game_coverimg_for_game = async (game) => {
   const gameId = await get_gameid(game);
   const imageUrl = await get_game_coverimg(gameId);
   return imageUrl;
 };
+const get_gameid_list_coverimg = async (gameIdList) =>{
+  const querry =
+  `fields url, game; where game =(`+gameIdList.join(",")+`);`
+  const path = "/covers";
+  const response = await igdbRequest.make_igdb_request(path, querry)
+  for(i=0; i<response.length; i++){
+    if (typeof response[i] !== undefined)
+      response[i]["url"] = response[i]["url"].replace("//","").replace("t_thumb", "t_logo_med")
+      //t_logo_med
+  }
+  return response
+}
 
-const search_for_a_game = async (gameName, offset, limit) => {
+const search_for_a_game_names = async (gameName, offset, limit) => {
   const query =
     `fields id, name;
     search "` +
@@ -67,24 +80,34 @@ const search_for_a_game = async (gameName, offset, limit) => {
   return response;
 };
 
-// Game Search with images
-// const make_game_search_query = async (game, limit) => {
-//   const games = await search_for_a_game(game, limit)
-//   // const images = []
-//   // for (let i = 0; i < games.length; i++) {
-//   //   let image = await get_thumb_acoverimg(games[i]['id'])
-//   //   images.push(image)
-//   // }
-//   console.log(games)
-//   // console.log(images)
-// }
+//Game Search with images
+const search_for_a_game = async (gameName, offset, limit) => {
+  const games = await search_for_a_game_names(gameName, offset, limit)
+  const  newGames = []
+  const gameIds = []
+  games.forEach(element => {
+    gameIds.push(element["id"])
+  });
+  const images = await get_gameid_list_coverimg(gameIds)
+  console.log(gameIds)
+  for (i=0;i<gameIds.length;i++){
+    imageobj = images.find(o => o["game"] === gameIds[i])
+    if (typeof imageobj === "undefined"){
+      newGames.push({...games[i], image: ""})
+    } else{
+      newGames.push({...games[i], image: imageobj["url"]})
+    }
+  }
+  console.log(newGames)
+  return newGames
+  }
+
 // const test = async () => {
-//   //let response = await search_for_a_game("metro", 10);
+//   //const response = await get_gameid_list_coverimg([37016, 10283])
 //   //console.log(response);
-//   response = await get_thumb_coverimg("19586");
-//   console.log(response)
+//   search_for_a_game("Metro", 1, 3)
 // };
-//test();
-// make_game_search_query("metro", 10)
+
+
 
 module.exports = { search_for_a_game };
