@@ -1,19 +1,24 @@
-const passport = require("passport")
-const validators = require("../validation/validators")
-const express = require("express")
-const User = require("../models/User")
-const bcrypt = require("bcrypt")
-const mongoose = require("mongoose")
-const keys = require("../config/keys")
-const utils = require("../lib/utils")
+const passport = require("passport");
+const validators = require("../validation/validators");
+const express = require("express");
+const User = require("../models/User");
+const bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
+const keys = require("../config/keys");
+const utils = require("../lib/utils");
 const loginValidator = validators.loginValidator;
 const registerValidator = validators.registerValidator;
 
 const router = express.Router();
-router.get('/protected', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    res.status(200).json({success: true, msg: 'jwt valid', })
-    console.log(req.user)
-})
+// TODO: delete in production
+router.get(
+  "/protected",
+  passport.authenticate("jwt", { session: false }),
+  (req, res, next) => {
+    res.status(200).json({ success: true, msg: "jwt valid" });
+    console.log(req.user);
+  }
+);
 
 router.post("/register", (req, res) => {
   const { errors, isValid } = validators.registerValidator(req.body);
@@ -28,6 +33,11 @@ router.post("/register", (req, res) => {
         name: req.body.username,
         email: req.body.email,
         password: req.body.password,
+        Board: {
+          listsOrder: [],
+          cards: [],
+          lists: [],
+        },
       });
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(registerUser.password, salt, (err, hash) => {

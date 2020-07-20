@@ -8,6 +8,7 @@ const keys = require('./config/keys')
 const User = require('./routes/User')
 const passport = require('passport')
 const Games = require('./routes/Games');
+const Board = require('./routes/Board');
 
 const app = express()
 const port = 8000
@@ -28,7 +29,7 @@ app.use(passport.initialize());
 app.get('/', (req, res) => res.send('Hello World!'))
 app.use("/user/", User)
 app.use("/games/", Games)
-
+app.use("/board/", Board)
 // app.post('/auth', (req, res) =>{
 
 //     res.send('auth')

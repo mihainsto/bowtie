@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const BoardSchema = require('./Board');
+
+
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -17,6 +20,7 @@ const UserSchema = new Schema({
     Date: {
         type: Date,
         default: Date.now
-    }
+    },
+    Board: BoardSchema
 })
 module.exports = Users = mongoose.model("Users",UserSchema);
