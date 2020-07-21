@@ -8,7 +8,14 @@ import "../../style.scss";
 import "./layout.scss";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { useState, useRef, useEffect } from "react";
-import { api_board_createlist, api_get_board_data, api_board_updateListOrder } from "../../Api/Board";
+import {
+  api_board_createlist,
+  api_get_board_data,
+  api_board_updateListOrder,
+  api_board_addCard,
+  api_board_updateCardOrder,
+  api_board_moveCard
+} from "../../Api/Board";
 import { useLocalStorage } from "@rehooks/local-storage";
 
 const Layout = ({ children }) => {
@@ -56,39 +63,48 @@ const Layout = ({ children }) => {
   const [cards, setCards] = useState({});
   const [cardImages, setCardsImages] = useState({});
   const [lists, setLists] = useState({});
-  const [activeModalListId, setActiveModalListId] = useState(null)
+  const [activeModalListId, setActiveModalListId] = useState(null);
   const fetchDataFromApi = async () => {
-    const data = await api_get_board_data(jwt)
-    console.log(data.board)
-    const _listOrder = data.board.listsOrder
-    const _lists = {}
-    data.board.lists.forEach(element => {
-      _lists[element.listId] = {cards: [], title: element.title}
+    const data = await api_get_board_data(jwt);
+    console.log(data.board);
+    const _listOrder = data.board.listsOrder;
+    const _lists = {};
+    const _cards = {};
+    data.board.lists.forEach((element) => {
+      _lists[element.listId] = {
+        cards: element.cardsIds,
+        title: element.title,
+      };
     });
-    console.log({lists:_lists})
-    console.log({listsOrder:_listOrder})
-    setLists(_lists)
-    setListorder(_listOrder)
-
+    data.board.cards.forEach((element) => {
+      console.log({ element: element });
+      _cards[element.cardId] = element.gameId;
+    });
+    console.log({ lists: _lists });
+    console.log({ listsOrder: _listOrder });
+    setLists(_lists);
+    setListorder(_listOrder);
+    setCards(_cards);
     // _listOrder.forEach(element => {
     //   console.log(_lists[element])
     // });
-  }
+  };
   useEffect(() => {
-    fetchDataFromApi()
-  }, [])
+    fetchDataFromApi();
+  }, []);
 
   const addGameCard = async (game) => {
     const cardId = uuidv4();
-    const listId = activeModalListId
-    const gameTitle = game.name
-    const gameId = game.id
-    setCards({...cards, [cardId]: gameTitle})
+    const listId = activeModalListId;
+    const gameTitle = game.name;
+    const gameId = game.id;
+    setCards({ ...cards, [cardId]: gameTitle });
     // setLists({...lists, [listId]:{...[lists.listId], cards: [...cards, cardId] }})
-    console.log({lists, lists})
-    setLists({...lists, [listId]:{...lists[listId], cards: lists[listId].cards.concat(cardId) }})
-
-  }
+    // console.log({lists, lists})
+    const newCards = lists[listId].cards.concat(cardId);
+    setLists({ ...lists, [listId]: { ...lists[listId], cards: newCards } });
+    api_board_addCard(jwt, cardId, listId, gameId);
+  };
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
 
@@ -108,7 +124,7 @@ const Layout = ({ children }) => {
       newListOrder.splice(source.index, 1);
       newListOrder.splice(destination.index, 0, draggableId);
       setListorder(newListOrder);
-      api_board_updateListOrder(jwt, newListOrder)
+      api_board_updateListOrder(jwt, newListOrder);
       return;
     }
 
@@ -119,11 +135,11 @@ const Layout = ({ children }) => {
     const startList = lists[startListId];
     const finishList = lists[finishListId];
 
+    // Card moved in same list
     if (startList === finishList) {
       const curentListIndex = source.droppableId;
       const list = lists[curentListIndex];
       const newCardsList = Array.from(list.cards);
-
       newCardsList.splice(source.index, 1);
       newCardsList.splice(destination.index, 0, draggableId);
 
@@ -136,6 +152,7 @@ const Layout = ({ children }) => {
         ...lists,
         [curentListIndex]: newList,
       });
+      api_board_updateCardOrder(jwt, curentListIndex, newCardsList);
       return;
     }
 
@@ -158,6 +175,7 @@ const Layout = ({ children }) => {
       [startListId]: newStart,
       [finishListId]: newFinish,
     });
+    api_board_moveCard(jwt, startListId, finishListId, newStart.cards, newFinish.cards)
     return;
   };
 
@@ -214,7 +232,7 @@ const Layout = ({ children }) => {
   const [modalStatus, setModalStatus] = useState(false);
   const onAddNewCardClick = (list) => {
     setModalStatus(true);
-    setActiveModalListId(list)
+    setActiveModalListId(list);
     //searchInputElement.current.focus();
     //console.log(searchInputElement.curent.value)
   };
@@ -225,7 +243,7 @@ const Layout = ({ children }) => {
   const gameItemClicked = (game) => {
     console.log(game);
     setModalStatus(false);
-    addGameCard(game)
+    addGameCard(game);
   };
   return (
     <div className="layout-wrapper">
