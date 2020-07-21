@@ -5,8 +5,7 @@ const BoardSchema = new Schema({
     listsOrder:[String],
     cards: [{
         cardId: String,
-        cardName: String,
-        imageLink: String
+        gameId: String,
       }],
     lists: [{
         listId: String,
@@ -14,5 +13,7 @@ const BoardSchema = new Schema({
         title: String
     }]
 })
+
+
 
 module.exports = BoardSchema
