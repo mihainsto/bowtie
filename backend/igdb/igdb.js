@@ -106,6 +106,17 @@ const search_for_a_game = async (gameName, offset, limit) => {
   return newGames
   }
 
+const get_game = async (gameId) => {
+  const querry =
+  `fields name; 
+  where id = ` +
+  gameId +
+  `; 
+  limit 1;`;
+  const path = "/games";
+  const response = await igdbRequest.make_igdb_request(path, querry);
+  return response[0];
+}
 // const test = async () => {
 //   //const response = await get_gameid_list_coverimg([37016, 10283])
 //   //console.log(response);
@@ -113,5 +124,4 @@ const search_for_a_game = async (gameName, offset, limit) => {
 // };
 
 
-
-module.exports = { search_for_a_game };
+module.exports = { search_for_a_game, get_game };

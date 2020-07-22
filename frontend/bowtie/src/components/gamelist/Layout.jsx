@@ -14,7 +14,7 @@ import {
   api_board_updateListOrder,
   api_board_addCard,
   api_board_updateCardOrder,
-  api_board_moveCard
+  api_board_moveCard,
 } from "../../Api/Board";
 import { useLocalStorage } from "@rehooks/local-storage";
 
@@ -67,6 +67,7 @@ const Layout = ({ children }) => {
   const fetchDataFromApi = async () => {
     const data = await api_get_board_data(jwt);
     console.log(data.board);
+    console.log({games: data.games})
     const _listOrder = data.board.listsOrder;
     const _lists = {};
     const _cards = {};
@@ -78,7 +79,7 @@ const Layout = ({ children }) => {
     });
     data.board.cards.forEach((element) => {
       console.log({ element: element });
-      _cards[element.cardId] = element.gameId;
+      _cards[element.cardId] = data.games[element.gameId];
     });
     console.log({ lists: _lists });
     console.log({ listsOrder: _listOrder });
@@ -98,7 +99,7 @@ const Layout = ({ children }) => {
     const listId = activeModalListId;
     const gameTitle = game.name;
     const gameId = game.id;
-    setCards({ ...cards, [cardId]: gameTitle });
+    setCards({ ...cards, [cardId]: {title:gameTitle} });
     // setLists({...lists, [listId]:{...[lists.listId], cards: [...cards, cardId] }})
     // console.log({lists, lists})
     const newCards = lists[listId].cards.concat(cardId);
@@ -175,7 +176,13 @@ const Layout = ({ children }) => {
       [startListId]: newStart,
       [finishListId]: newFinish,
     });
-    api_board_moveCard(jwt, startListId, finishListId, newStart.cards, newFinish.cards)
+    api_board_moveCard(
+      jwt,
+      startListId,
+      finishListId,
+      newStart.cards,
+      newFinish.cards
+    );
     return;
   };
 
@@ -268,11 +275,12 @@ const Layout = ({ children }) => {
                   const cardsOrder = curentList.cards;
 
                   cardsOrder.forEach((i) => {
-                    listCards.push({
-                      cardTitle: cards[i],
-                      cardId: i,
-                      cardImage: cardImages[i],
-                    });
+                    if (typeof cards[i] !== "undefined")
+                      listCards.push({
+                        cardTitle: cards[i]["title"],
+                        cardId: i,
+                        cardImage: cardImages[i],
+                      });
                   });
 
                   return (

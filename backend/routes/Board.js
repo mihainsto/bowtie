@@ -3,6 +3,7 @@ const express = require("express");
 const uuid = require("uuid");
 const igdb = require("../igdb/igdb");
 const User = require("../models/User");
+const Game = require("../models/Game");
 
 const router = express.Router();
 
@@ -64,10 +65,35 @@ router.post(
         }
       }
       const updated = await req.user.save();
-      res.status(200).json({ success: true, updated: newCard });
+      // after we created the card we want to update the games collection and
+      // add the game there
+      Game.find({ gameId: gameId }).then(async (games) => {
+        if (games.length) {
+          res
+            .status(200)
+            .json({ success: true, updated: newCard, game: games[0] });
+        } else {
+          // searching igdb for game and picture
+          igdbGame = await igdb.get_game(gameId);
+          const newGame = new Game({
+            gameId: gameId,
+            title: igdbGame.name,
+            imageUrl: "null",
+          });
+          console.log(newGame);
+          newGame
+            .save()
+            .then((game) => res.status(200).json({ success: true, game: game }))
+            .catch((err) => {
+              console.log(err);
+              res.status(400).json({ error: true });
+            });
+        }
+      });
+      // res.status(200).json({ success: true, updated: newCard });
     } catch (err) {
       console.log(err);
-      res.status(400).json({ status: "success", error: true });
+      res.status(400).json({ error: true });
     }
   }
 );
@@ -125,7 +151,16 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
     try {
-      res.status(200).json({ status: "success", board: req.user.Board });
+      // finding the games
+      gameIds = []
+      req.user.Board.cards.forEach(card => {
+        gameIds.push(card.gameId)
+      });
+
+    const games = await Game.find({'gameId': { $in: gameIds}})
+    const gamesObj = games.reduce((a,x) => ({...a, [x.gameId]: x}), {})
+    
+    res.status(200).json({ status: "success", board: req.user.Board, games: gamesObj });
     } catch (err) {
       console.log(err);
       res.status(400).json({ status: "error" });
