@@ -4,6 +4,7 @@ import List from "./List/List";
 import AddNewCard from "./AddNewCard/AddNewCard";
 import TitleCardInput from "./TitleCard/TitleCardInput";
 import GameSearchModal from "./GameSearchModal/GameSearchModal";
+import {api_url} from "../../Api/config";
 import "../../style.scss";
 import "./layout.scss";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
@@ -104,7 +105,9 @@ const Layout = ({ children }) => {
     // console.log({lists, lists})
     const newCards = lists[listId].cards.concat(cardId);
     setLists({ ...lists, [listId]: { ...lists[listId], cards: newCards } });
-    api_board_addCard(jwt, cardId, listId, gameId);
+    const updatedCard = await api_board_addCard(jwt, cardId, listId, gameId);
+    setCards({ ...cards, [cardId]: updatedCard.game });
+
   };
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
@@ -275,14 +278,15 @@ const Layout = ({ children }) => {
                   const cardsOrder = curentList.cards;
 
                   cardsOrder.forEach((i) => {
+                    console.log(cards)
                     if (typeof cards[i] !== "undefined")
                       listCards.push({
                         cardTitle: cards[i]["title"],
                         cardId: i,
-                        cardImage: cardImages[i],
+                        cardImage: api_url + "/"+cards[i]["imageUrl"],
                       });
                   });
-
+                  
                   return (
                     <List
                       listCards={listCards}
