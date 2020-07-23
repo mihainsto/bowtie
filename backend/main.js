@@ -9,6 +9,7 @@ const User = require('./routes/User')
 const passport = require('passport')
 const Games = require('./routes/Games');
 const Board = require('./routes/Board');
+const paths = require('./config/paths');
 
 const app = express()
 const port = 8000
@@ -30,6 +31,9 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.use("/user/", User)
 app.use("/games/", Games)
 app.use("/board/", Board)
+app.use("/public", express.static(__dirname + '/public'));
+
+
 // app.post('/auth', (req, res) =>{
 
 //     res.send('auth')

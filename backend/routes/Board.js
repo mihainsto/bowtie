@@ -4,6 +4,8 @@ const uuid = require("uuid");
 const igdb = require("../igdb/igdb");
 const User = require("../models/User");
 const Game = require("../models/Game");
+const paths = require("../config/paths");
+const smartcrop = require("../smartcrop/smartcrop");
 
 const router = express.Router();
 
@@ -75,15 +77,20 @@ router.post(
         } else {
           // searching igdb for game and picture
           igdbGame = await igdb.get_game(gameId);
+          //paths.imagesPath
+          const src = igdbGame.image
+          const newImageName = src.split("/")[src.split("/").length-1]
+          const newImagePath = paths.imagesPath+"/games/"+newImageName
+          smartcrop.applySmartCrop(igdbGame.image, newImagePath, 600, 300)
           const newGame = new Game({
             gameId: gameId,
             title: igdbGame.name,
-            imageUrl: "null",
+            imageUrl: newImagePath,
           });
           console.log(newGame);
           newGame
             .save()
-            .then((game) => res.status(200).json({ success: true, game: game }))
+            .then((game) => res.status(200).json({ success: true, game: newGame }))
             .catch((err) => {
               console.log(err);
               res.status(400).json({ error: true });
