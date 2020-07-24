@@ -28,7 +28,7 @@ router.post("/register", (req, res) => {
   const { errors, isValid } = validators.registerValidator(req.body);
   if (!isValid) {
     res.status("400").json(errors);
-  }
+  } else {
   User.findOne({ email: req.body.email }).then((user) => {
     if (user) {
       res.status(404).json({ email: "Email ID already exists!" });
@@ -56,15 +56,18 @@ router.post("/register", (req, res) => {
     }
   });
   // res.send(errors);
+}
 });
 
 router.post("/login", (req, res) => {
   if (logging.enabled)
     console.log({"/login": req.body})
   const { errors, isValid } = validators.loginValidator(req.body);
+  
   if (!isValid) {
     res.status(400).json(errors);
   }
+  else {
   Users.findOne({ email: req.body.email }).then((user) => {
     if (!user) res.status(400).json({ email: "Email doesn't exist!" });
     bcrypt.compare(req.body.password, user.password).then((isMatch) => {
@@ -79,6 +82,7 @@ router.post("/login", (req, res) => {
       }
     });
   });
+}
 });
 
 module.exports = router;
