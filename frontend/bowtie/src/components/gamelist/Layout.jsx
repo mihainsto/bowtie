@@ -107,7 +107,7 @@ const Layout = ({ children }) => {
     setLists({ ...lists, [listId]: { ...lists[listId], cards: newCards } });
     const updatedCard = await api_board_addCard(jwt, cardId, listId, gameId);
     setCards({ ...cards, [cardId]: updatedCard.game });
-    console.log(updatedCard.game)
+    // console.log(updatedCard.game)
   };
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;

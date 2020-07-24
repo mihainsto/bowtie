@@ -2,8 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./CardImage.scss";
 const CardImage = (props) => {
-  const [displayImage, setDisplayImage] = useState(false);
-  const cropSize = { x: 0, y: 0, height: 200, width: 200 };
+  const [displayImage, setDisplayImage] = useState(true);
+  const [hideImage, setHideImage] = useState(true)
   const withHttp = (url) =>
     !/^https?:\/\//i.test(url) ? `https://${url}` : url;
 
@@ -17,8 +17,9 @@ const CardImage = (props) => {
   const imageLoaded = () => {
     setDisplayImage(true);
   };
+  // console.log(props.image)
+  if(displayImage && !(props.image.includes("undefined"))){
     return (
-      <div className={displayImage?"":"display-none"}>
         <div className="cardImage">
           <img
             src={withHttp(props.image)} 
@@ -27,9 +28,11 @@ const CardImage = (props) => {
             alt=""
           ></img>
         </div>
-      </div>
     );
+  } else {
+    return(<div></div>)
   }
+}
 
 
 export default CardImage;
