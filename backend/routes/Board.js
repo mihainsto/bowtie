@@ -63,7 +63,7 @@ router.post(
       const listId = req.body.listId;
       const gameId = req.body.gameId;
       const newCard = {
-        cardId: uuid.v4(),
+        cardId: req.body.cardId,
         gameId: gameId,
       };
       req.user.Board.cards.push(newCard);
