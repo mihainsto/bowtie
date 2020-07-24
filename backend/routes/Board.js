@@ -81,13 +81,12 @@ router.post(
           const src = igdbGame.image
           const newImageName = src.split("/")[src.split("/").length-1]
           const newImagePath = paths.imagesPath+"/games/"+newImageName
-          smartcrop.applySmartCrop(igdbGame.image, newImagePath, 600, 300)
+          const status = await smartcrop.applySmartCropPromise(igdbGame.image, newImagePath, 600, 300)
           const newGame = new Game({
             gameId: gameId,
             title: igdbGame.name,
             imageUrl: newImagePath,
           });
-          console.log(newGame);
           newGame
             .save()
             .then((game) => res.status(200).json({ success: true, game: newGame }))

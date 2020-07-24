@@ -67,8 +67,8 @@ const Layout = ({ children }) => {
   const [activeModalListId, setActiveModalListId] = useState(null);
   const fetchDataFromApi = async () => {
     const data = await api_get_board_data(jwt);
-    console.log(data.board);
-    console.log({games: data.games})
+    // console.log(data.board);
+    // console.log({games: data.games})
     const _listOrder = data.board.listsOrder;
     const _lists = {};
     const _cards = {};
@@ -79,11 +79,11 @@ const Layout = ({ children }) => {
       };
     });
     data.board.cards.forEach((element) => {
-      console.log({ element: element });
+      // console.log({ element: element });
       _cards[element.cardId] = data.games[element.gameId];
     });
-    console.log({ lists: _lists });
-    console.log({ listsOrder: _listOrder });
+    // console.log({ lists: _lists });
+    // console.log({ listsOrder: _listOrder });
     setLists(_lists);
     setListorder(_listOrder);
     setCards(_cards);
@@ -107,7 +107,7 @@ const Layout = ({ children }) => {
     setLists({ ...lists, [listId]: { ...lists[listId], cards: newCards } });
     const updatedCard = await api_board_addCard(jwt, cardId, listId, gameId);
     setCards({ ...cards, [cardId]: updatedCard.game });
-
+    console.log(updatedCard.game)
   };
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
@@ -276,9 +276,7 @@ const Layout = ({ children }) => {
                   const curentList = lists[item];
                   const title = curentList.title;
                   const cardsOrder = curentList.cards;
-
                   cardsOrder.forEach((i) => {
-                    console.log(cards)
                     if (typeof cards[i] !== "undefined")
                       listCards.push({
                         cardTitle: cards[i]["title"],

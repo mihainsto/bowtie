@@ -80,6 +80,21 @@ const search_for_a_game_names = async (gameName, offset, limit) => {
   return response;
 };
 
+const get_game_artwork = async (gameId) => {
+    const querry =
+    `fields url;
+  where game = ` +
+    gameId +
+    `;`;
+  const path = "/artworks";
+  const response = await igdbRequest.make_igdb_request(path, querry);
+  if (typeof response[0] === "undefined") {
+    return null;
+  }
+  let image_url = response[0].url;
+  image_url = image_url.replace("//", "");
+  return image_url;
+}
 //Game Search with images
 const search_for_a_game = async (gameName, offset, limit) => {
   const games = await search_for_a_game_names(gameName, offset, limit)
@@ -115,11 +130,13 @@ const get_game = async (gameId) => {
   limit 1;`;
   const path = "/games";
   const gameQuery = await igdbRequest.make_igdb_request(path, querry);
-  const image = await get_thumb_coverimg(gameId)
+  const image = await get_game_coverimg(gameId)
   const fullImage = convert_image_to_full_size(image)
   const response = {...gameQuery[0], image: "https://"+fullImage}
   return response;
 }
+
+
 // const test = async () => {
 //   //const response = await get_gameid_list_coverimg([37016, 10283])
 //   //console.log(response);
