@@ -21,54 +21,29 @@ import { useLocalStorage } from "@rehooks/local-storage";
 
 const Layout = ({ children }) => {
   const [jwt] = useLocalStorage("jwt");
-
-  // const [listorder, setListorder] = useState(["list-1", "list-2", "list-3"]);
-  // const [cards, setCards] = useState({
-  //   "1": "Metro Exodus",
-  //   "2": "The Last of Us",
-  //   "3": "Doom Eternal",
-  //   "4": "Horizon Zero Dawn",
-  //   "5": "Nier Automata",
-  //   "6": "Until Dawn",
-  //   "7": "Gears 5",
-  //   "8": "Metro Last Light",
-  //   "9": "Life is Strange 2",
-  //   "10": "Control",
-  //   "11": "Star Wars Jedi: Fallen Order",
-  //   "12": "Just Cause 4",
-  // });
-  // const [cardImages, setCardsImages] = useState({
-  //   "1": "https://i.imgur.com/SvPjEBF.jpg",
-  //   "2": "https://i.imgur.com/SvPjEBF.jpg",
-  //   "3": "https://i.imgur.com/SvPjEBF.jpg",
-  //   "4": "https://i.imgur.com/SvPjEBF.jpg",
-  //   "5": "https://i.imgur.com/SvPjEBF.jpg",
-  // });
-  // const [lists, setLists] = useState({
-  //   "list-1": { cards: ["1", "2", "3"], title: "Completed 2020" },
-  //   "list-2": { cards: ["4", "5", "6", "7"], title: "To play" },
-  //   "list-3": {
-  //     cards: ["8", "9", "10", "11", "12"],
-  //     title: "Completed 2019",
-  //   },
-  // });
-
-  // const [users, setUsers] = useState({
-  //   "test_user_1" : {products: ["1", "2", "3"], status: "gold"},
-  //   "test_user_2" : {products: ["2", "5", "6"], status: "silver"}
-  // })
-
-  // serUsers(...users, [username]: {...[users.username], {}})
-
+  // The order of the lists, is a array containing the id's of the lists
   const [listorder, setListorder] = useState([]);
+  // Object containing cards, the key is the card id
+  // And the value is an Object containing the card information (including the game id)
   const [cards, setCards] = useState({});
-  const [cardImages, setCardsImages] = useState({});
+  // Object containing lists, the key is the list id that can be found also in 
+  // listorder array
   const [lists, setLists] = useState({});
+  // state containing the id of the lists that has the modal opened
   const [activeModalListId, setActiveModalListId] = useState(null);
+  // Store css class for the add new list button
+  const [addButtonVisibile, setAddButtonVisibile] = useState("visibility-visible");
+  // Store css class for the add new list text field
+  const [titleTextBoxVisible, settitleTextBoxVisible] = useState("visibility-hidden");
+  const [modalStatus, setModalStatus] = useState(false);
+  // store the new list title
+  const [titleEntry, setTitleEntry] = useState("");
+  // ref for focusing on new list text field
+  const titleInputElement = useRef(null);
+
+  // Fetches data from the api and update the state with that data 
   const fetchDataFromApi = async () => {
     const data = await api_get_board_data(jwt);
-    // console.log(data.board);
-    // console.log({games: data.games})
     const _listOrder = data.board.listsOrder;
     const _lists = {};
     const _cards = {};
@@ -79,36 +54,33 @@ const Layout = ({ children }) => {
       };
     });
     data.board.cards.forEach((element) => {
-      // console.log({ element: element });
       _cards[element.cardId] = data.games[element.gameId];
     });
-    // console.log({ lists: _lists });
-    // console.log({ listsOrder: _listOrder });
     setLists(_lists);
     setListorder(_listOrder);
     setCards(_cards);
-    // _listOrder.forEach(element => {
-    //   console.log(_lists[element])
-    // });
   };
+  // Use Effect for calling the fetch data from api function
   useEffect(() => {
     fetchDataFromApi();
   }, []);
 
+  // Adds a game card on the list that has the search modal open at that time
+  // And is also sending the new created card on the backend and waits for a image response
   const addGameCard = async (game) => {
     const cardId = uuidv4();
     const listId = activeModalListId;
     const gameTitle = game.name;
     const gameId = game.id;
     setCards({ ...cards, [cardId]: {title:gameTitle} });
-    // setLists({...lists, [listId]:{...[lists.listId], cards: [...cards, cardId] }})
-    // console.log({lists, lists})
     const newCards = lists[listId].cards.concat(cardId);
     setLists({ ...lists, [listId]: { ...lists[listId], cards: newCards } });
     const updatedCard = await api_board_addCard(jwt, cardId, listId, gameId);
     setCards({ ...cards, [cardId]: updatedCard.game });
-    // console.log(updatedCard.game)
   };
+
+  // React Beautiful DnD onDragEnd
+  // Handles the card moving logic and updates the api at every change
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
 
@@ -188,16 +160,8 @@ const Layout = ({ children }) => {
     );
     return;
   };
-
-  const [addButtonVisibile, setAddButtonVisibile] = useState(
-    "visibility-visible"
-  );
-  const [titleTextBoxVisible, settitleTextBoxVisible] = useState(
-    "visibility-hidden"
-  );
-  const [titleEntry, setTitleEntry] = useState("");
-  const titleInputElement = useRef(null);
-
+  // Handles the add new list button click
+  // Auto focus the search element and scroll to left-most of the page
   const addnewButtonClicked = () => {
     titleInputElement.current.focus();
     window.scrollTo(9999999, 0);
@@ -209,12 +173,18 @@ const Layout = ({ children }) => {
   // allow to pres enter only when input is on focus
   const [enterKeyAllow, setEnterKeyAllow] = useState(false);
 
+  // Handle when the add new list text field is focused
+  // It hides the button and shows the text field
   const addnewFocused = () => {
     setAddButtonVisibile("visibility-hidden");
     settitleTextBoxVisible("visibility-visible");
     setEnterKeyAllow(true);
   };
 
+  // Handle when the add new list text field is blured
+  // When is blured that means that the user clicked elsewhere
+  // And we can add a new list, also sending an API call with the new list
+  // It hides the button and shows the text field
   const addnewBlured = () => {
     setAddButtonVisibile("visibility-visible");
     settitleTextBoxVisible("visibility-hidden");
@@ -233,28 +203,37 @@ const Layout = ({ children }) => {
     setTitleEntry("");
     api_board_createlist(jwt, newId, titleEntry);
   };
+
+  // Calls onBlur for new list text field after the user pressed enter
   const addnewKeyPressed = (event) => {
     if (event.key === "Enter" && enterKeyAllow === true) {
       addnewBlured();
       setEnterKeyAllow(false);
     }
   };
-  const [modalStatus, setModalStatus] = useState(false);
+
+  // When the add new card button is clicked
+  // We show the modal
   const onAddNewCardClick = (list) => {
     setModalStatus(true);
     setActiveModalListId(list);
-    //searchInputElement.current.focus();
-    //console.log(searchInputElement.curent.value)
   };
+
+  // Closes the modal when user clicks outside of it
   const modalOutsideClicked = (event) => {
     setModalStatus(false);
     event.stopPropagation();
   };
+
+  // When a game is clicked we add it to the list
   const gameItemClicked = (game) => {
     console.log(game);
     setModalStatus(false);
     addGameCard(game);
   };
+
+  // Default return
+  // Returns the lists
   return (
     <div className="layout-wrapper">
       <GameSearchModal

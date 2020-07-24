@@ -2,6 +2,7 @@ import React from "react"
 
 import "./SearchGameCard.scss"
 
+// ! is not used - to be removed in the future
 const SearchGameCard = React.forwardRef((props, ref) => {
     return (
       <div className="searchgamecard-card">

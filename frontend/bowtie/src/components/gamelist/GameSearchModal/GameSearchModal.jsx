@@ -86,11 +86,16 @@ const GameSearchModal = (props) => {
   const searchInputElement = useRef(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState(null);
+  // Stores if the showMore button should be displayed
   const [showMoreStatus, setShowMoreStatus] = useState(false);
+  // Records the searching status, if is fetching or not
   const [searchingStatus, setSearchingStatus] = useState(false);
+  // Records if no data is fetched to display a none found message
   const [emptyResponseMessage, setEmptyResponseMessage] = useState(false);
+  // The next search page that is to be fetched and displayed
   const [page, setPage] = useState(1);
 
+  // Method that handles the API request on the search
   const updateSearchData = async (query, page) => {
     console.log({ query: query, page: page });
     if (query.length > 2 && page === 1) {
@@ -116,6 +121,10 @@ const GameSearchModal = (props) => {
       }
     }
   };
+
+  // Calls the api after the user has stoped typing for
+  // 0.3 seconds so that the backend is not flooded with 
+  // useless requests
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       console.log(searchQuery);
@@ -126,6 +135,7 @@ const GameSearchModal = (props) => {
     return () => clearTimeout(delayDebounceFn);
   }, [searchQuery]);
 
+  // When the text field is changed the modal output is reseted
   const searchInputChanged = (event) => {
     if (event.target.value.length <= 2)
       setSearchingStatus(false);
@@ -136,30 +146,40 @@ const GameSearchModal = (props) => {
     setPage(1);
     setSearchQuery(event.target.value);
   };
+
+  // Focuses the text field when the status is set on true
   useEffect(() => {
     if (props.status) {
       searchInputElement.current.focus();
     }
   }, [props.status]);
 
+  // Handles show more button clicked
+  // And is querying the backend for a new page
   const showMoreClicked = () => {
     updateSearchData(searchQuery, page + 1);
     setShowMoreStatus(false);
     setPage(page + 1);
   };
-  const cleanModal = () => {
+
+  // Deletes the curent search string
+  // And reserts the modal to the starting state
+  // So that if the modal is openend again
+  // It will delete all the previous search information
+  const resetModal = () => {
     setSearchQuery("");
     setSearchResults(null);
     setShowMoreStatus(false);
     setSearchingStatus(false);
     setEmptyResponseMessage(false);
   }
+
   return (
     <div
       className="modal-wrapper"
       onClick={(event) => {
         props.modalOutsideClicked(event);
-        cleanModal()
+        resetModal()
       }}
       style={{ display: props.status ? "block" : "none" }}
     >
@@ -189,7 +209,7 @@ const GameSearchModal = (props) => {
           searchingStatus={searchingStatus}
           gameItemClicked={(event) => {
             props.gameItemClicked(event);
-            cleanModal()
+            resetModal()
           }}
           emptyResponseMessage={emptyResponseMessage}
         />
