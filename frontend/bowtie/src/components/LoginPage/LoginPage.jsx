@@ -4,11 +4,12 @@ import LogoNav from "../Navs/LogoNav/LogoNav";
 import BlueButton from "../Buttons/BlueButton/BlueButton";
 import Checkboxs1 from "../Checkboxes/Checkboxs1/Checkboxs1";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory} from "react-router-dom";
 import { api_login } from "../../Api/user";
 import { writeStorage } from "@rehooks/local-storage";
 import BeatLoader from "react-spinners/BeatLoader";
 const LoginPage = () => {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberCheck, setRememberCheck] = useState(false);
@@ -24,6 +25,8 @@ const LoginPage = () => {
       console.log("Login Succes");
       //TODO: Insecure, to change in the future
       writeStorage("jwt", response["token"]);
+      history.push("/board");
+
     } else {
       console.log("Login failed");
     }

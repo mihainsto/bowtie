@@ -147,16 +147,19 @@ const GameSearchModal = (props) => {
     setShowMoreStatus(false);
     setPage(page + 1);
   };
+  const cleanModal = () => {
+    setSearchQuery("");
+    setSearchResults(null);
+    setShowMoreStatus(false);
+    setSearchingStatus(false);
+    setEmptyResponseMessage(false);
+  }
   return (
     <div
       className="modal-wrapper"
       onClick={(event) => {
         props.modalOutsideClicked(event);
-        setSearchQuery("");
-        setSearchResults(null);
-        setShowMoreStatus(false);
-        setSearchingStatus(false);
-        setEmptyResponseMessage(false);
+        cleanModal()
       }}
       style={{ display: props.status ? "block" : "none" }}
     >
@@ -184,7 +187,10 @@ const GameSearchModal = (props) => {
           showMoreClicked={showMoreClicked}
           showMoreStatus={showMoreStatus}
           searchingStatus={searchingStatus}
-          gameItemClicked={props.gameItemClicked}
+          gameItemClicked={(event) => {
+            props.gameItemClicked(event);
+            cleanModal()
+          }}
           emptyResponseMessage={emptyResponseMessage}
         />
       </div>
