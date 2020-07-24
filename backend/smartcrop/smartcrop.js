@@ -19,7 +19,7 @@ const applySmartCrop = (src, dest, width, height) => {
       }); 
   });
 }
-
+// Apply smart crop solves the promise when te image is done and saved
 const applySmartCropPromise = (src, dest, width, height) => {
   return new Promise((resolve, reject) => {
     request(src, { encoding: null }, function process(error, response, body) {
@@ -46,7 +46,6 @@ module.exports = {
 //Test
 // var src = 'https://images.igdb.com/igdb/image/upload/t_original/ebus9dxflazafgwc6xq0.jpg';
 // var src = 'https://images.igdb.com/igdb/image/upload/t_original/co1r0o.jpg'
-// // console.log(newImageName)
 // applySmartCrop(src, 'public/images/games/croppedimg.jpg', 600, 300);
 // const test = async ()=>{
 //   const data = await applySmartCropPromise(src, 'public/images/games/aTest.jpg', 600, 300)
