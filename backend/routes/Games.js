@@ -1,13 +1,16 @@
 const passport = require("passport")
 const express = require("express")
 const igdb = require("../igdb/igdb")
+const logging = require("../config/logging")
 
 
 const router = express.Router();
 
 router.post('/search', passport.authenticate('jwt', { session: false }), async (req, res, next) => {
+    if (logging.enabled)
+        console.log({"/games/search": req.body})
     const query = req.body.query
-    console.log(query)
+    // console.log(query)
     const page = req.body.page
     if (page <= 0)
         res.status(422).json({"status": "Page dose not exist"})

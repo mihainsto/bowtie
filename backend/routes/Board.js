@@ -6,6 +6,7 @@ const User = require("../models/User");
 const Game = require("../models/Game");
 const paths = require("../config/paths");
 const smartcrop = require("../smartcrop/smartcrop");
+const logging = require("../config/logging");
 
 const router = express.Router();
 
@@ -13,6 +14,8 @@ router.post(
   "/createlist",
   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
+    if (logging.enabled)
+      console.log({"/board/createlist": req.body})
     try {
       const listTitle = req.body.listTitle;
       const listId = req.body.listId;
@@ -36,6 +39,8 @@ router.post(
   "/updatelistorder",
   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
+    if (logging.enabled)
+      console.log({"/board/updatelistorder": req.body})
     try {
       const newOrder = req.body.listOrder;
       req.user.Board.listsOrder = newOrder;
@@ -52,6 +57,8 @@ router.post(
   "/addcard",
   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
+    if (logging.enabled)
+      console.log({"/board/addcard": req.body})
     try {
       const listId = req.body.listId;
       const gameId = req.body.gameId;
@@ -108,6 +115,8 @@ router.post(
   "/updatecardorder",
   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
+    if (logging.enabled)
+      console.log({"/board/updatecardorder": req.body})
     try {
       const listId = req.body.listId;
       const cardOrder = req.body.cardOrder;
@@ -131,6 +140,8 @@ router.post(
   "/updatecardmove",
   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
+    if (logging.enabled)
+      console.log({"/board/updatecardmove": req.body})
     try {
       const list1Id = req.body.list1Id;
       const list2Id = req.body.list2Id;
@@ -156,6 +167,8 @@ router.get(
   "/getboard",
   passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
+    if (logging.enabled)
+      console.log({"/board/getboard": req.body})
     try {
       // finding the games
       gameIds = []

@@ -108,7 +108,7 @@ const search_for_a_game = async (gameName, offset, limit) => {
     gameIds.push(element["id"])
   });
   const images = await get_gameid_list_coverimg(gameIds)
-  console.log(gameIds)
+  // console.log(gameIds)
   for (i=0;i<gameIds.length;i++){
     imageobj = images.find(o => o["game"] === gameIds[i])
     if (typeof imageobj === "undefined"){
@@ -117,7 +117,7 @@ const search_for_a_game = async (gameName, offset, limit) => {
       newGames.push({...games[i], image: imageobj["url"]})
     }
   }
-  console.log(newGames)
+  // console.log(newGames)
   return newGames
   }
 

@@ -6,6 +6,8 @@ const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const keys = require("../config/keys");
 const utils = require("../lib/utils");
+const logging = require("../config/logging");
+
 const loginValidator = validators.loginValidator;
 const registerValidator = validators.registerValidator;
 
@@ -16,11 +18,13 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res, next) => {
     res.status(200).json({ success: true, msg: "jwt valid" });
-    console.log(req.user);
+    // console.log(req.user);
   }
 );
 
 router.post("/register", (req, res) => {
+  if (logging.enabled)
+    console.log({"/register": req.body})
   const { errors, isValid } = validators.registerValidator(req.body);
   if (!isValid) {
     res.status("400").json(errors);
@@ -55,6 +59,8 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
+  if (logging.enabled)
+    console.log({"/login": req.body})
   const { errors, isValid } = validators.loginValidator(req.body);
   if (!isValid) {
     res.status(400).json(errors);
