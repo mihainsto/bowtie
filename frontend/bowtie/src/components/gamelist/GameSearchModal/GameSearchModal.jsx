@@ -4,7 +4,6 @@ import { FaSearch } from "react-icons/fa";
 import { useRef, useEffect, useState } from "react";
 import { games_search } from "../../../Api/games";
 import { useLocalStorage } from "@rehooks/local-storage";
-import { queryByRole } from "@testing-library/react";
 
 const transformDateIntoYear = (timestamp) => {
   const date = new Date(timestamp * 1000);

@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import "./CardImage.scss";
 // Component that renders a image
 // Is used by a card

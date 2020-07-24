@@ -189,10 +189,8 @@ const Layout = ({ children }) => {
     setAddButtonVisibile("visibility-visible");
     settitleTextBoxVisible("visibility-hidden");
     // if no input do not add new list
-    if (titleEntry == "") return;
+    if (titleEntry === "") return;
     // After the users clicked out of the search we want to add a new list
-    const lists_ids = Object.keys(lists).sort();
-    const last_id = lists_ids[lists_ids.length - 1];
     const newId = uuidv4();
 
     setLists({ ...lists, [newId]: { cards: [], title: titleEntry } });
