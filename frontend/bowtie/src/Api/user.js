@@ -1,6 +1,8 @@
 import { api_url } from "./config";
 import axios from 'axios';
 
+// Login of a user
+// Returns the status / the errors in case we have ones
 const api_login = async (email, password) => {
   const response = await axios({
     method: 'post',

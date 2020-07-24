@@ -3,6 +3,9 @@ import { api_url } from "./config";
 
 let  gameResultsCache = {}
 
+// Searching for a game
+// This function also handles caching of the responses
+// And it canceles the old requests when reciving newer ones
 const make_games_search = () => {
   let cancel;
   return async (jwt, query, page) => {
