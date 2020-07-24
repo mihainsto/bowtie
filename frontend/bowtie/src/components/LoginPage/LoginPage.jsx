@@ -4,38 +4,39 @@ import LogoNav from "../Navs/LogoNav/LogoNav";
 import BlueButton from "../Buttons/BlueButton/BlueButton";
 import Checkboxs1 from "../Checkboxes/Checkboxs1/Checkboxs1";
 import { useState } from "react";
-import {Link} from "react-router-dom";
-import {api_login} from "../../Api/user"
-import { writeStorage } from '@rehooks/local-storage';
-
+import { Link } from "react-router-dom";
+import { api_login } from "../../Api/user";
+import { writeStorage } from "@rehooks/local-storage";
+import BeatLoader from "react-spinners/BeatLoader";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberCheck, setRememberCheck] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   const inputFieldChanged = (value, setState) => {
     setState(value.target.value);
   };
   const loginClicked = async (value) => {
-    const response = await api_login(email, password)
-    console.log(response["success"])
-    if (response["success"] === true){
-      console.log("Login Succes")
+    setButtonDisabled(true);
+    const response = await api_login(email, password);
+    console.log(response["success"]);
+    if (response["success"] === true) {
+      console.log("Login Succes");
       //TODO: Insecure, to change in the future
-      writeStorage('jwt', response["token"])
-    }
-    else{
-      console.log("Login failed")
+      writeStorage("jwt", response["token"]);
+    } else {
+      console.log("Login failed");
     }
   };
   const checkboxClicked = (value, setState) => {
-    if (rememberCheck === true)
-      setState(false)
-    else
-      setState(true)
+    if (rememberCheck === true) setState(false);
+    else setState(true);
   };
   const resetpassClicked = () => {
-    console.log("reset pass clicked")
-  }
+    console.log("reset pass clicked");
+  };
+  const spinner = <BeatLoader size={30} color={"#eef7ff"} css={`margin-top: 5px;`}></BeatLoader>;
+
   return (
     <div className="loginpage">
       <LogoNav />
@@ -43,7 +44,7 @@ const LoginPage = () => {
         <div className="form-wrapper">
           <div className="buttons">
             <span className="login-btn">Log In</span>
-            <Link to="/register" style={{ textDecoration: 'none' }}>
+            <Link to="/register" style={{ textDecoration: "none" }}>
               <span className="register-btn">Register</span>
             </Link>
           </div>
@@ -73,10 +74,19 @@ const LoginPage = () => {
             <span>Remember me</span>
           </div>
           <div className="login-submit-btn">
-            <BlueButton text="Log In" onClick={loginClicked} />
+            <BlueButton
+              text="Log In"
+              onClick={loginClicked}
+              spinner={spinner}
+              disabled={buttonDisabled}
+            />
           </div>
           <div className="forgot-pass-text">
-            Forgot password? <span className="reset-pass-btn" onClick={resetpassClicked}> Reset </span>
+            Forgot password?{" "}
+            <span className="reset-pass-btn" onClick={resetpassClicked}>
+              {" "}
+              Reset{" "}
+            </span>
           </div>
         </div>
       </div>
