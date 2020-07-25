@@ -2,6 +2,8 @@ import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import "./Card.scss";
 import CardImage from "../CardImage/CardImage";
+
+// Component that renders a card with a game and a image
 const Card = (props) => {
   return (
     <Draggable

@@ -2,6 +2,8 @@ import React from "react"
 
 import "./AddNewCard.scss"
 
+// The button that sits in the right of the title
+// The button purpose is to fire the modal on click
 const AddNewCard = (props) => {
 
   const divStyle = {

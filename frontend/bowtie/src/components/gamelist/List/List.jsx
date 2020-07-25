@@ -6,24 +6,16 @@
  */
 
 import React from "react";
-import { useState, useRef } from "react";
 
-//import TitleCard from "/../TitleCard/TitleCard"
 import TitleCard from "../TitleCard/TitleCard";
 import Card from "../Card/Card";
-import AddNewCard from "../AddNewCard/AddNewCard";
-import SearchGameCard from "../SearchGameCard/SearchGameCard";
 import "./List.scss";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
+// Component for the list
+// This components loops trough the list cards and
+// uses Card component to render game cards
 const List = (props) => {
-  const [newEntry, setNewEntry] = useState("");
-  const [addButtonVisibile, setAddButtonVisibile] = useState(
-    "list-visibility-visible"
-  );
-  const [searchVisible, setSearchVisible] = useState("list-visibility-hidden");
-  const searchElement = useRef(null);
-
 
   return (
     <Draggable

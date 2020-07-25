@@ -1,6 +1,14 @@
 @import "../../style.scss";
 
 .loginpage {
+  .display-none{
+    display: none;
+  }
+  .incorrect-flair{
+    color: #FF4343;
+    margin-top: 15px;
+    margin-bottom: -30px;
+  }
   .login-btn {
     font-weight: bold;
     font-style: normal;

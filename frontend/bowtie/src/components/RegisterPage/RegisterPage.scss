@@ -1,6 +1,19 @@
 @import "../../style.scss";
 
 .registerpage {
+  .display-none{
+    display: none;
+  }
+  .incorrect-flair{
+    color: #FF4343;
+    margin-top: 15px;
+    margin-bottom: -30px;
+  }
+  .success-text{
+    color: #41E48B;
+    margin-top: 15px;
+    margin-bottom: -30px;
+  }
   .register-btn {
     font-weight: bold;
     font-style: normal;
