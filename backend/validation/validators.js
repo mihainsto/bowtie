@@ -25,22 +25,21 @@ module.exports.loginValidator = loginValidator =  (data) => {
 
 module.exports.registerValidator = registerValidator=  (data) => {
 
-    const errors = {}
+    let errors = ""
     data.email = !(isEmpty(data.email)) ? data.email:"";
     data.password = !isEmpty(data.password) ? data.password:"";
     data.username = !(isEmpty(data.username)) ? data.username : "";
     if(Validators.isEmpty(data.email)){
-        errors.email = "Email is required. Can't be empty!"
-    }
+        errors = "Email is required. Can't be empty!"
+    } else
     if(Validators.isEmpty(data.username)){
-        errors.username = "username is required. Can't be empty!"
-    }
+        errors = "Username is required. Can't be empty!"
+    } else
     if(!Validators.isEmail(data.email)){
-        errors.email = "Email is invalid. Please provide valid email address!";
-    }
-
+        errors = "Email is invalid. Please provide valid email address!";
+    } else
     if(Validators.isEmpty(data.password)){
-        errors.password = "Please provide passowrd!";
+        errors = "Please provide passowrd!";
     }
     return {
         errors:errors,

@@ -19,7 +19,23 @@ const api_login = async (email, password) => {
 }
 };
 
-export { api_login };
+const api_register = async (username, email, password) => {
+  try{
+    const response = await axios({
+      method: 'post',
+      url: api_url + "/user/register",
+      data: {
+        username: username,
+        email: email,
+        password: password
+      }
+    })
+    return response.data
+  } catch (err) {
+    return err
+  }
+}
+export { api_login, api_register };
 
 // testEmail@gmail.com
 // testPassword
