@@ -14,10 +14,11 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [rememberCheck, setRememberCheck] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [showIncorrectFalir, setShowIncorrectFlair] = useState(false)
   const inputFieldChanged = (value, setState) => {
     setState(value.target.value);
   };
-  const loginClicked = async (value) => {
+  const loginClicked = async () => {
     setButtonDisabled(true);
     const response = await api_login(email, password);
     console.log(response["success"]);
@@ -28,6 +29,8 @@ const LoginPage = () => {
       history.push("/board");
 
     } else {
+      setButtonDisabled(false)
+      setShowIncorrectFlair(true)
       console.log("Login failed");
     }
   };
@@ -38,7 +41,11 @@ const LoginPage = () => {
   const resetpassClicked = () => {
     console.log("reset pass clicked");
   };
-  
+  const handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+        loginClicked()
+    }
+  }
   const spinner = <BeatLoader size={30} color={"#eef7ff"} css={`margin-top: 5px;`}></BeatLoader>;
   return (
     <div className="loginpage">
@@ -51,13 +58,18 @@ const LoginPage = () => {
               <span className="register-btn">Register</span>
             </Link>
           </div>
-
+          <div className={!showIncorrectFalir?"display-none":""}>
+            <div className= "incorrect-flair" >
+              Incorrect email or password. 
+            </div>
+          </div>
           <div>
             <input
               type="email"
               placeholder="Email"
               value={email}
               onChange={(value) => inputFieldChanged(value, setEmail)}
+              onKeyPress={handleKeyPress}
             ></input>
           </div>
           <div>
@@ -66,6 +78,7 @@ const LoginPage = () => {
               placeholder="Password"
               value={password}
               onChange={(value) => inputFieldChanged(value, setPassword)}
+              onKeyPress={handleKeyPress}
             ></input>
           </div>
 
