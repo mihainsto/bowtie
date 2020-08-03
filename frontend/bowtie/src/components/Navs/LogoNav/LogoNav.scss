@@ -1,6 +1,6 @@
 @import "../../../style.scss";
 
-.logonav {
+.logo-nav {
   margin-top: 30px;
 
   .logo {
@@ -11,7 +11,7 @@
 
 }
 @media only screen and (max-width: 650px) {
-  .logonav{
+  .logo-nav{
     text-align: center;
     .logo{
       margin-left: auto

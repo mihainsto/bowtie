@@ -3,15 +3,15 @@ import "./LogoButtonsNav.scss";
 import BlueButton from "../../Buttons/BlueButton/BlueButton";
 const LogoButtonsNav = () => {
   return (
-    <nav className="logobuttonsnav">
+    <nav className="logo-buttons-nav">
       <span className="logo">Bowtie</span>
 
       <div className="register-btn">
         <BlueButton text={"Register"} />
       </div>
 
-      <div className="loginbtn">
-        <div className="loginbtn-text">Log In</div>
+      <div className="login-btn">
+        <div className="login-btn-text">Log In</div>
       </div>
     </nav>
   );

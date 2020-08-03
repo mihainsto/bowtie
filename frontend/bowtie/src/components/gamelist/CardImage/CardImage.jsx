@@ -16,7 +16,7 @@ const CardImage = (props) => {
   
   if(displayImage && !(props.image.includes("undefined"))){
     return (
-        <div className="cardImage">
+        <div className="card-image">
           <img
             src={withHttp(props.image)} 
             onError={imageDoseNotExist}

@@ -35,12 +35,11 @@ const RegisterPage = () => {
       setIncorrectFlairText(response.response.data)
       setButtonDisabled(false)
       setShowIncorrectFlair(true)
-      // console.log("Register failed");
     }
   };
   const spinner = <BeatLoader size={30} color={"#eef7ff"} css={`margin-top: 5px;`}></BeatLoader>;
   return (
-    <div className="registerpage">
+    <div className="register-page">
       <LogoNav />
       <div className="form-container">
         <div className="form-wrapper">

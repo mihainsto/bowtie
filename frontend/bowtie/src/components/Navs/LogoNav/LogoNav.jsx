@@ -3,7 +3,7 @@ import "./LogoNav.scss";
 
 const LogoButtonsNav = () => {
   return (
-    <nav className = "logonav">
+    <nav className = "logo-nav">
       <span className="logo">Bowtie</span>
     </nav>
   );
