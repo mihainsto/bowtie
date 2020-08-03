@@ -8,7 +8,7 @@ const TitleCard = (props) => {
         <div className="titleCard-title-text">
           {props.title}
         </div>
-        <span className="plusIcon" onClick={props.onAddNewCardClick}>
+        <span className="plus-icon" onClick={props.onAddNewCardClick}>
           <RiMenuAddLine size="40"/>
           </span>
       </div>

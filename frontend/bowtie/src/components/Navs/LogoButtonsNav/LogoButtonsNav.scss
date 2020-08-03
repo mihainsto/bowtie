@@ -1,13 +1,13 @@
 @import "../../../style.scss";
 
-.logobuttonsnav {
+.logo-buttons-nav {
   margin-top: 30px;
 
   .logo {
     font-size: 48px;
     margin-left: 45px;
   }
-  .loginbtn {
+  .login-btn {
     margin-right: 50px;
     float: right;
     cursor: pointer;
@@ -15,7 +15,7 @@
     line-height: 60px;
     border-radius: 13px;
   }
-  .loginbtn-text {
+  .login-btn-text {
     font-size: 30px;
     color: $text-color;
     vertical-align: middle;

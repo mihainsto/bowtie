@@ -1,6 +1,6 @@
 @import "../../style.scss";
 
-.registerpage {
+.register-page {
   .display-none{
     display: none;
   }
@@ -94,8 +94,6 @@
   }
   .remember-checkbox {
     margin-top: 70px;
-    //margin-left: -460px;
-    //float:left;
     text-align: left;
   }
   .forgot-pass-text {
@@ -120,9 +118,6 @@
   }
   @media only screen and (max-width: 340px) {
     .buttons {
-      //display: flex;
-      //flex-wrap: wrap;
-
       text-align: center;
       .register-btn {
         margin-top: 10px;
