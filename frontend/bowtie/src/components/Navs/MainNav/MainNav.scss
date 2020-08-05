@@ -1,0 +1,35 @@
+@import "../../../style.scss";
+
+.main-nav{
+    display: flex;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    background-color: $card-color;
+    box-shadow:
+    3px 3px 10px 0 rgba(0, 0, 0, 0.12);
+    .logo {
+        font-size: 35px;
+        margin-left: 45px;
+    }
+    .icon{
+        vertical-align: text-bottom;
+        font-size: 25px;
+        margin: 0px auto;
+    }
+    .username-button{
+        font-size: 20px;
+    }
+    .buttons-container{
+        margin-left: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-right: 45px;
+    }
+    .buttons-container > span{
+        margin-left: 30px;
+    }
+        
+}
