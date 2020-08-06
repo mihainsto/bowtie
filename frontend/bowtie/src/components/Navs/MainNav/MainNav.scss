@@ -1,6 +1,9 @@
 @import "../../../style.scss";
-
+.display-none{
+    display: none;
+}
 .main-nav{
+    z-index: 1;
     display: flex;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -30,6 +33,20 @@
     }
     .buttons-container > span{
         margin-left: 30px;
+        cursor: pointer;
+    }    
+}
+@media only screen and (max-width: 600px) {
+    .main-nav{
+        .username-button{
+            display:none;
+        }
+        .logo {
+            font-size: 35px;
+            margin-left: 20px;
+        }
+        .buttons-container{
+            margin-right: 20px;
+        }
     }
-        
 }

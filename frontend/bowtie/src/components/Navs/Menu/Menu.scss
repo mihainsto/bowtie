@@ -1,0 +1,19 @@
+@import "style.scss";
+
+.menu{
+    //z-index: 1;
+    position: fixed;
+    background-color: $card-color;
+    width: 400px;
+    height: 100%;
+    right: 0;
+    margin-top: 45px;
+    // display: none;
+    box-shadow:
+    -3px -3px 10px 0 rgba(0, 0, 0, 0.12);
+}
+@media only screen and (max-width: 600px) {
+    .menu{
+        width: 300px;
+    }
+}
