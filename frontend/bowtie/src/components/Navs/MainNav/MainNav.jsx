@@ -37,7 +37,7 @@ const MainNav = () => {
         
       </nav>
         <div className={!menuToggle? "display-none": ""} >
-        <Menu />
+        <Menu closeMenu={toggleMenu}/>
         </div>
     </div>
   );
