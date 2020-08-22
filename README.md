@@ -1,7 +1,7 @@
 # ![Bowtie](https://i.imgur.com/OIMUDig.png)
 
 # Bowtie
-Bowtie is a Web application with the purpose of helping gamers organize their games using a kanban-like board style.
+Bowtie is a Web application constructed for the purpose of helping gamers organize their games using a kanban-like board style.
 
 
 
