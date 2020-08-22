@@ -4,7 +4,8 @@ import List from "./List/List";
 import AddNewCard from "./AddNewCard/AddNewCard";
 import TitleCardInput from "./TitleCard/TitleCardInput";
 import GameSearchModal from "./GameSearchModal/GameSearchModal";
-import {api_url} from "../../Api/config";
+import { api_url } from "../../Api/config";
+import MainNav from "../Navs/MainNav/MainNav";
 import "../../style.scss";
 import "./layout.scss";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
@@ -26,22 +27,26 @@ const Layout = ({ children }) => {
   // Object containing cards, the key is the card id
   // And the value is an Object containing the card information (including the game id)
   const [cards, setCards] = useState({});
-  // Object containing lists, the key is the list id that can be found also in 
+  // Object containing lists, the key is the list id that can be found also in
   // listorder array
   const [lists, setLists] = useState({});
   // state containing the id of the lists that has the modal opened
   const [activeModalListId, setActiveModalListId] = useState(null);
   // Store css class for the add new list button
-  const [addButtonVisibile, setAddButtonVisibile] = useState("visibility-visible");
+  const [addButtonVisibile, setAddButtonVisibile] = useState(
+    "visibility-visible"
+  );
   // Store css class for the add new list text field
-  const [titleTextBoxVisible, settitleTextBoxVisible] = useState("visibility-hidden");
+  const [titleTextBoxVisible, settitleTextBoxVisible] = useState(
+    "visibility-hidden"
+  );
   const [modalStatus, setModalStatus] = useState(false);
   // store the new list title
   const [titleEntry, setTitleEntry] = useState("");
   // ref for focusing on new list text field
   const titleInputElement = useRef(null);
 
-  // Fetches data from the api and update the state with that data 
+  // Fetches data from the api and update the state with that data
   const fetchDataFromApi = async () => {
     const data = await api_get_board_data(jwt);
     const _listOrder = data.board.listsOrder;
@@ -72,7 +77,7 @@ const Layout = ({ children }) => {
     const listId = activeModalListId;
     const gameTitle = game.name;
     const gameId = game.id;
-    setCards({ ...cards, [cardId]: {title:gameTitle} });
+    setCards({ ...cards, [cardId]: { title: gameTitle } });
     const newCards = lists[listId].cards.concat(cardId);
     setLists({ ...lists, [listId]: { ...lists[listId], cards: newCards } });
     const updatedCard = await api_board_addCard(jwt, cardId, listId, gameId);
@@ -233,67 +238,70 @@ const Layout = ({ children }) => {
   // Default return
   // Returns the lists
   return (
-    <div className="layout-wrapper">
-      <GameSearchModal
-        modalOutsideClicked={modalOutsideClicked}
-        status={modalStatus}
-        gameItemClicked={gameItemClicked}
-      />
-      <div className="layout-lists">
-        <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable droppableId="lists" direction="horizontal" type="list">
-            {(provided) => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                className="lists-wrapper"
-              >
-                {listorder.map((item, index) => {
-                  const listCards = [];
-                  const curentList = lists[item];
-                  const title = curentList.title;
-                  const cardsOrder = curentList.cards;
-                  cardsOrder.forEach((i) => {
-                    if (typeof cards[i] !== "undefined")
-                      listCards.push({
-                        cardTitle: cards[i]["title"],
-                        cardId: i,
-                        cardImage: api_url + "/"+cards[i]["imageUrl"],
-                      });
-                  });
-                  
-                  return (
-                    <List
-                      listCards={listCards}
-                      title={title}
-                      listId={item}
-                      index={index}
-                      onAddNewCardClick={() => onAddNewCardClick(item)}
+    <div>
+      <MainNav />
+      <div className="layout-wrapper">
+        <GameSearchModal
+          modalOutsideClicked={modalOutsideClicked}
+          status={modalStatus}
+          gameItemClicked={gameItemClicked}
+        />
+        <div className="layout-lists">
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="lists" direction="horizontal" type="list">
+              {(provided) => (
+                <div
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  className="lists-wrapper"
+                >
+                  {listorder.map((item, index) => {
+                    const listCards = [];
+                    const curentList = lists[item];
+                    const title = curentList.title;
+                    const cardsOrder = curentList.cards;
+                    cardsOrder.forEach((i) => {
+                      if (typeof cards[i] !== "undefined")
+                        listCards.push({
+                          cardTitle: cards[i]["title"],
+                          cardId: i,
+                          cardImage: api_url + "/" + cards[i]["imageUrl"],
+                        });
+                    });
+
+                    return (
+                      <List
+                        listCards={listCards}
+                        title={title}
+                        listId={item}
+                        index={index}
+                        onAddNewCardClick={() => onAddNewCardClick(item)}
+                      />
+                    );
+                  })}
+                  {provided.placeholder}
+                  <div className={"addnew-list-card " + titleTextBoxVisible}>
+                    <TitleCardInput
+                      onChangeValue={titleInputOnChangeValueHandler}
+                      ref={titleInputElement}
+                      focused={addnewFocused}
+                      blured={addnewBlured}
+                      onKeyPress={addnewKeyPressed}
+                      value={titleEntry}
                     />
-                  );
-                })}
-                {provided.placeholder}
-                <div className={"addnew-list-card " + titleTextBoxVisible}>
-                  <TitleCardInput
-                    onChangeValue={titleInputOnChangeValueHandler}
-                    ref={titleInputElement}
-                    focused={addnewFocused}
-                    blured={addnewBlured}
-                    onKeyPress={addnewKeyPressed}
-                    value={titleEntry}
-                  />
+                  </div>
+                  <div className={"addnew-list-card " + addButtonVisibile}>
+                    <AddNewCard
+                      cardText="+ Add new list"
+                      height={60}
+                      onClick={addnewButtonClicked}
+                    />
+                  </div>
                 </div>
-                <div className={"addnew-list-card " + addButtonVisibile}>
-                  <AddNewCard
-                    cardText="+ Add new list"
-                    height={60}
-                    onClick={addnewButtonClicked}
-                  />
-                </div>
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </div>
       </div>
     </div>
   );
