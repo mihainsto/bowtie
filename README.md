@@ -8,5 +8,8 @@ Bowtie is a Web application with the purpose to help gamers organize their games
 
 # Table of contents
 
+- [Demo](#demo)
+- [Roadmap](#roadmap)
 - [Installation](#installation)
+- [Built with](#builtwith)
 - [License](#license)
