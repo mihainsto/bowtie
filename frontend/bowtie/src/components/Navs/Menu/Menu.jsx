@@ -37,6 +37,7 @@ const BoardSettings = (props) => {
         </span>
         <span>Show images</span>
       </div>
+
       <div
         className="menu-item"
         onClick={() =>

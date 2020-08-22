@@ -1,0 +1,17 @@
+@import "style.scss";
+
+
+.floating-menu{
+    position: absolute;
+    z-index: 3;
+    display: inline-block;
+    box-shadow:
+    -3px -3px 10px 0 rgba(0, 0, 0, 0.12),
+    3px 3px 10px 0 rgba(0, 0, 0, 0.12);
+    background-color: $card-color;
+    min-width: 20px;
+    min-height: 80px;
+    padding: 20px;
+
+
+}
