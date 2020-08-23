@@ -19,7 +19,7 @@ Bowtie is a work in progress project and it will be soon released on its first A
 Here is a working live demo :  https://mihainsto.github.io/bowtie/  
 (The demo does not contain api/backend functionality)  
 
-Here is a video: https://youtu.be/mrpPoKgFGcw 
+Here is a video : https://youtu.be/mrpPoKgFGcw 
 
 ## Features
 - Create your lists and add what games you want
