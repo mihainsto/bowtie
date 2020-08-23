@@ -43,3 +43,9 @@ The Roadmap for the first Alpha release:
 - [IGDB API](https://www.igdb.com/api)
 - [Smartcrop.js](https://github.com/jwagner/smartcrop.js/)
 - [MongoDB](https://github.com/mongodb/mongo)
+
+## [License](https://github.com/mihainsto/bowtie/blob/readme/LICENSE)
+Bowtie is under the Mozilla Public License 2.0.
+
+
+
