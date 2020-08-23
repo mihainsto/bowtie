@@ -38,8 +38,8 @@ The Roadmap for the first Alpha release:
 - Database
   - For the database you need to have docker installed, go in `docker-bowtie` and run `docker-compose up -d`.
 - Backend
-  - For Smartcrop.js you may need `imagemagick`, if you encounter an error run 
-  `sudo apt install imagemagick` or `brew install imagemagick`.
+  - For Smartcrop.js you may need imagemagick, if you encounter an error run when starting the backend run
+  `sudo apt install imagemagick` or `brew install imagemagick` (for MacOS) to install imagemagick.
   - You need an IGDB API key, you can get one [here](https://www.igdb.com/api).
   - Create a file named `config.js` in `backend/igdb` with the api key as export.   
   `module.exports = {
