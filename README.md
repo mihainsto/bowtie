@@ -26,6 +26,10 @@ Here is a working live demo :  https://mihainsto.github.io/bowtie/
 - See all information about a game (TODO)
 - More in the future
 
+## Roadmap
+The Roadmap for the first Alpha release:
+[roadmap](https://github.com/mihainsto/bowtie/wiki/Roadmap-for-first-release)
+
 ## Built with 
 
 - [React](https://github.com/facebook/react)
