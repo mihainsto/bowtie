@@ -17,4 +17,4 @@ Bowtie is an Web application with the purpose of helping gamers organize their g
 
 ## Demo
 Here is a working live demo :  https://mihainsto.github.io/bowtie/  
-(The demo does not contain any api/backend functionality)
+(The demo does not contain api/backend functionality)
