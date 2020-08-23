@@ -19,6 +19,10 @@ Bowtie is an Web application with the purpose of helping gamers organize their g
 Here is a working live demo :  https://mihainsto.github.io/bowtie/  
 (The demo does not contain api/backend functionality)
 
+## Features
+- 
+- More in the future
+
 ## Built with 
 
 - [React](https://github.com/facebook/react)
@@ -26,3 +30,4 @@ Here is a working live demo :  https://mihainsto.github.io/bowtie/
 - [Node.js](https://github.com/nodejs/node)
 - [IGDB API](https://www.igdb.com/api)
 - [Smartcrop.js](https://github.com/jwagner/smartcrop.js/)
+- [MongoDB](https://github.com/mongodb/mongo)
