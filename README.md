@@ -41,7 +41,7 @@ The Roadmap for the first Alpha release:
   - You need an IGDB API key, you can get one [here](https://www.igdb.com/api).
   - Create a file named `config.js` in `backend/igdb` with the api key as export.   
   `module.exports = {
-    api_key: "f47e0ed761f5010ed137d4eb36d31c27"
+    api_key: your-api-key
   }`
   - Generate keys with `node generateKeypair.js`.
   - To start the backend run `npm install` and then `npm start`.
