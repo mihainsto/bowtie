@@ -1,9 +1,7 @@
-# ![Bowtie](https://i.imgur.com/OIMUDig.png)
-
 # Bowtie
 Bowtie is a Web application with the purpose of helping gamers organize their games. Bowtie is constructed with a Kanban board style in mind and it's utilizing IGDB API to keep all the game data up to date.
 
-
+# ![Bowtie](https://i.imgur.com/OIMUDig.png)
 
 
 ## Table of contents
