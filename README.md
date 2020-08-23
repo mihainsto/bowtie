@@ -9,8 +9,8 @@ Bowtie is a work in progress project and it will be soon released on its first A
 ## Table of contents
 
 - [Demo](#demo)
-- [Roadmap](#roadmap)
 - [Features](#features)
+- [Roadmap](#roadmap)
 - [Installation](#installation)
 - [Built with](#built-with)
 - [License](#license)
@@ -31,6 +31,9 @@ Here is a working live demo :  https://mihainsto.github.io/bowtie/
 ## Roadmap
 The Roadmap for the first Alpha release:
 [roadmap](https://github.com/mihainsto/bowtie/wiki/Roadmap-for-first-release)
+
+## Installation
+
 
 ## Built with 
 
