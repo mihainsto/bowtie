@@ -22,20 +22,31 @@ Here is a working live demo :  https://mihainsto.github.io/bowtie/
 Here is a video : https://youtu.be/mrpPoKgFGcw 
 
 ## Features
-- Create your lists and add what games you want
-- Search games in the IGDB database and add them
-- Track and organize your gaming life in a clean UI
-- Display a reference image of the game on the card
-- See the release date of the unreleased games and get notifications when/before a game is released (TODO)
-- See all information about a game (TODO)
-- More in the future
+- Create your lists and add what games you want.
+- Search games in the IGDB database and add them.
+- Track and organize your gaming life in a clean UI.
+- Display a reference image of the game on the card.
+- See the release date of the unreleased games and get notifications when/before a game is released (TODO).
+- See all information about a game (TODO).
+- More in the future.
 
 ## Roadmap
 The Roadmap for the first Alpha release:
 [roadmap](https://github.com/mihainsto/bowtie/wiki/Roadmap-for-first-release)
 
 ## Installation
-
+- Database
+  - For the database you need to have docker installed, go in `docker-bowtie` and run `docker-compose up -d`.
+- Backend
+  - You need an IGDB API key, you can get one [here](https://www.igdb.com/api).
+  - Create a file named `config.js` in `backend/igdb` with the api key as export.   
+  `module.exports = {
+    api_key: "f47e0ed761f5010ed137d4eb36d31c27"
+  }`
+  - Generate keys with `node generateKeypair.js`.
+  - To start the backend run `npm install` and then `npm start`.
+- Frontend
+  - To start the frontend run `yarn install` and then `yarn start`.
 
 ## Built with 
 
