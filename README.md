@@ -54,6 +54,7 @@ The Roadmap for the first Alpha release:
 
 - [React](https://github.com/facebook/react)
 - [Material-UI](https://github.com/mui-org/material-ui)
+- [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd)
 - [Node.js](https://github.com/nodejs/node)
 - [IGDB API](https://www.igdb.com/api)
 - [Smartcrop.js](https://github.com/jwagner/smartcrop.js/)
