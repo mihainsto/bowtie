@@ -1,7 +1,7 @@
 # ![Bowtie](https://i.imgur.com/OIMUDig.png)
 
 # Bowtie
-Bowtie is an Web application with the purpose of helping gamers organize their games. Bowtie is constructed with a Kanban board style in mind and it's utilizing IGDB API to keep all the game data up to date.
+Bowtie is a Web application with the purpose of helping gamers organize their games. Bowtie is constructed with a Kanban board style in mind and it's utilizing IGDB API to keep all the game data up to date.
 
 
 
@@ -20,7 +20,12 @@ Here is a working live demo :  https://mihainsto.github.io/bowtie/
 (The demo does not contain api/backend functionality)
 
 ## Features
-- 
+- Create your lists and add what games you want
+- Search games in the IGDB database and add them
+- Track and organize your gaming life in a clean UI
+- Display a reference image of the game on the card
+- See the release date of the unreleased games and get notifications when/before a game is released (TODO)
+- See all information about a game (TODO)
 - More in the future
 
 ## Built with 
