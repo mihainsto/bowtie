@@ -15,6 +15,7 @@ Bowtie is a work in progress project and it will be soon released on its first a
 - [Installation](#installation)
 - [Built with](#built-with)
 - [License](#license)
+- [Thanks](#thanks)
 
 ## Demo
 Here is a working live demo :  https://mihainsto.github.io/bowtie/  
@@ -64,5 +65,5 @@ The Roadmap for the first Alpha release:
 ## [License](https://github.com/mihainsto/bowtie/blob/readme/LICENSE)
 Bowtie is under the Mozilla Public License 2.0.
 
-
-
+## [Thanks]
+Thanks to [Andrei Sugeac](https://github.com/AndreiSugeac) for designing the awesome Bowtie logo.
