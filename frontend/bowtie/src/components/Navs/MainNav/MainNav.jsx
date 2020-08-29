@@ -9,6 +9,7 @@ import Menu from "components/Navs/Menu/Menu";
 import { useState, useRef, useEffect } from "react";
 import MenuOpenIcon from "@material-ui/icons/MenuOpen";
 import useWindowSize from "Hooks/useWindowSize";
+import logo from "logo.svg";
 
 const MainNav = () => {
   const size = useWindowSize();
@@ -28,7 +29,7 @@ const MainNav = () => {
   return (
     <div>
       <nav className="main-nav">
-        <span className="logo">Bowtie</span>
+        <img src={logo} className="logo"/>
         <span className="buttons-container">
           <span
             className="username-button"
