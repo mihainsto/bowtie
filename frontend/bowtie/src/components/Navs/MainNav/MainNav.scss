@@ -8,6 +8,7 @@
     padding-top: 5px;
     padding-bottom: 5px;
     justify-content: space-between;
+    align-items: center;
     position: fixed;
     width: 100%;
     background-color: $card-color;
@@ -16,6 +17,10 @@
     .logo {
         font-size: 35px;
         margin-left: 45px;
+        align-self: center;
+        height: auto;
+        max-width: 110px;
+        
     }
     .icon{
         vertical-align: text-bottom;
@@ -43,8 +48,8 @@
             display:none;
         }
         .logo {
-            font-size: 35px;
             margin-left: 20px;
+
         }
         .buttons-container{
             margin-right: 20px;
