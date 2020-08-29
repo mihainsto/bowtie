@@ -93,6 +93,7 @@ router.post(
             gameId: gameId,
             title: igdbGame.name,
             imageUrl: newImagePath,
+            releaseDate: new Date(igdbGame.first_release_date * 1000)
           });
           newGame
             .save()
@@ -178,7 +179,7 @@ router.get(
 
     const games = await Game.find({'gameId': { $in: gameIds}})
     const gamesObj = games.reduce((a,x) => ({...a, [x.gameId]: x}), {})
-    
+    console.log(gamesObj)
     res.status(200).json({ status: "success", board: req.user.Board, games: gamesObj });
     } catch (err) {
       console.log(err);
