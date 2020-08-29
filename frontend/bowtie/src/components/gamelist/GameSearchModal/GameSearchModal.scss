@@ -12,7 +12,8 @@
   min-height: 65px;
   left: 50%;
   margin-left: -250px;
-  top: 20%;
+  margin-bottom: 200px;
+  top: 10%;
   border-radius: 10px;
   box-shadow: -5px -5px 10px 0 rgba(0, 0, 0, 0.16),
     5px 5px 10px 0 rgba(0, 0, 0, 0.16);
@@ -162,6 +163,24 @@
   .game-search-modal{
     input {
       font-size: 1.4em;
+    }
+  }
+}
+
+@media only screen and (max-height: 650px) {
+  .game-search-modal{
+    top: 10%;
+    .search-results-container{
+      max-height: 400px;
+    }
+  }
+}
+
+@media only screen  and (min-height: 650px) and (max-height: 800px) {
+  .game-search-modal{
+    top: 10%;
+    .search-results-container{
+      max-height: 500px;
     }
   }
 }
