@@ -93,7 +93,7 @@ router.post(
             gameId: gameId,
             title: igdbGame.name,
             imageUrl: newImagePath,
-            releaseDate: new Date(igdbGame.first_release_date * 1000)
+            releaseDate: igdbGame.first_release_date
           });
           newGame
             .save()

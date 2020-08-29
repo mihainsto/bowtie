@@ -5,7 +5,7 @@ const GameSchema = new Schema({
     gameId : String,
     title: String,
     imageUrl: String,
-    releaseDate: Date,
+    releaseDate: String,
     Date: {
         type: Date,
         default: Date.now

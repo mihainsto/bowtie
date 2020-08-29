@@ -32,6 +32,7 @@ const List = (props) => {
                   {props.listCards.map((item, index) => (
                     <div className="list-card">
                       <Card
+                        cardReleaseDate={item.cardReleaseDate}
                         cardText={item.cardTitle}
                         cardImage={item.cardImage}
                         cardId={item.cardId}

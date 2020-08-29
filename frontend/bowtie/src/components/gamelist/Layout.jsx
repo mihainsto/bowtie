@@ -266,6 +266,7 @@ const Layout = ({ children }) => {
                           cardTitle: cards[i]["title"],
                           cardId: i,
                           cardImage: api_url + "/" + cards[i]["imageUrl"],
+                          cardReleaseDate: cards[i]["releaseDate"]
                         });
                     });
 
