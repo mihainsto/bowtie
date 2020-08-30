@@ -53,12 +53,14 @@ const Layout = ({ children }) => {
   const [titleEntry, setTitleEntry] = useState("");
   // ref for focusing on new list text field
   const titleInputElement = useRef(null);
-
+  // State containing username, this is fetched from the backend when loading first tme
+  const [username, setUsername] = useState(null);
   // Fetches data from the api and update the state with that data
   const fetchDataFromApi = async () => {
     setFetchingDataState(true)
     const user = await api_reauth(jwt)
     const data = user.user
+    setUsername(data.name)
     // If options are not set we set them
     if (typeof data.options === "undefined") {
       api_set_options(jwt, optionsContextDefaultValues)
@@ -265,7 +267,7 @@ const Layout = ({ children }) => {
   return (
     <OptionsContext.Provider value={[optionsContext, setOptonsContext]}>
       <div>
-        <MainNav />
+        <MainNav username={username}/>
         <div className="layout-wrapper">
           <GameSearchModal
             modalOutsideClicked={modalOutsideClicked}

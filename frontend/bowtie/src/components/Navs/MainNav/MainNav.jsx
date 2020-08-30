@@ -11,7 +11,7 @@ import MenuOpenIcon from "@material-ui/icons/MenuOpen";
 import useWindowSize from "Hooks/useWindowSize";
 import logo from "logo.svg";
 
-const MainNav = () => {
+const MainNav = (props) => {
   const size = useWindowSize();
   const [menuToggle, setMenuToggle] = useState(false);
   const [notificationsMenuToggle, setNotificationsMenuToggle] = useState(false);
@@ -24,7 +24,7 @@ const MainNav = () => {
   useEffect(() => {
     setUsernameRect(usernameButtonRef.current.getBoundingClientRect());
     setNotificationsRect(notificationsRef.current.getBoundingClientRect());
-  }, [size]);
+  }, [size, props.username]);
 
   return (
     <div>
@@ -36,14 +36,13 @@ const MainNav = () => {
             ref={usernameButtonRef}
             onClick={() => setUsernameMenuToggle(!usernameMenuToggle)}
           >
-            Username
+            {props.username}
             {!usernameMenuToggle ? (
               <ExpandMoreIcon className="icon" />
             ) : (
               <ExpandLessIcon className="icon" />
             )}
           </span>
-
           <span
             ref={notificationsRef}
             onClick={() => setNotificationsMenuToggle(!notificationsMenuToggle)}
