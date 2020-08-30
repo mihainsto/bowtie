@@ -19,8 +19,11 @@ import {
   api_board_moveCard,
 } from "../../Api/Board";
 import { useLocalStorage } from "@rehooks/local-storage";
+import { OptionsContext } from "Context.js";
 
 const Layout = ({ children }) => {
+  // User options shared state
+  const [optionsContext, setOptonsContext] = useState();
   const [jwt] = useLocalStorage("jwt");
   // The order of the lists, is a array containing the id's of the lists
   const [listorder, setListorder] = useState([]);
@@ -69,7 +72,10 @@ const Layout = ({ children }) => {
   useEffect(() => {
     fetchDataFromApi();
   }, []);
-
+  // Use Effect for handling context changes and update the database
+  useEffect(() => {
+    console.log(optionsContext)
+  }, [optionsContext])
   // Adds a game card on the list that has the search modal open at that time
   // And is also sending the new created card on the backend and waits for a image response
   const addGameCard = async (game) => {
@@ -238,73 +244,75 @@ const Layout = ({ children }) => {
   // Default return
   // Returns the lists
   return (
-    <div>
-      <MainNav />
-      <div className="layout-wrapper">
-        <GameSearchModal
-          modalOutsideClicked={modalOutsideClicked}
-          status={modalStatus}
-          gameItemClicked={gameItemClicked}
-        />
-        <div className="layout-lists">
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="lists" direction="horizontal" type="list">
-              {(provided) => (
-                <div
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  className="lists-wrapper"
-                >
-                  {listorder.map((item, index) => {
-                    const listCards = [];
-                    const curentList = lists[item];
-                    const title = curentList.title;
-                    const cardsOrder = curentList.cards;
-                    cardsOrder.forEach((i) => {
-                      if (typeof cards[i] !== "undefined")
-                        listCards.push({
-                          cardTitle: cards[i]["title"],
-                          cardId: i,
-                          cardImage: api_url + "/" + cards[i]["imageUrl"],
-                          cardReleaseDate: cards[i]["releaseDate"]
-                        });
-                    });
+    <OptionsContext.Provider value={[optionsContext, setOptonsContext]}>
+      <div>
+        <MainNav />
+        <div className="layout-wrapper">
+          <GameSearchModal
+            modalOutsideClicked={modalOutsideClicked}
+            status={modalStatus}
+            gameItemClicked={gameItemClicked}
+          />
+          <div className="layout-lists">
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="lists" direction="horizontal" type="list">
+                {(provided) => (
+                  <div
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    className="lists-wrapper"
+                  >
+                    {listorder.map((item, index) => {
+                      const listCards = [];
+                      const curentList = lists[item];
+                      const title = curentList.title;
+                      const cardsOrder = curentList.cards;
+                      cardsOrder.forEach((i) => {
+                        if (typeof cards[i] !== "undefined")
+                          listCards.push({
+                            cardTitle: cards[i]["title"],
+                            cardId: i,
+                            cardImage: api_url + "/" + cards[i]["imageUrl"],
+                            cardReleaseDate: cards[i]["releaseDate"],
+                          });
+                      });
 
-                    return (
-                      <List
-                        listCards={listCards}
-                        title={title}
-                        listId={item}
-                        index={index}
-                        onAddNewCardClick={() => onAddNewCardClick(item)}
+                      return (
+                        <List
+                          listCards={listCards}
+                          title={title}
+                          listId={item}
+                          index={index}
+                          onAddNewCardClick={() => onAddNewCardClick(item)}
+                        />
+                      );
+                    })}
+                    {provided.placeholder}
+                    <div className={"addnew-list-card " + titleTextBoxVisible}>
+                      <TitleCardInput
+                        onChangeValue={titleInputOnChangeValueHandler}
+                        ref={titleInputElement}
+                        focused={addnewFocused}
+                        blured={addnewBlured}
+                        onKeyPress={addnewKeyPressed}
+                        value={titleEntry}
                       />
-                    );
-                  })}
-                  {provided.placeholder}
-                  <div className={"addnew-list-card " + titleTextBoxVisible}>
-                    <TitleCardInput
-                      onChangeValue={titleInputOnChangeValueHandler}
-                      ref={titleInputElement}
-                      focused={addnewFocused}
-                      blured={addnewBlured}
-                      onKeyPress={addnewKeyPressed}
-                      value={titleEntry}
-                    />
+                    </div>
+                    <div className={"addnew-list-card " + addButtonVisibile}>
+                      <AddNewCard
+                        cardText="+ Add new list"
+                        height={60}
+                        onClick={addnewButtonClicked}
+                      />
+                    </div>
                   </div>
-                  <div className={"addnew-list-card " + addButtonVisibile}>
-                    <AddNewCard
-                      cardText="+ Add new list"
-                      height={60}
-                      onClick={addnewButtonClicked}
-                    />
-                  </div>
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </div>
         </div>
       </div>
-    </div>
+    </OptionsContext.Provider>
   );
 };
 

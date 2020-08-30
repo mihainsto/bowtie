@@ -4,7 +4,12 @@ import "./Card.scss";
 import CardImage from "../CardImage/CardImage";
 import { OptionsContext } from "Context.js";
 import {useContext} from "react";
+import { useEffect, useState } from "react";
 
+// Function to process the release date
+// For pretty display
+// This functon will return jsx containing the release date
+// Or the number of remaning days if there are <10 
 const processLaunchDate = (date) => {
   const formDate = new Date(date * 1000);
   var today = new Date();
@@ -50,10 +55,20 @@ const processLaunchDate = (date) => {
     </div>
   );
 };
-// Component that renders a card with a game and a image
+
+// Component that renders a card with a game and a image and a release date
 const Card = (props) => {
   const [context, setContext] = useContext(OptionsContext);
-  console.log(context)
+  const [launchDate, setLaunchDate] = useState();
+
+  // Processing the date only one time to avoid performance drops
+  useEffect(()=>{
+    setLaunchDate(processLaunchDate(props.cardReleaseDate))
+  }, [])
+
+  if (typeof context === "undefined") {
+    return("")
+  }
   return (
     <Draggable
       draggableId={props.cardId}
@@ -74,7 +89,7 @@ const Card = (props) => {
               <div className="card-text">{props.cardText}</div>
               
               {typeof props.cardReleaseDate !== "undefined"
-                ? processLaunchDate(props.cardReleaseDate)
+                ? launchDate
                 : ""}
             </div>
           </div>
