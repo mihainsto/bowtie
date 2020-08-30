@@ -85,4 +85,23 @@ router.post("/login", (req, res) => {
 }
 });
 
+router.post(
+  "/options/set",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res, next) => {
+    if (logging.enabled)
+      console.log({"/options/set": req.body})
+    try {
+      const options = req.body;
+      req.user.options = options;
+      const updated = await req.user.save();
+      res.status(200).json({ success: true });
+    } catch (err) {
+      console.log(err);
+      res.status(400).json({ status: "success", error: true });
+    }
+  }
+);
+
+
 module.exports = router;

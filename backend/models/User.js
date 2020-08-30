@@ -21,6 +21,7 @@ const UserSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    Board: BoardSchema
+    Board: BoardSchema,
+    options: Object
 })
 module.exports = Users = mongoose.model("Users",UserSchema);
