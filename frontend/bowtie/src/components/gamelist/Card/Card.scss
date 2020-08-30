@@ -20,3 +20,12 @@
 .card-text{
     margin-top: -10px;
 }
+.card-release-date{
+    line-height: 30px;
+    font-size: 0.7em;
+    text-align: left;
+    margin-top: -15px;
+    .date{
+        color: $blue-color;
+    }
+}

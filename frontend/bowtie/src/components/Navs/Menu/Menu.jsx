@@ -4,15 +4,11 @@ import "./Menu.scss";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import CloseIcon from "@material-ui/icons/Close";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { OptionsContext } from "Context.js";
 
 const BoardSettings = (props) => {
-  const [options, setOptions] = useState({
-    images: false,
-    "release date released": false,
-    "release date unreleased": false,
-  });
-
+  const [options, setOptions] = useContext(OptionsContext);
   return (
     <div className="settings-menu">
       <div className="menu-title">
@@ -30,10 +26,10 @@ const BoardSettings = (props) => {
       <div className="menu-subsection">Cards:</div>
       <div
         className="menu-item"
-        onClick={() => setOptions({ ...options, images: !options["images"] })}
+        onClick={() => setOptions({ ...options, images: !options.images })}
       >
         <span>
-          <Checkboxs1 size={18} checked={options["images"]} />
+          <Checkboxs1 size={18} checked={options.images} />
         </span>
         <span>Show images</span>
       </div>
@@ -43,12 +39,12 @@ const BoardSettings = (props) => {
         onClick={() =>
           setOptions({
             ...options,
-            "release date released": !options["release date released"],
+            release_date_released: !options.release_date_released,
           })
         }
       >
         <span>
-          <Checkboxs1 size={18} checked={options["release date released"]} />
+          <Checkboxs1 size={18} checked={options.release_date_released} />
         </span>
         <span>Show release date for released games </span>
       </div>
@@ -57,11 +53,11 @@ const BoardSettings = (props) => {
         onClick={() =>
           setOptions({
             ...options,
-            "release date unreleased": !options["release date unreleased"],
+            release_date_unreleased: !options.release_date_unreleased,
           })
         }
       >
-        <Checkboxs1 size={18} checked={options["release date unreleased"]} />
+        <Checkboxs1 size={18} checked={options.release_date_unreleased} />
         <span>Show release date for unreleased games</span>
       </div>
     </div>

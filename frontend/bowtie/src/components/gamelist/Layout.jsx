@@ -18,9 +18,17 @@ import {
   api_board_updateCardOrder,
   api_board_moveCard,
 } from "../../Api/Board";
+import {
+  api_reauth,
+  api_set_options
+} from "Api/user";
 import { useLocalStorage } from "@rehooks/local-storage";
+import { OptionsContext, optionsContextDefaultValues } from "Context.js";
 
 const Layout = ({ children }) => {
+  // User options shared state
+  const [optionsContext, setOptonsContext] = useState();
+  const [fetchingDataState, setFetchingDataState] = useState(true);
   const [jwt] = useLocalStorage("jwt");
   // The order of the lists, is a array containing the id's of the lists
   const [listorder, setListorder] = useState([]);
@@ -45,10 +53,22 @@ const Layout = ({ children }) => {
   const [titleEntry, setTitleEntry] = useState("");
   // ref for focusing on new list text field
   const titleInputElement = useRef(null);
-
+  // State containing username, this is fetched from the backend when loading first tme
+  const [username, setUsername] = useState(null);
   // Fetches data from the api and update the state with that data
   const fetchDataFromApi = async () => {
-    const data = await api_get_board_data(jwt);
+    setFetchingDataState(true)
+    const user = await api_reauth(jwt)
+    const data = user.user
+    setUsername(data.name)
+    // If options are not set we set them
+    if (typeof data.options === "undefined") {
+      api_set_options(jwt, optionsContextDefaultValues)
+      data.options = optionsContextDefaultValues
+    }
+    // Set the user options to the context
+    setOptonsContext(data.options)
+    // Processing the board and setting the data
     const _listOrder = data.board.listsOrder;
     const _lists = {};
     const _cards = {};
@@ -64,12 +84,19 @@ const Layout = ({ children }) => {
     setLists(_lists);
     setListorder(_listOrder);
     setCards(_cards);
+    setFetchingDataState(false);
   };
   // Use Effect for calling the fetch data from api function
   useEffect(() => {
     fetchDataFromApi();
   }, []);
-
+  // Use Effect for handling context changes and update the database
+  useEffect(() => {
+    if (!fetchingDataState){
+      const optionsCopy = {...optionsContext}
+      api_set_options(jwt, optionsCopy)
+    }
+  }, [optionsContext])
   // Adds a game card on the list that has the search modal open at that time
   // And is also sending the new created card on the backend and waits for a image response
   const addGameCard = async (game) => {
@@ -238,72 +265,75 @@ const Layout = ({ children }) => {
   // Default return
   // Returns the lists
   return (
-    <div>
-      <MainNav />
-      <div className="layout-wrapper">
-        <GameSearchModal
-          modalOutsideClicked={modalOutsideClicked}
-          status={modalStatus}
-          gameItemClicked={gameItemClicked}
-        />
-        <div className="layout-lists">
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="lists" direction="horizontal" type="list">
-              {(provided) => (
-                <div
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  className="lists-wrapper"
-                >
-                  {listorder.map((item, index) => {
-                    const listCards = [];
-                    const curentList = lists[item];
-                    const title = curentList.title;
-                    const cardsOrder = curentList.cards;
-                    cardsOrder.forEach((i) => {
-                      if (typeof cards[i] !== "undefined")
-                        listCards.push({
-                          cardTitle: cards[i]["title"],
-                          cardId: i,
-                          cardImage: api_url + "/" + cards[i]["imageUrl"],
-                        });
-                    });
+    <OptionsContext.Provider value={[optionsContext, setOptonsContext]}>
+      <div>
+        <MainNav username={username}/>
+        <div className="layout-wrapper">
+          <GameSearchModal
+            modalOutsideClicked={modalOutsideClicked}
+            status={modalStatus}
+            gameItemClicked={gameItemClicked}
+          />
+          <div className="layout-lists">
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="lists" direction="horizontal" type="list">
+                {(provided) => (
+                  <div
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    className="lists-wrapper"
+                  >
+                    {listorder.map((item, index) => {
+                      const listCards = [];
+                      const curentList = lists[item];
+                      const title = curentList.title;
+                      const cardsOrder = curentList.cards;
+                      cardsOrder.forEach((i) => {
+                        if (typeof cards[i] !== "undefined")
+                          listCards.push({
+                            cardTitle: cards[i]["title"],
+                            cardId: i,
+                            cardImage: api_url + "/" + cards[i]["imageUrl"],
+                            cardReleaseDate: cards[i]["releaseDate"],
+                          });
+                      });
 
-                    return (
-                      <List
-                        listCards={listCards}
-                        title={title}
-                        listId={item}
-                        index={index}
-                        onAddNewCardClick={() => onAddNewCardClick(item)}
+                      return (
+                        <List
+                          listCards={listCards}
+                          title={title}
+                          listId={item}
+                          index={index}
+                          onAddNewCardClick={() => onAddNewCardClick(item)}
+                        />
+                      );
+                    })}
+                    {provided.placeholder}
+                    <div className={"addnew-list-card " + titleTextBoxVisible}>
+                      <TitleCardInput
+                        onChangeValue={titleInputOnChangeValueHandler}
+                        ref={titleInputElement}
+                        focused={addnewFocused}
+                        blured={addnewBlured}
+                        onKeyPress={addnewKeyPressed}
+                        value={titleEntry}
                       />
-                    );
-                  })}
-                  {provided.placeholder}
-                  <div className={"addnew-list-card " + titleTextBoxVisible}>
-                    <TitleCardInput
-                      onChangeValue={titleInputOnChangeValueHandler}
-                      ref={titleInputElement}
-                      focused={addnewFocused}
-                      blured={addnewBlured}
-                      onKeyPress={addnewKeyPressed}
-                      value={titleEntry}
-                    />
+                    </div>
+                    <div className={"addnew-list-card " + addButtonVisibile}>
+                      <AddNewCard
+                        cardText="+ Add new list"
+                        height={60}
+                        onClick={addnewButtonClicked}
+                      />
+                    </div>
                   </div>
-                  <div className={"addnew-list-card " + addButtonVisibile}>
-                    <AddNewCard
-                      cardText="+ Add new list"
-                      height={60}
-                      onClick={addnewButtonClicked}
-                    />
-                  </div>
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </div>
         </div>
       </div>
-    </div>
+    </OptionsContext.Provider>
   );
 };
 

@@ -123,7 +123,7 @@ const search_for_a_game = async (gameName, offset, limit) => {
 
 const get_game = async (gameId) => {
   const querry =
-  `fields name; 
+  `fields name, first_release_date; 
   where id = ` +
   gameId +
   `; 

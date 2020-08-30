@@ -2,6 +2,7 @@ const passport = require("passport");
 const validators = require("../validation/validators");
 const express = require("express");
 const User = require("../models/User");
+const Game = require("../models/Game");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const keys = require("../config/keys");
@@ -37,7 +38,7 @@ router.post("/register", (req, res) => {
         name: req.body.username,
         email: req.body.email,
         password: req.body.password,
-        Board: {
+        board: {
           listsOrder: [],
           cards: [],
           lists: [],
@@ -85,4 +86,50 @@ router.post("/login", (req, res) => {
 }
 });
 
+router.post(
+  "/options/set",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res, next) => {
+    if (logging.enabled)
+      console.log({"/options/set": req.body})
+    try {
+      const options = req.body.options;
+      req.user.options = options;
+      const updated = await req.user.save();
+      res.status(200).json({ success: true });
+    } catch (err) {
+      console.log(err);
+      res.status(400).json({ status: "success", error: true });
+    }
+  }
+);
+
+// TODO: Refactor this code since is a duplicate with getBoard method
+router.get(
+  "/reauth",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res, next) => {
+    if (logging.enabled)
+      console.log({"/reauth": req.body})
+    try {
+      // finding the games
+      gameIds = []
+      req.user.board.cards.forEach(card => {
+        gameIds.push(card.gameId)
+      });
+
+    const games = await Game.find({'gameId': { $in: gameIds}})
+    const gamesObj = games.reduce((a,x) => ({...a, [x.gameId]: x}), {})
+    console.log(gamesObj)
+    const userCpy = Object.assign({}, req.user._doc)
+    delete userCpy.password
+    delete userCpy._id
+    res.status(200).json({ status: "success", user: {...userCpy, games: gamesObj} });
+    console.log(req.user)
+    } catch (err) {
+      console.log(err);
+      res.status(400).json({ status: "error" });
+    }
+  }
+);
 module.exports = router;
