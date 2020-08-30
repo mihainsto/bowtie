@@ -22,7 +22,6 @@ const Card = (props) => {
     if (typeof date === "undefined") {
       return "";
     }
-    console.log(date);
     const formDate = new Date(date * 1000);
     var today = new Date();
     const differenceInTime = formDate.getTime() - today.getTime();
