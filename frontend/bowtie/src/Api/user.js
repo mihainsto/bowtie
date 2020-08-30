@@ -35,7 +35,15 @@ const api_register = async (username, email, password) => {
     return err
   }
 }
-export { api_login, api_register };
+const api_reauth = async (jwt) => {
+  const response = await axios({
+    method: "get",
+    url: api_url + "/user/reauth",
+    headers: { Authorization: jwt },
+  });
+  return response.data;
+};
+export { api_login, api_register, api_reauth };
 
 // testEmail@gmail.com
 // testPassword

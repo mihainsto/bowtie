@@ -24,8 +24,8 @@ router.post(
         cardsIds: [],
         title: listTitle,
       };
-      req.user.Board.lists.push(newList);
-      req.user.Board.listsOrder.push(listId);
+      req.user.board.lists.push(newList);
+      req.user.board.listsOrder.push(listId);
       const updated = await req.user.save();
       res.status(200).json({ status: "success", updated: newList });
     } catch (err) {
@@ -43,7 +43,7 @@ router.post(
       console.log({"/board/updatelistorder": req.body})
     try {
       const newOrder = req.body.listOrder;
-      req.user.Board.listsOrder = newOrder;
+      req.user.board.listsOrder = newOrder;
       const updated = await req.user.save();
       res.status(200).json({ status: "success", updated: newOrder });
     } catch (err) {
@@ -66,10 +66,10 @@ router.post(
         cardId: req.body.cardId,
         gameId: gameId,
       };
-      req.user.Board.cards.push(newCard);
-      for (i = 0; i < req.user.Board.lists.length; i++) {
-        if (req.user.Board.lists[i].listId === listId) {
-          req.user.Board.lists[i].cardsIds.push(newCard.cardId);
+      req.user.board.cards.push(newCard);
+      for (i = 0; i < req.user.board.lists.length; i++) {
+        if (req.user.board.lists[i].listId === listId) {
+          req.user.board.lists[i].cardsIds.push(newCard.cardId);
           break;
         }
       }
@@ -122,9 +122,9 @@ router.post(
       const listId = req.body.listId;
       const cardOrder = req.body.cardOrder;
       console.log({ listId: listId, cardOrder: cardOrder });
-      for (i = 0; i < req.user.Board.lists.length; i++) {
-        if (req.user.Board.lists[i].listId === listId) {
-          req.user.Board.lists[i].cardsIds = cardOrder;
+      for (i = 0; i < req.user.board.lists.length; i++) {
+        if (req.user.board.lists[i].listId === listId) {
+          req.user.board.lists[i].cardsIds = cardOrder;
           break;
         }
       }
@@ -149,11 +149,11 @@ router.post(
       const cardOrder1 = req.body.cardOrder1;
       const cardOrder2 = req.body.cardOrder2;
 
-      for (i = 0; i < req.user.Board.lists.length; i++) {
-        if (req.user.Board.lists[i].listId === list1Id) {
-          req.user.Board.lists[i].cardsIds = cardOrder1;
-        } else if (req.user.Board.lists[i].listId === list2Id) {
-          req.user.Board.lists[i].cardsIds = cardOrder2;
+      for (i = 0; i < req.user.board.lists.length; i++) {
+        if (req.user.board.lists[i].listId === list1Id) {
+          req.user.board.lists[i].cardsIds = cardOrder1;
+        } else if (req.user.board.lists[i].listId === list2Id) {
+          req.user.board.lists[i].cardsIds = cardOrder2;
         }
       }
       const updated = await req.user.save();
@@ -173,14 +173,14 @@ router.get(
     try {
       // finding the games
       gameIds = []
-      req.user.Board.cards.forEach(card => {
+      req.user.board.cards.forEach(card => {
         gameIds.push(card.gameId)
       });
 
     const games = await Game.find({'gameId': { $in: gameIds}})
     const gamesObj = games.reduce((a,x) => ({...a, [x.gameId]: x}), {})
     console.log(gamesObj)
-    res.status(200).json({ status: "success", board: req.user.Board, games: gamesObj });
+    res.status(200).json({ status: "success", board: req.user.board, games: gamesObj });
     } catch (err) {
       console.log(err);
       res.status(400).json({ status: "error" });

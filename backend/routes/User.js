@@ -38,7 +38,7 @@ router.post("/register", (req, res) => {
         name: req.body.username,
         email: req.body.email,
         password: req.body.password,
-        Board: {
+        board: {
           listsOrder: [],
           cards: [],
           lists: [],
@@ -114,7 +114,7 @@ router.get(
     try {
       // finding the games
       gameIds = []
-      req.user.Board.cards.forEach(card => {
+      req.user.board.cards.forEach(card => {
         gameIds.push(card.gameId)
       });
 
@@ -124,7 +124,7 @@ router.get(
     const userCpy = Object.assign({}, req.user._doc)
     delete userCpy.password
     delete userCpy._id
-    res.status(200).json({ status: "success", user: userCpy, games: gamesObj });
+    res.status(200).json({ status: "success", user: {...userCpy, games: gamesObj} });
     console.log(req.user)
     } catch (err) {
       console.log(err);

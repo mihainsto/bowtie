@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 // This functon will return jsx containing the release date
 // Or the number of remaning days if there are <10 
 const processLaunchDate = (date) => {
+  return ("")
   const formDate = new Date(date * 1000);
   var today = new Date();
   const differenceInTime = formDate.getTime() - today.getTime();
@@ -66,9 +67,9 @@ const Card = (props) => {
     setLaunchDate(processLaunchDate(props.cardReleaseDate))
   }, [])
 
-  if (typeof context === "undefined") {
-    return("")
-  }
+  // if (typeof context === "undefined") {
+  //   return("")
+  // }
   return (
     <Draggable
       draggableId={props.cardId}

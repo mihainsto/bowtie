@@ -18,6 +18,9 @@ import {
   api_board_updateCardOrder,
   api_board_moveCard,
 } from "../../Api/Board";
+import {
+  api_reauth
+} from "Api/user";
 import { useLocalStorage } from "@rehooks/local-storage";
 import { OptionsContext } from "Context.js";
 
@@ -51,7 +54,8 @@ const Layout = ({ children }) => {
 
   // Fetches data from the api and update the state with that data
   const fetchDataFromApi = async () => {
-    const data = await api_get_board_data(jwt);
+    const user = await api_reauth(jwt)
+    const data = user.user
     const _listOrder = data.board.listsOrder;
     const _lists = {};
     const _cards = {};
