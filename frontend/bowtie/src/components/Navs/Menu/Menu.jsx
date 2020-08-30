@@ -8,17 +8,7 @@ import { useState, useContext, useEffect } from "react";
 import { OptionsContext } from "Context.js";
 
 const BoardSettings = (props) => {
-  const [context, setContext] = useContext(OptionsContext);
-  const [options, setOptions] = useState({
-    images: false,
-    release_date_released: false,
-    release_date_unreleased: false,
-  });
-
-  useEffect(() => {
-    setContext(options)
-  },[options])
-
+  const [options, setOptions] = useContext(OptionsContext);
   return (
     <div className="settings-menu">
       <div className="menu-title">

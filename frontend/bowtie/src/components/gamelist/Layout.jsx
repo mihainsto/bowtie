@@ -19,14 +19,16 @@ import {
   api_board_moveCard,
 } from "../../Api/Board";
 import {
-  api_reauth
+  api_reauth,
+  api_set_options
 } from "Api/user";
 import { useLocalStorage } from "@rehooks/local-storage";
-import { OptionsContext } from "Context.js";
+import { OptionsContext, optionsContextDefaultValues } from "Context.js";
 
 const Layout = ({ children }) => {
   // User options shared state
   const [optionsContext, setOptonsContext] = useState();
+  const [fetchingDataState, setFetchingDataState] = useState(true);
   const [jwt] = useLocalStorage("jwt");
   // The order of the lists, is a array containing the id's of the lists
   const [listorder, setListorder] = useState([]);
@@ -54,8 +56,17 @@ const Layout = ({ children }) => {
 
   // Fetches data from the api and update the state with that data
   const fetchDataFromApi = async () => {
+    setFetchingDataState(true)
     const user = await api_reauth(jwt)
     const data = user.user
+    // If options are not set we set them
+    if (typeof data.options === "undefined") {
+      api_set_options(jwt, optionsContextDefaultValues)
+      data.options = optionsContextDefaultValues
+    }
+    // Set the user options to the context
+    setOptonsContext(data.options)
+    // Processing the board and setting the data
     const _listOrder = data.board.listsOrder;
     const _lists = {};
     const _cards = {};
@@ -71,6 +82,7 @@ const Layout = ({ children }) => {
     setLists(_lists);
     setListorder(_listOrder);
     setCards(_cards);
+    setFetchingDataState(false);
   };
   // Use Effect for calling the fetch data from api function
   useEffect(() => {
@@ -78,7 +90,10 @@ const Layout = ({ children }) => {
   }, []);
   // Use Effect for handling context changes and update the database
   useEffect(() => {
-    console.log(optionsContext)
+    if (!fetchingDataState){
+      const optionsCopy = {...optionsContext}
+      api_set_options(jwt, optionsCopy)
+    }
   }, [optionsContext])
   // Adds a game card on the list that has the search modal open at that time
   // And is also sending the new created card on the backend and waits for a image response

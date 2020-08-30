@@ -93,7 +93,7 @@ router.post(
     if (logging.enabled)
       console.log({"/options/set": req.body})
     try {
-      const options = req.body;
+      const options = req.body.options;
       req.user.options = options;
       const updated = await req.user.save();
       res.status(200).json({ success: true });
