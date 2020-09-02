@@ -18,7 +18,7 @@ Bowtie is a work in progress project and it will be soon released on its first a
 - [Thanks](#thanks)
 
 ## Demo
-Here is a working live demo :  https://mihainsto.github.io/bowtie/   (To be updated)  
+Here is a working live demo :  https://mihainsto.github.io/bowtie/   
 (The demo does not contain api/backend functionality)  
 
 ## Features
