@@ -1,13 +1,14 @@
 const passport = require("passport");
-const validators = require("../validation/validators");
+const validators = require("../services/validation/validators");
 const express = require("express");
 const User = require("../models/User");
 const Game = require("../models/Game");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const keys = require("../config/keys");
-const utils = require("../lib/utils");
+const utils = require("../services/lib/utils");
 const logging = require("../config/logging");
+const UserService = require("../services/UserService");
 
 const loginValidator = validators.loginValidator;
 const registerValidator = validators.registerValidator;
@@ -23,41 +24,20 @@ router.get(
   }
 );
 
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
   if (logging.enabled)
     console.log({"/register": req.body})
-  const { errors, isValid } = validators.registerValidator(req.body);
-  if (!isValid) {
-    res.status("400").json(errors);
-  } else {
-  User.findOne({ email: req.body.email }).then((user) => {
-    if (user) {
-      res.status(404).json("Email already exists!");
+  try {
+    const result = await UserService.register_user(req.body.email, req.body.username, req.body.password)
+    if (result){
+      res.json({success: true})
     } else {
-      const registerUser = new Users({
-        name: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-        board: {
-          listsOrder: [],
-          cards: [],
-          lists: [],
-        },
-      });
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(registerUser.password, salt, (err, hash) => {
-          if (err) throw err;
-          registerUser.password = hash;
-          registerUser
-            .save()
-            .then((user) => res.json({success: true}))
-            .catch((err) => console.log(err));
-        });
-      });
+      res.status("400").json("error");
     }
-  });
-  // res.send(errors);
-}
+  } catch (err){
+    console.log(err)
+    res.status(400).json(err);
+  }
 });
 
 router.post("/login", (req, res) => {

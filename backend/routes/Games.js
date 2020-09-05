@@ -1,6 +1,6 @@
 const passport = require("passport")
 const express = require("express")
-const igdb = require("../igdb/igdb")
+const igdb = require("../services/igdb/igdb")
 const logging = require("../config/logging")
 
 

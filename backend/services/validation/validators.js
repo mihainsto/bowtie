@@ -1,7 +1,7 @@
 const Validators = require('validator');
 const isEmpty = require('is-empty');
 
-module.exports.loginValidator = loginValidator =  (data) => {
+const loginValidator =  (data) => {
     const errors = {}
     
     data.email = !(isEmpty(data.email)) ? data.email:"";
@@ -23,7 +23,7 @@ module.exports.loginValidator = loginValidator =  (data) => {
     };
 }
 
-module.exports.registerValidator = registerValidator=  (data) => {
+const  registerValidator =  (data) => {
 
     let errors = ""
     data.email = !(isEmpty(data.email)) ? data.email:"";
@@ -47,3 +47,5 @@ module.exports.registerValidator = registerValidator=  (data) => {
     };
     
 }
+
+module.exports = {loginValidator, registerValidator}

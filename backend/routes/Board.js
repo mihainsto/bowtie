@@ -1,11 +1,11 @@
 const passport = require("passport");
 const express = require("express");
 const uuid = require("uuid");
-const igdb = require("../igdb/igdb");
+const igdb = require("../services/igdb/igdb");
 const User = require("../models/User");
 const Game = require("../models/Game");
 const paths = require("../config/paths");
-const smartcrop = require("../smartcrop/smartcrop");
+const smartcrop = require("../services/smartcrop/smartcrop");
 const logging = require("../config/logging");
 
 const router = express.Router();
