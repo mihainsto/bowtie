@@ -46,4 +46,15 @@ const create_game = async (gameId) => {
     return newGame;
   }
 };
-module.exports = { get_games, create_game };
+
+const search_game = async (query, page) => {
+    if (page <= 0)
+        throw "Page dose not exist"
+    if (query.length > 100) {
+        throw "Query to big"
+    }
+    const search_results = await igdb.search_for_a_game(query, (page-1)*4, 4)
+    return search_results
+}
+
+module.exports = { get_games, create_game, search_game };
