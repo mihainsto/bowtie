@@ -9,6 +9,7 @@ const keys = require("../config/keys");
 const utils = require("../services/lib/utils");
 const logging = require("../config/logging");
 const UserService = require("../services/UserService");
+const OptionsService = require("../services/OptionsService");
 
 const loginValidator = validators.loginValidator;
 const registerValidator = validators.registerValidator;
@@ -40,30 +41,20 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   if (logging.enabled)
     console.log({"/login": req.body})
-  const { errors, isValid } = validators.loginValidator(req.body);
   
-  if (!isValid) {
-    res.status(400).json(errors);
-  }
-  else {
-  Users.findOne({ email: req.body.email }).then((user) => {
-    if (!user) res.status(400).json({ email: "Email doesn't exist!" });
-    bcrypt.compare(req.body.password, user.password).then((isMatch) => {
-      if (!isMatch)
-        res.status(400).json({ password: "Incorrect password provided!" });
-      else {
-        const jwt = utils.issueJWT(user);
-        res.status(200).json({
-          success: true,
-          token: jwt.token,
-        });
-      }
+  try {
+    const jwt = await UserService.login_user(req.body.email, req.body.password)
+    res.status(200).json({
+      success: true,
+      token: jwt.token,
     });
-  });
-}
+  }
+  catch(err) {
+    res.status(400).json(err)
+  }
 });
 
 router.post(
@@ -73,13 +64,10 @@ router.post(
     if (logging.enabled)
       console.log({"/options/set": req.body})
     try {
-      const options = req.body.options;
-      req.user.options = options;
-      const updated = await req.user.save();
+      OptionsService.set_options(req.user, req.body.options)
       res.status(200).json({ success: true });
     } catch (err) {
-      console.log(err);
-      res.status(400).json({ status: "success", error: true });
+      res.status(400).json(err);
     }
   }
 );

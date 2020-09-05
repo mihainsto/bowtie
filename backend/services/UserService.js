@@ -35,19 +35,32 @@ const register_user = async (email, username, password) => {
           lists: [],
         },
       });
-      const salt = await bcryptPromise.genSalt(registerUser.password );
-      const hash = await bcryptPromise.genHash(salt, registerUser.password );
+      const salt = await bcryptPromise.genSalt(registerUser.password);
+      const hash = await bcryptPromise.genHash(salt, registerUser.password);
       registerUser.password = hash;
-      try{
-        const user = await registerUser.save()
-        return true
+      try {
+        const user = await registerUser.save();
+        return true;
+      } catch (err) {
+        throw err;
       }
-      catch(err) {
-          throw err
-      }
-
     }
   }
 };
 
-module.exports = {register_user}
+const login_user = async (email, password) => {
+  const { errors, isValid } = validators.loginValidator({email, password});
+  if (!isValid) {
+    res.status(400).json(errors);
+  } else {
+    const user = await Users.findOne({ email: email });
+    if (!user) throw "Email doesn't exist!";
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) throw "Incorrect password provided!";
+    else {
+      const jwt = utils.issueJWT(user);
+      return jwt;
+    }
+  }
+};
+module.exports = { register_user, login_user };
