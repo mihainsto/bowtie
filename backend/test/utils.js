@@ -12,7 +12,7 @@ const createFakeUser = async () => {
         name: faker.name.findName(),
         password: faker.internet.password(),
       };
-    // fakeUser.email="atest@gmail.com";
+    // fakeUser.email="atest2@gmail.com";
     // fakeUser.password="123qwe123";
     const status = await UserService.register_user(fakeUser.email, fakeUser.name, fakeUser.password);
     const user = await User.findOne({email: fakeUser.email})
