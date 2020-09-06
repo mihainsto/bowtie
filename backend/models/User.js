@@ -24,4 +24,5 @@ const UserSchema = new Schema({
     board: BoardSchema,
     options: Object
 })
+
 module.exports = Users = mongoose.model("Users",UserSchema);
