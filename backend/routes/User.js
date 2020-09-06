@@ -12,7 +12,7 @@ router.get(
   "/protected",
   passport.authenticate("jwt", { session: false }),
   (req, res, next) => {
-    res.status(200).json({ success: true, msg: "jwt valid" });
+    res.status(200).json(req.user);
     // console.log(req.user);
   }
 );
