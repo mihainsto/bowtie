@@ -40,7 +40,7 @@ The Roadmap for the first Alpha release:
 - Backend
   - For Smartcrop.js you may need imagemagick, if you encounter an error run when starting the backend run
   `sudo apt install imagemagick` or `brew install imagemagick` (for MacOS) to install imagemagick.
-  - You need IGDB API credential, you can get them [here](https://www.igdb.com/api).
+  - You need IGDB API credentials, you can get them [here](https://www.igdb.com/api).
   - Create a file named `config.js` in `backend/services/igdb` with the credentials as export.   
   `module.exports = {
     access_token: your-access-token,
