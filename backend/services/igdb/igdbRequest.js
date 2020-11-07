@@ -1,15 +1,16 @@
 var request = require('request');
 var rp = require('request-promise');
 var config = require("./config");
-const api_key = config.api_key;
-
+const client_id = config.client_id
+const access_token = config.access_token
 var headers = {
-  'user-key': api_key,
+  'Client-ID': client_id,
+  'Authorization': 'Bearer ' + access_token
 };
 
 const make_igdb_request = async(path, querry) => {
   var options = {
-      url: 'https://api-v3.igdb.com'+path,
+      url: 'https://api.igdb.com/v4'+path,
       method: 'POST',
       headers: headers,
       body: querry
