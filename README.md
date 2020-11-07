@@ -43,8 +43,8 @@ The Roadmap for the first Alpha release:
   - You need IGDB API credential, you can get them [here](https://www.igdb.com/api).
   - Create a file named `config.js` in `backend/services/igdb` with the credentials as export.   
   `module.exports = {
-    access_token: your-access-token
-    client_id: your-client-id
+    access_token: your-access-token,
+    client_id: your-client-id,
   }`
   - Generate keys with `node generateKeypair.js`.
   - Create the public/images/games folders in `backend/public/images/games`
